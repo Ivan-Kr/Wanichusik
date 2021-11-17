@@ -191,16 +191,18 @@ public:
 		int R = 0;
 		int G = 0;
 		int B = 0;
-		file.write(5);
-		for (int i = 0;i < Size.x * Size.y;i++) {
+		if (file.is_openn()) {
+			file.write(5);
+			for (int i = 0;i < Size.x * Size.y;i++) {
 
-			R = stoi(file.get_insert());
-			file.write(1);
-			G = stoi(file.get_insert());
-			file.write(1);
-			B = stoi(file.get_insert());
-			Picture[i % Size.x][i / Size.x] = wincon_convert(R, G, B);
-			file.write(1);
+				R = stoi(file.get_insert());
+				file.write(1);
+				G = stoi(file.get_insert());
+				file.write(1);
+				B = stoi(file.get_insert());
+				Picture[i % Size.x][i / Size.x] = wincon_convert(R, G, B);
+				file.write(1);
+			}
 		}
 		file.close();
 	}

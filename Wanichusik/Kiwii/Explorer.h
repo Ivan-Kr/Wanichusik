@@ -46,6 +46,9 @@ public:
 	QWORD size() {
 		return siz;
 	}
+	bool is_openn() {
+		return is_opened;
+	}
 
 	void open(std::string directive, std::ios_base::open_mode _mode) {
 		check_dir(directive);
@@ -65,7 +68,8 @@ public:
 	}
 
 	std::string get_insert() {
-		return insert;
+		if(is_opened)
+			return insert;
 	}
 
 	std::string write_all(std::string directive = "") {
