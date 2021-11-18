@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <functional>
 
 /*define*/
 #define temp template
@@ -207,10 +208,10 @@ public:
 		file.close();
 	}
 
-	void fill_image() {
+	void fill_image(BYTE charr) {
 		for (BYTE j = 0;j < Size.y;j++)
 			for (BYTE i = 0;i < Size.x;i++)
-				Picture[i][j] = (j * Size.x) + i;
+				Picture[i][j] = charr;
 	}
 	void fill_text(TEXT charr) {
 		for (BYTE j = 0;j < Size.y;j++)
@@ -361,12 +362,39 @@ public:
 		return token_col;
 	}
 
+	void write_graph(WORD size_scr_X, WORD size_scr_Y, bool need_comment,std::function<double(int)> func, BYTE end_clr = 7) {
+
+		BYTE* scr_col = new BYTE[size_scr_X * size_scr_Y];
+
+		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_col[i] = 0x00;
+
+		for (int i = 0;i < size_scr_X;i++) {
+			if (((int)(func(i) * (size_scr_X * 1.0f))) + i < size_scr_X * size_scr_Y&& ((int)(func(i) * (size_scr_X * 1.5f))) + i>=0) {
+				scr_col[((int)(func(i) * (size_scr_X*1.0f))) + i] = 0xcc;
+			}
+		}
+
+		for (int is = 0;is < size_scr_X * size_scr_Y;is++) {
+			SetAtr(GetStdHandle(STD_OUTPUT_HANDLE), scr_col[is]);
+				putchar(' ');
+			if ((is + 1) % size_scr_X == 0 && is != 0) {
+				SetAtr(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+				printf("\n");
+			}
+		}
+		SetAtr(GetStdHandle(STD_OUTPUT_HANDLE), end_clr);
+		if (need_comment) {
+			printf("%s\n", this->Comment.c_str());
+		}
+		delete[] scr_col;
+	}
+
 	void write_scene(WORD size_scr_X, WORD size_scr_Y, bool need_comment, BYTE end_clr = 7) {
 
 		BYTE* scr_col = new BYTE[size_scr_X * size_scr_Y];
 		TEXT* scr_text = new TEXT[size_scr_X * size_scr_Y];
 
-		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_col[i] = 0x11;
+		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_col[i] = 0x00;
 		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_text[i] = (TEXT)' ';
 
 		for (int i = 0;i < this->obj.size();i++) {
@@ -420,7 +448,7 @@ public:
 		BYTE* scr_col = new BYTE[size_scr_X * size_scr_Y];
 		TEXT* scr_text = new TEXT[size_scr_X * size_scr_Y];
 
-		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_col[i] = 0x11;
+		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_col[i] = 0x00;
 		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_text[i] = (TEXT)' ';
 
 		if (duration_shake != 0) {
@@ -473,6 +501,61 @@ public:
 
 		if (duration_shake != 0) {
 			duration_shake--;
+		}
+		delete[] scr_col, scr_text;
+	}
+
+	void write_modific_scene(WORD size_scr_X, WORD size_scr_Y, bool need_comment,std::function<BYTE(WORD,WORD,BYTE)> func, BYTE end_clr = 7) {
+
+		BYTE* scr_col = new BYTE[size_scr_X * size_scr_Y];
+		TEXT* scr_text = new TEXT[size_scr_X * size_scr_Y];
+
+		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_col[i] = 0x00;
+		for (int i = 0;i < size_scr_X * size_scr_Y;i++) scr_text[i] = (TEXT)' ';
+
+		for (int i = 0;i < this->obj.size();i++) {
+
+			auto Xp = obj[i]._position('x');
+			auto Yp = obj[i]._position('y');
+
+			auto Xs = obj[i]._size('x');
+			auto Ys = obj[i]._size('y');
+
+			int Pos = (Yp * size_scr_X) + Xp;
+
+			for (int is = 0;is < Ys;is++) {
+				for (int js = 0;js < Xs;js++) {
+					if (obj[i]._picture(js, is) != 0xfe) {
+						if ((int)(Pos + (is * size_scr_X) + js) < (int)(size_scr_X * size_scr_Y)) {
+							scr_col[Pos + (is * size_scr_X) + js] = obj[i]._picture(js, is);
+							scr_text[Pos + (is * size_scr_X) + js] = (TEXT)'3';
+						}
+					}
+				}
+			}
+
+		}
+
+		for (int is = 0;is < size_scr_Y;is++) {
+			for (int js = 0;js < size_scr_X;js++) {
+				scr_col[(js*size_scr_X)+is] = func(is,js, scr_col[(js * size_scr_X) + is]);
+			}
+		}
+
+		for (int is = 0;is < size_scr_X * size_scr_Y;is++) {
+			SetAtr(GetStdHandle(STD_OUTPUT_HANDLE), scr_col[is]);
+			if (sizeof(TEXT) == 1)
+				putchar(scr_text[is]);
+			if (sizeof(TEXT) == 2)
+				putwchar(scr_text[is]);
+			if ((is + 1) % size_scr_X == 0 && is != 0) {
+				SetAtr(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+				printf("\n");
+			}
+		}
+		SetAtr(GetStdHandle(STD_OUTPUT_HANDLE), end_clr);
+		if (need_comment) {
+			printf("%s\n", this->Comment.c_str());
 		}
 		delete[] scr_col, scr_text;
 	}

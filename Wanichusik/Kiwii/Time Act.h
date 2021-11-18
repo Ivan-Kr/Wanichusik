@@ -302,6 +302,6 @@ void time_rps(TIME_POINT begin, TIME_POINT end) {
 	//std::cin.get();
 }
 double time_rps_g(TIME_POINT begin, TIME_POINT end) {
-	return (double)(pow(10, 3) / get_diff_ms(begin, end));
+	return (double)(pow(10, 6) / get_diff_us(begin, end));
 	//std::cin.get();
 }
