@@ -11,7 +11,8 @@ int main(int args,char* argv[])
 	a.obj[0].set_size(8, 8);
 	a.obj[0].import(".\\Pocket\\Pic.ppm");
 	a.obj[0]._positioo(5, 5);
-	a.write_scene(30, 30,false);
+	a.write_comment("Hey, its apple!");
+	a.write_scene(30, 30,true);
 	 
 	std::cin.get();
 }
