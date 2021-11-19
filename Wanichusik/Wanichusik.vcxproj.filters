@@ -27,9 +27,6 @@
     <ClCompile Include="Wanichusik.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\ScreenText.cpp">
-      <Filter>Kiwii\Any</Filter>
-    </ClCompile>
     <ClCompile Include="Kiwii\Kiwii.cpp">
       <Filter>Kiwii\Any</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
       <Filter>Kiwii\Heades</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\Explorer.h">
+      <Filter>Kiwii\Heades</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\Interpre.h">
       <Filter>Kiwii\Heades</Filter>
     </ClInclude>
   </ItemGroup>

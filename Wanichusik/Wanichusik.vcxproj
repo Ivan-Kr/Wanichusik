@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Kiwii\Kiwii.cpp" />
-    <ClCompile Include="Kiwii\ScreenText.cpp" />
     <ClCompile Include="Wanichusik.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +152,7 @@
     <ClInclude Include="Kiwii\ScreenText.h" />
     <ClInclude Include="Kiwii\Template.h" />
     <ClInclude Include="Kiwii\Time Act.h" />
+    <ClInclude Include="Kiwii\Interpre.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
