@@ -67,6 +67,10 @@ namespace kiwii {
 				SCREEN[index] = val;
 		}
 
+		void Comment(int length,const wchar_t*const format) {
+			swprintf_s(SCREEN, length, format);
+		}
+
 		double Aspect() {
 			return ASPECT;
 		}

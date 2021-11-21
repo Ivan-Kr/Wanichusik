@@ -73,6 +73,7 @@ namespace kiwii {
 		elif(r == 0xff && g == 0x00 && b == 0xff) return win_console_col_list[13];
 		elif(r == 0xff && g == 0xff && b == 0x00) return win_console_col_list[14];
 		elif(r == 0xff && g == 0xff && b == 0xff) return win_console_col_list[15];
+
 		elif(r == 0x2f && g == 0x2f && b == 0x2f) return win_console_text_list[0];
 		elif(r == 0x2f && g == 0x2f && b == 0xaf) return win_console_text_list[1];
 		elif(r == 0x2f && g == 0xaf && b == 0x2f) return win_console_text_list[2];
@@ -137,6 +138,7 @@ namespace kiwii {
 		vec<vec<BYTE>> Picture;
 		vec<vec<TEXT>> Text;
 	public:
+
 		BYTE& _size(char pos) {
 			if (pos == 'x')
 				return Size.x;

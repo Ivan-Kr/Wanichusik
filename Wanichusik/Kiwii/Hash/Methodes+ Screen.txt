@@ -1,0 +1,199 @@
+		<pixel & text>(using palette WinConsole+)
+	<if>
+0
+0
+0
+	<then>
+fe
+	<if>
+0f
+0f
+0f
+	<then>
+0
+	<if>
+0
+0
+80
+	<then>
+11
+	<if>
+0
+80
+0
+	<then>
+11
+	<if>
+0
+80
+80
+	<then>
+33
+	<if>
+80
+0
+0
+	<then>
+44
+	<if>
+80
+0
+80
+	<then>
+55
+	<if>
+80
+80
+0
+	<then>
+66
+	<if>
+c0
+c0
+c0
+	<then>
+77
+	<if>
+80
+80
+80
+	<then>
+88
+	<if>
+0
+0
+ff
+	<then>
+99
+	<if>
+0
+ff
+0
+	<then>
+aa
+	<if>
+0
+ff
+ff
+	<then>
+bb
+	<if>
+ff
+0
+0
+	<then>
+cc
+	<if>
+ff
+0
+ff
+	<then>
+dd
+	<if>
+ff
+ff
+0
+	<then>
+ee
+	<if>
+ff
+ff
+ff
+	<then>
+ff
+	<if>
+2f
+2f
+2f
+	<then>
+0a
+	<if>
+2f
+2f
+af
+	<then>
+09
+	<if>
+2f
+af
+2f
+	<then>
+3b
+	<if>
+2f
+af
+af
+	<then>
+4c
+	<if>
+af
+2f
+2f
+	<then>
+5d
+	<if>
+af
+2f
+af
+	<then>
+6e
+	<if>
+af
+af
+2f
+	<then>
+7f
+	<if>
+df
+df
+df
+	<then>
+80
+	<if>
+af
+af
+af
+	<then>
+91
+	<if>
+2f
+2f
+ef
+	<then>
+a2
+	<if>
+2f
+ef
+2f
+	<then>
+b3
+	<if>
+2f
+ef
+ef
+	<then>
+c4
+	<if>
+ef
+2f
+2f
+	<then>
+d5
+	<if>
+ef
+2f
+ef
+	<then>
+e6
+	<if>
+ef
+ef
+2f
+	<then>
+f7
+	<if>
+ef
+ef
+ef
+	<then>
+8
