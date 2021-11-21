@@ -20,67 +20,63 @@ void SetWindow(int Width, int Height)
 	SetConsoleWindowInfo(Handle, TRUE, &Rect);
 }
 
-int Normalize(int val, int maxx, int minn) {
-	return min(max(val, minn), maxx);
+namespace kiwii {
+
+	int Normalize(int val, int maxx, int minn) {
+		return min(max(val, minn), maxx);
+	}
+
+	class ScreenText {
+		WORD WIDTH;
+		WORD HEIGHT;
+		HANDLE HCONSOLE;
+		DWORD DWBYTESWRITTEN = 0;
+
+		double ASPECT;
+
+		wchar_t* SCREEN;
+	public:
+		ScreenText(WORD Width, WORD Height) {
+			WIDTH = Width;
+			HEIGHT = Height;
+
+			SetWindow(WIDTH, HEIGHT);
+
+			HCONSOLE = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+			SetConsoleActiveScreenBuffer(HCONSOLE);
+
+			ASPECT = WIDTH / HEIGHT;
+
+			SCREEN = new wchar_t[WIDTH * HEIGHT + 1];
+			SCREEN[WIDTH * HEIGHT] = L'\0';
+		}
+
+		WORD Width() {
+			return WIDTH;
+		}
+		WORD Height() {
+			return HEIGHT;
+		}
+
+		wchar_t Screen(int index) {
+			if (!(index < 0 || index >= WIDTH * HEIGHT))
+				return SCREEN[index];
+		}
+		void Screen(int index, wchar_t val) {
+			if (!(index < 0 || index >= WIDTH * HEIGHT))
+				SCREEN[index] = val;
+		}
+
+		double Aspect() {
+			return ASPECT;
+		}
+
+		void Out() {
+			WriteConsoleOutputCharacterW(HCONSOLE, SCREEN, WIDTH * HEIGHT, { 0, 0 }, &DWBYTESWRITTEN);
+		}
+
+		~ScreenText() {
+			delete[] SCREEN;
+		}
+	};
 }
-
-class ScreenText :
-    public Kiwii
-{
-	WORD width=0;
-	WORD height=0;
-
-	HANDLE hConsole;
-	DWORD dwBytesWritten = 0;
-
-	wchar_t* screen;
-
-	double aspect;
-public:
-	ScreenText(WORD Width, WORD Height) {
-		hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-		SetConsoleActiveScreenBuffer(hConsole);
-		width = Width;
-		height = Height;
-		aspect = (double)width / height;
-		SetWindow(width, height);
-		screen = new wchar_t[width * height + 1];
-	}
-
-	void _aspect(double asp) {
-		aspect = asp;
-	}
-	double _aspect() {
-		return aspect;
-	}
-
-	int _width() {
-		return width;
-	}
-	int _height() {
-		return height;
-	}
-
-	void write(int x, int y,wchar_t pix) {
-		if (x >= 0 && x < width && y>=0 && y < height)
-			screen[y * width + x] = pix;
-	}
-
-	wchar_t read(int x, int y) {
-		if (x > 0 && x < width && y>0 && y < height)
-			return screen[y * width + x];
-		else
-			return 0;
-	}
-
-	void out() {
-		screen[width * height] = L'\0';
-		WriteConsoleOutputCharacter(hConsole, screen, width * height, { 0, 0 }, &dwBytesWritten);
-	}
-
-	~ScreenText() {
-		delete[] screen;
-	}
-
-};
-
