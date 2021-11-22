@@ -1,18 +1,25 @@
 ﻿#pragma once
 #include "Kiwii/ScreenText.h"
 #include "Kiwii/Math.h"
+#include "Kiwii/Music.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
 #include <math.h>
 #include <string>
+#include <future>
 
 int main(){
-	
+	srand(time(NULL));
+
 	kiwii::ScreenText ux(90, 30);
 
 	kiwii::vec2<double> round{};
 	float pixelAspect = 11.0f / 24.0f;
+
+	std::future<void> a=std::async(kiwii::play_test_song);
+
+	a;
 
 	for (int t = 0;t < 2000000;t++) {
 		for (int j = 0;j < ux.Height();j++) {
