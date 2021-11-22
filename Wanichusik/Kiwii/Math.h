@@ -19,14 +19,6 @@ namespace kiwii {
 		return sqrt(a * a + b * b);
 	}
 
-	struct Fraction {
-		double numer, denom;
-
-		double div() {
-			return denom != 0 ? numer / denom : NAN;
-		}
-	};
-
 	template<typename T>
 	double avge(T* mas, unsigned __int16 nmas) {
 		double avg = 0;

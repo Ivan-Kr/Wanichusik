@@ -1,4 +1,5 @@
 #pragma once
+#include "Screen.h"
 #include <functional>
 #include <vector>
 #include <list>
@@ -82,3 +83,4 @@ namespace kiwii {
 		return arr[X - 1][Y - 1];
 	}
 }
+

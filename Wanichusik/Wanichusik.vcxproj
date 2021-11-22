@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Kiwii\Kiwii.cpp" />
+    <ClCompile Include="Kiwii\ScreenText.cpp" />
+    <ClCompile Include="Kiwii\ShaderText.cpp" />
     <ClCompile Include="Wanichusik.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +152,7 @@
     <ClInclude Include="Kiwii\Music.h" />
     <ClInclude Include="Kiwii\Screen.h" />
     <ClInclude Include="Kiwii\ScreenText.h" />
+    <ClInclude Include="Kiwii\ShaderText.h" />
     <ClInclude Include="Kiwii\Time Act.h" />
     <ClInclude Include="Kiwii\Interpre.h" />
   </ItemGroup>
