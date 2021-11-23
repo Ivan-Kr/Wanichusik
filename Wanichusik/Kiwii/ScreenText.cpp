@@ -1,7 +1,12 @@
 #include "ScreenText.h"
 
+void kiwii::ScreenText::Setup() {
+	HCONSOLE = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	SetConsoleActiveScreenBuffer(HCONSOLE);
+}
 
-kiwii::ScreenText::ScreenText(WORD Width, WORD Height) {
+void kiwii::ScreenText::SetupS(WORD Width, WORD Height)
+{
 	WIDTH = Width;
 	HEIGHT = Height;
 

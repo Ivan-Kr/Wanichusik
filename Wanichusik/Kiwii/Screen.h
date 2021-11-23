@@ -189,7 +189,7 @@ namespace kiwii {
 
 		}
 		void import(std::string dir) {
-			file_text file;
+			file_t file;
 			file.open(dir, std::ios::out);
 
 			int R = 0;

@@ -22,6 +22,12 @@
     <Filter Include="Kiwii\Any">
       <UniqueIdentifier>{29155a38-1c97-4b7a-91d5-cc36944b1b57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kiwii\MonoText">
+      <UniqueIdentifier>{68ded093-6a18-4f6a-b5cb-44ecc869128b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kiwii\MonoText\Any">
+      <UniqueIdentifier>{8583ead8-cab8-4fdf-b929-1f68b2072630}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Wanichusik.cpp">
@@ -30,11 +36,14 @@
     <ClCompile Include="Kiwii\Kiwii.cpp">
       <Filter>Kiwii\Any</Filter>
     </ClCompile>
+    <ClCompile Include="Kiwii\GradientText.cpp">
+      <Filter>Kiwii\MonoText\Any</Filter>
+    </ClCompile>
     <ClCompile Include="Kiwii\ScreenText.cpp">
-      <Filter>Kiwii\Any</Filter>
+      <Filter>Kiwii\MonoText\Any</Filter>
     </ClCompile>
     <ClCompile Include="Kiwii\ShaderText.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Kiwii\MonoText\Any</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,17 +65,20 @@
     <ClInclude Include="Kiwii\Screen.h">
       <Filter>Kiwii\Heades</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\ScreenText.h">
-      <Filter>Kiwii\Heades</Filter>
-    </ClInclude>
     <ClInclude Include="Kiwii\Explorer.h">
       <Filter>Kiwii\Heades</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\Interpre.h">
       <Filter>Kiwii\Heades</Filter>
     </ClInclude>
+    <ClInclude Include="Kiwii\GradientText.h">
+      <Filter>Kiwii\MonoText</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\ScreenText.h">
+      <Filter>Kiwii\MonoText</Filter>
+    </ClInclude>
     <ClInclude Include="Kiwii\ShaderText.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Kiwii\MonoText</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

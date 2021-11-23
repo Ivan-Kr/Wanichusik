@@ -94,7 +94,7 @@ namespace kiwii {
 		std::wstring author_songs = L"https://www.cyberforum.ru/members/116421.html";
 		//in https://www.cyberforum.ru/cpp-beginners/thread235154.html
 
-		file_text file_i, file_d;
+		file_t file_i, file_d;
 
 		int a = 0;
 

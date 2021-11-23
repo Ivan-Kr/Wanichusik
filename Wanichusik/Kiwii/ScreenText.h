@@ -19,12 +19,14 @@ namespace kiwii {
 
 		wchar_t* SCREEN;
 
+
+	public:
 		int SQUARE() {
 			return WIDTH * HEIGHT;
 		}
-	public:
+		virtual void Setup();
 
-		ScreenText(WORD Width, WORD Height);
+		void SetupS(WORD Width, WORD Height);
 
 		WORD Width() {
 			return WIDTH;

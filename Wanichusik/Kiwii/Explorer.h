@@ -15,7 +15,7 @@ namespace kiwii{
 	using WORD = unsigned short;
 	using BYTE = unsigned char;
 
-	class file_text {
+	class file_t {
 	private:
 		std::ifstream Out;
 		std::ofstream In;
@@ -40,8 +40,8 @@ namespace kiwii{
 			}
 		}
 	public:
-		file_text() {
-			siz = sizeof(file_text);
+		file_t() {
+			siz = sizeof(file_t);
 		}
 		QWORD size() {
 			return siz;
@@ -108,7 +108,106 @@ namespace kiwii{
 			Out.close();
 		}
 
-		~file_text() {
+		~file_t() {
+			close();
+		}
+	};
+
+	class wfile_t {
+	private:
+		std::wifstream Out;
+		std::wofstream In;
+		std::wstring directive, insert;
+		QWORD siz;
+		bool is_opened = 0;
+
+		void check_dir(std::wstring directive = L"") {
+			if (directive != L"")
+				this->directive = directive;
+		}
+		bool check_open(std::ios_base::open_mode _mode) {
+			if (_mode == std::ios::in || _mode == std::ios::app) {
+				In.open(this->directive, _mode);
+				if (!In.is_open()) return 0;
+				else return 1;
+			}
+			else {
+				Out.open(this->directive, _mode);
+				if (!Out.is_open()) return 0;
+				else return 1;
+			}
+		}
+	public:
+		wfile_t() {
+			siz = sizeof(file_t);
+		}
+		QWORD size() {
+			return siz;
+		}
+		bool is_openn() {
+			return is_opened;
+		}
+
+		void open(std::wstring directive, std::ios_base::open_mode _mode) {
+			check_dir(directive);
+			if (check_open(_mode))
+				is_opened = true;
+		}
+
+		std::wstring write(DWORD n_str) {
+			if (!is_opened)  return L" ";
+
+			while (Out && n_str > 0) {
+				std::getline(Out, insert);
+				n_str--;
+			}
+
+			return insert;
+		}
+
+		std::wstring get_insert() {
+			if (is_opened)
+				return insert;
+		}
+
+		std::wstring write_all(std::wstring directive = L"") {
+			check_dir(directive);
+			if (!is_opened) return L" ";
+
+			std::wstring s;
+
+			while (Out) {
+				
+				std::getline(Out, s);
+				insert += s + L"\n";
+			}
+
+			return insert;
+		}
+
+		void out() {
+			printf("%s", insert.c_str());
+		}
+
+		void create() {
+
+			In.open(this->directive);
+		}
+
+		temp<typename T>
+			void input(T val) {
+			check_dir(directive);
+			if (!is_opened) { return; }
+
+			In << val;
+		}
+
+		void close() {
+			In.close();
+			Out.close();
+		}
+
+		~wfile_t() {
 			close();
 		}
 	};

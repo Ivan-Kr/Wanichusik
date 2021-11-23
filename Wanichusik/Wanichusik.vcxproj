@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Kiwii\GradientText.cpp" />
     <ClCompile Include="Kiwii\Kiwii.cpp" />
     <ClCompile Include="Kiwii\ScreenText.cpp" />
     <ClCompile Include="Kiwii\ShaderText.cpp" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="Kiwii\Explorer.h" />
     <ClInclude Include="Kiwii\Games.h" />
+    <ClInclude Include="Kiwii\GradientText.h" />
     <ClInclude Include="Kiwii\Kiwii.h" />
     <ClInclude Include="Kiwii\Math.h" />
     <ClInclude Include="Kiwii\Music.h" />
