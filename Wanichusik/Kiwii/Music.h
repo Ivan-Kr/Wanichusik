@@ -96,7 +96,7 @@ namespace kiwii {
 
 		file_t file_i, file_d;
 
-		int a = 0;
+		int a = Rand 2;
 
 		if (a) {
 			file_i.open("Kiwii\\Hash\\Iyolochka_i Music.txt", std::ios::out);
