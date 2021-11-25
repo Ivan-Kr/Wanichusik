@@ -5,16 +5,24 @@
 
 namespace kiwii {
 	class ShaderText {
+		friend ScreenText;
 		ScreenText& ConnectedScreen;
 		std::list<std::string> action;
 		bool is_connected;
 	public:
+		ShaderText(): ConnectedScreen(new ScreenText){
+		}
+
 		void Connect(ScreenText screentext);
 
 		void Noise();
 
+		void Color(unsigned __int8 color);
+
 		std::string ShowList(int index);
 
 		void Disconnect();
+
+		~ShaderText() {}
 	};
 }

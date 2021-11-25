@@ -297,6 +297,10 @@ namespace kiwii{
 		//std::cin.get();
 	}
 
+	long time_get_g(TIME_POINT begin, TIME_POINT end) {
+		return get_diff_ms(begin, end);
+	}
+
 	void time_rps(TIME_POINT begin, TIME_POINT end) {
 		std::wstring title = L"RPS(FPS) -> ";
 		wprintf(L"%s%.3f\n", title.c_str(), (double)(pow(10, 3) / get_diff_ms(begin, end)));

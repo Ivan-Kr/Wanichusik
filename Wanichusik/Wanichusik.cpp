@@ -1,8 +1,5 @@
-﻿#include "Kiwii/ScreenText.h"
-#include "Kiwii/Math.h"
-#include "Kiwii/GradientText.h"
-#include "Kiwii/Music.h"
-#include "Kiwii/Kiwii.h"
+﻿#include "Kiwii/GradientText.h"
+#include "Kiwii/ShaderText.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
@@ -12,27 +9,37 @@
 
 int main(){
 	srand(time(NULL));
-	Kiwii d;
-	d._random(45);
 	kiwii::GradientText ai;
+	kiwii::ShaderText shader;
+
+	shader.Connect(ai);
+	shader.Color((unsigned __int8)0x34);
+
+	float font_ = 7.0f / 14.0f;
 	ai.SetupS(90, 30);
 	ai.Setup();
-	ai.ImportO(L"Kiwii/Hash/Gradient1 GradientText.txt");
-
+	ai.Fill(L' ');
+	ai.ImportL(L"Kiwii/Hash/Gradient1 GradientText.txt");
 	for (int t = 0;t < 500000;t++) {
-		for (int i = 0;i < ai.SQUARE();i++) {
-			ai.Brightness(i, (int)(sin(t*i)*2));
-			ai.BrightnessDiff(i, d._random());
+
+		for (int j = 0;j < ai.Height();j++) {
+			for (int i = 0;i < ai.Width();i++) {
+				float x = (float)i / ai.Width()*2.0f-1.0f;
+				float y = (float)j / ai.Height() * 2.0f - 1.0f;
+				x *= ai.Aspect() * font_;
+
+				x += sin(t * 0.001f);
+
+				wchar_t a = L' ';
+				if (x * x + y * y < 0.5f)
+					a = L'#';
+				ai.ScreenP(i, j, a);
+			
+
+			}
 		}
-		ai.Paint();
 		ai.Out();
+
 	}
 	return 0;
 }
-/*
-map     shader  .
-movement        import  .
-made_perlin     .       .
-scaling_screen  .       .
-
-*/

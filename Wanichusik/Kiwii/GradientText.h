@@ -6,6 +6,7 @@ namespace kiwii {
 	class GradientText :
 		public ScreenText
 	{
+	protected:
 		unsigned __int8* BRIGHTNESS;
 		std::wstring GRADIENT;
 	public:
@@ -18,8 +19,8 @@ namespace kiwii {
 		void BrightnessDiff(int index, __int8 val);
 
 		void ImportS(std::wstring grad);
-		void ImportO(std::wstring dir);
 		void ImportL(std::wstring dir);
+		void ImportLS(std::wstring dir);
 
 		wchar_t Gradient(unsigned __int8 index) {
 			return GRADIENT[index];

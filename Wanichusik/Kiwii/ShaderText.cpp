@@ -16,8 +16,16 @@ void kiwii::ShaderText::Disconnect()
 void kiwii::ShaderText::Noise()
 {
 	for (int i = 0;i < ConnectedScreen.Height() * ConnectedScreen.Width();i++)
-		ConnectedScreen.Screen(i, rand() % sizeof(wchar_t));
+		ConnectedScreen.ScreenL(i, rand() % sizeof(wchar_t));
 	action.push_back("Noise for " + (long long)&ConnectedScreen);
+}
+
+void kiwii::ShaderText::Color(unsigned __int8 color)
+{
+	std::wstring str = L"color ";
+	str+=std::to_wstring((int)color);
+
+	_wsystem(str.c_str());
 }
 
 std::string kiwii::ShaderText::ShowList(int index)

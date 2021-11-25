@@ -25,7 +25,7 @@ void kiwii::GradientText::ImportS(std::wstring grad)
 	GRADIENT = grad.c_str();
 }
 
-void kiwii::GradientText::ImportO(std::wstring dir)
+void kiwii::GradientText::ImportL(std::wstring dir)
 {
 	wfile_t file;
 	file.open(dir, std::ios::out);
@@ -35,7 +35,7 @@ void kiwii::GradientText::ImportO(std::wstring dir)
 	file.close();
 }
 
-void kiwii::GradientText::ImportL(std::wstring dir)
+void kiwii::GradientText::ImportLS(std::wstring dir)
 {
 	wfile_t file;
 	file.open(dir, std::ios::out);
@@ -50,6 +50,6 @@ void kiwii::GradientText::ImportL(std::wstring dir)
 void kiwii::GradientText::Paint()
 {
 	for (int i = 0;i < SQUARE();i++) {
-		SCREEN[i] = GRADIENT[min(BRIGHTNESS[i], GRADIENT.size() - 1)];
+		_screen[i] = GRADIENT[min(BRIGHTNESS[i], GRADIENT.size() - 1)];
 	}
 }
