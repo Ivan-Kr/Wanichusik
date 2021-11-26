@@ -10,16 +10,16 @@
 int main(){
 	srand(time(NULL));
 	kiwii::GradientText ai;
-	kiwii::ShaderText shader;
+	kiwii::ShaderText* shader;
 
-	shader.Connect(ai);
-	shader.Color((unsigned __int8)0x34);
+
 
 	float font_ = 7.0f / 14.0f;
 	ai.SetupS(90, 30);
 	ai.Setup();
 	ai.Fill(L' ');
 	ai.ImportL(L"Kiwii/Hash/Gradient1 GradientText.txt");
+	shader->Connect(ai);
 	for (int t = 0;t < 500000;t++) {
 
 		for (int j = 0;j < ai.Height();j++) {
@@ -38,8 +38,11 @@ int main(){
 
 			}
 		}
+		shader->Color((unsigned __int8)0x34);
 		ai.Out();
 
 	}
+
+	delete shader;
 	return 0;
 }
