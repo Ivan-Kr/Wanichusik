@@ -1,7 +1,5 @@
 #include "ScreenText.h"
 
-void kiwii::ScreenText::Setup() {}
-
 void kiwii::ScreenText::SetupS(WORD Width, WORD Height)
 {
 	_width = Width;
