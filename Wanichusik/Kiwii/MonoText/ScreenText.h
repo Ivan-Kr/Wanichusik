@@ -1,11 +1,9 @@
 #pragma once
 #include "Kiwii.h"
+#include "Head.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
-#include <math.h>
-
-void SetWindow(int Width, int Height);
 
 namespace kiwii {
 	class ScreenText {

@@ -1,0 +1,98 @@
+		<pixel>(using palette WinConsole)
+	<if>
+0
+0
+0
+	<then>
+0
+	<if>
+0
+0
+80
+	<then>
+11
+	<if>
+0
+80
+0
+	<then>
+11
+	<if>
+0
+80
+80
+	<then>
+33
+	<if>
+80
+0
+0
+	<then>
+44
+	<if>
+80
+0
+80
+	<then>
+55
+	<if>
+80
+80
+0
+	<then>
+66
+	<if>
+c0
+c0
+c0
+	<then>
+77
+	<if>
+80
+80
+80
+	<then>
+88
+	<if>
+0
+0
+ff
+	<then>
+99
+	<if>
+0
+ff
+0
+	<then>
+aa
+	<if>
+0
+ff
+ff
+	<then>
+bb
+	<if>
+ff
+0
+0
+	<then>
+cc
+	<if>
+ff
+0
+ff
+	<then>
+dd
+	<if>
+ff
+ff
+0
+	<then>
+ee
+	<if>
+ff
+ff
+ff
+	<then>
+ff
+104>

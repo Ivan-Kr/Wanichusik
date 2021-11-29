@@ -1,5 +1,5 @@
 ﻿#include "Kiwii/GradientText.h"
-#include "Kiwii/ShaderText.h"
+#include "Kiwii/SScreenText.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
@@ -11,8 +11,8 @@ int main(){
 	srand(time(NULL));
 	kiwii::GradientText ai;
 
-
-
+	kiwii::ScreenText ux;
+	ux.SetupS(90, 30);
 	float font_ = 7.0f / 14.0f;
 	ai.SetupS(90, 30);
 	ai.Setup();

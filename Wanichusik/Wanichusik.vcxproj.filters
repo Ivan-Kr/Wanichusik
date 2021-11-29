@@ -16,69 +16,81 @@
     <Filter Include="Kiwii">
       <UniqueIdentifier>{4a0e4497-c9c6-4d63-91d0-a1a59992eb5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kiwii\Heades">
-      <UniqueIdentifier>{b0d32c88-de23-4c5d-87ce-27c2145193fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Kiwii\Any">
-      <UniqueIdentifier>{29155a38-1c97-4b7a-91d5-cc36944b1b57}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Kiwii\MonoText">
       <UniqueIdentifier>{68ded093-6a18-4f6a-b5cb-44ecc869128b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kiwii\MonoText\Any">
+    <Filter Include="Kiwii\MonoText\Files">
       <UniqueIdentifier>{8583ead8-cab8-4fdf-b929-1f68b2072630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kiwii\MonoText\Headers">
+      <UniqueIdentifier>{ff222b59-3722-4dfb-9b91-1dafb5b09b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kiwii\Universalius">
+      <UniqueIdentifier>{b0d32c88-de23-4c5d-87ce-27c2145193fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Wanichusik.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\Kiwii.cpp">
-      <Filter>Kiwii\Any</Filter>
+    <ClCompile Include="Kiwii\MonoText\SScreenText.cpp">
+      <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\GradientText.cpp">
-      <Filter>Kiwii\MonoText\Any</Filter>
+    <ClCompile Include="Kiwii\MonoText\GradientText.cpp">
+      <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\ScreenText.cpp">
-      <Filter>Kiwii\MonoText\Any</Filter>
+    <ClCompile Include="Kiwii\MonoText\Kiwii.cpp">
+      <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\ShaderText.cpp">
-      <Filter>Kiwii\MonoText\Any</Filter>
+    <ClCompile Include="Kiwii\MonoText\ObgectText.cpp">
+      <Filter>Kiwii\MonoText\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Kiwii\MonoText\ScreenText.cpp">
+      <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Kiwii\Time Act.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Universalius.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Games.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Explorer.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Kiwii.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Games.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Math.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Interpre.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Music.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Math.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Screen.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Music.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Explorer.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Screen.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\Interpre.h">
-      <Filter>Kiwii\Heades</Filter>
+    <ClInclude Include="Kiwii\Universalius\Time Act.h">
+      <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\GradientText.h">
-      <Filter>Kiwii\MonoText</Filter>
+    <ClInclude Include="Kiwii\MonoText\Foot.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\ScreenText.h">
-      <Filter>Kiwii\MonoText</Filter>
+    <ClInclude Include="Kiwii\MonoText\GradientText.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\ShaderText.h">
-      <Filter>Kiwii\MonoText</Filter>
+    <ClInclude Include="Kiwii\MonoText\Kiwii.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\MonoText\ObgectText.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\MonoText\ScreenText.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\MonoText\SScreenText.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

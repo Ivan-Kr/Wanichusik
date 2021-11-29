@@ -139,24 +139,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Kiwii\GradientText.cpp" />
-    <ClCompile Include="Kiwii\Kiwii.cpp" />
-    <ClCompile Include="Kiwii\ScreenText.cpp" />
-    <ClCompile Include="Kiwii\ShaderText.cpp" />
+    <ClCompile Include="Kiwii\MonoText\GradientText.cpp" />
+    <ClCompile Include="Kiwii\MonoText\Kiwii.cpp" />
+    <ClCompile Include="Kiwii\MonoText\ObgectText.cpp" />
+    <ClCompile Include="Kiwii\MonoText\ScreenText.cpp" />
+    <ClCompile Include="Kiwii\MonoText\SScreenText.cpp" />
     <ClCompile Include="Wanichusik.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Kiwii\Explorer.h" />
-    <ClInclude Include="Kiwii\Games.h" />
-    <ClInclude Include="Kiwii\GradientText.h" />
-    <ClInclude Include="Kiwii\Kiwii.h" />
-    <ClInclude Include="Kiwii\Math.h" />
-    <ClInclude Include="Kiwii\Music.h" />
-    <ClInclude Include="Kiwii\Screen.h" />
-    <ClInclude Include="Kiwii\ScreenText.h" />
-    <ClInclude Include="Kiwii\ShaderText.h" />
-    <ClInclude Include="Kiwii\Time Act.h" />
-    <ClInclude Include="Kiwii\Interpre.h" />
+    <ClInclude Include="Kiwii\MonoText\Foot.h" />
+    <ClInclude Include="Kiwii\MonoText\GradientText.h" />
+    <ClInclude Include="Kiwii\MonoText\Kiwii.h" />
+    <ClInclude Include="Kiwii\MonoText\ObgectText.h" />
+    <ClInclude Include="Kiwii\MonoText\ScreenText.h" />
+    <ClInclude Include="Kiwii\MonoText\SScreenText.h" />
+    <ClInclude Include="Kiwii\Universalius\Explorer.h" />
+    <ClInclude Include="Kiwii\Universalius\Games.h" />
+    <ClInclude Include="Kiwii\Universalius\Interpre.h" />
+    <ClInclude Include="Kiwii\Universalius\Math.h" />
+    <ClInclude Include="Kiwii\Universalius\Music.h" />
+    <ClInclude Include="Kiwii\Universalius\Screen.h" />
+    <ClInclude Include="Kiwii\Universalius\Time Act.h" />
+    <ClInclude Include="Kiwii\Universalius\Universalius.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
