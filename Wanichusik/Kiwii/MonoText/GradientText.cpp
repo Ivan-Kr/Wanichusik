@@ -2,7 +2,7 @@
 
 unsigned __int8 kiwii::GradientText::Brightness(int index)
 {
-	if (!(index < 0 || index >= SQUARE()))
+	if (!(index < 0 || index >= Square()))
 		return BRIGHTNESS[index];
 	else
 		return 0;
@@ -10,13 +10,13 @@ unsigned __int8 kiwii::GradientText::Brightness(int index)
 
 void kiwii::GradientText::Brightness(int index, unsigned __int8 val)
 {
-	if (!(index < 0 || index >= SQUARE()))
+	if (!(index < 0 || index >= Square()))
 		BRIGHTNESS[index] = val;
 }
 
 void kiwii::GradientText::BrightnessDiff(int index, __int8 val)
 {
-	if (!(index < 0 || index >= SQUARE()))
+	if (!(index < 0 || index >= Square()))
 		BRIGHTNESS[index] += val;
 }
 
@@ -27,29 +27,35 @@ void kiwii::GradientText::ImportS(std::wstring grad)
 
 void kiwii::GradientText::ImportL(std::wstring dir)
 {
-	wfile_t file;
-	file.open(dir, std::ios::out);
-	if (file.is_openn()) {
-		GRADIENT = file.write(1).c_str();
+	std::wifstream file;
+	file.open(dir,std::ios::in);
+	if (file.is_open()) {
+		std::getline(file, GRADIENT);
 	}
 	file.close();
 }
 
 void kiwii::GradientText::ImportLS(std::wstring dir)
 {
-	wfile_t file;
-	file.open(dir, std::ios::out);
-	if (file.is_openn()) {
+	std::wifstream file;
+	file.open(dir, std::ios::in);
+	if (file.is_open()) {
 		
-		while(file.get_insert()[file.get_insert().size()-1]!=L'>')
-			GRADIENT+=file.write(1);
+		std::wstring s=L"";
+
+		while (file) {
+			std::getline(file, s);
+			if (s[s.length() - 1] != L'>')
+				GRADIENT += s;
+			else break;
+		}
 	}
 	file.close();
 }
 
 void kiwii::GradientText::Paint()
 {
-	for (int i = 0;i < SQUARE();i++) {
+	for (int i = 0;i < Square();i++) {
 		_screen[i] = GRADIENT[min(BRIGHTNESS[i], GRADIENT.size() - 1)];
 	}
 }

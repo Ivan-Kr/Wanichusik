@@ -1,6 +1,6 @@
 #pragma once
 #include "Kiwii.h"
-#include "Head.h"
+#include "Foot.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
@@ -19,7 +19,7 @@ namespace kiwii {
 
 
 	public:
-		int SQUARE() {
+		int Square() {
 			return _width * _height;
 		}
 		virtual void Setup() {};
@@ -52,7 +52,7 @@ namespace kiwii {
 		void Fill(wchar_t val);
 
 		void Out() {
-			WriteConsoleOutputCharacterW(_hconsole, _screen, SQUARE(), { 0, 0 }, &_dwbyteswritten);
+			WriteConsoleOutputCharacterW(_hconsole, _screen, Square(), { 0, 0 }, &_dwbyteswritten);
 		}
 
 		~ScreenText() {

@@ -12,37 +12,37 @@ void kiwii::ScreenText::SetupS(WORD Width, WORD Height)
 
 	_aspect = _width / _height;
 
-	_screen = new wchar_t[SQUARE() + 1];
-	_screen[SQUARE()] = L'\0';
+	_screen = new wchar_t[Square() + 1];
+	_screen[Square()] = L'\0';
 }
 
 wchar_t kiwii::ScreenText::ScreenL(int index) {
-	if (!(index < 0 || index >= SQUARE()))
+	if (!(index < 0 || index >= Square()))
 		return _screen[index];
 	else
 		return L'\0';
 }
 
 void kiwii::ScreenText::ScreenL(int index, wchar_t val) {
-	if (!(index < 0 || index >= SQUARE()))
+	if (!(index < 0 || index >= Square()))
 		_screen[index] = val;
 }
 
 wchar_t kiwii::ScreenText::ScreenP(int x, int y) {
-	if (!(x+y*_width < 0 || x + y * _width >= SQUARE()))
+	if (!(x+y*_width < 0 || x + y * _width >= Square()))
 		return _screen[x + y * _width];
 	else
 		return L'\0';
 }
 
 void kiwii::ScreenText::ScreenP(int x, int y, wchar_t val) {
-	if (!(x + y * _width < 0 || x + y * _width >= SQUARE()))
+	if (!(x + y * _width < 0 || x + y * _width >= Square()))
 		_screen[x + y * _width] = val;
 }
 
 void kiwii::ScreenText::Fill(wchar_t val)
 {
-	for (int i = 0;i < kiwii::ScreenText::SQUARE();i++) {
+	for (int i = 0;i < kiwii::ScreenText::Square();i++) {
 		_screen[i] = val;
 	}
 }

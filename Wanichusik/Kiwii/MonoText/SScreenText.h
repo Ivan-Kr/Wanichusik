@@ -1,10 +1,10 @@
 #pragma once
 #include "Kiwii.h"
-#include "Head.h"
+#include "Foot.h"
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
-#include <math.h>
+#include <vector>
 
 
 namespace kiwii {
@@ -17,11 +17,11 @@ namespace kiwii {
 
 		double _aspect;
 
-		wchar_t* _screen;
+		std::vector<wchar_t> _screen;
 
 
 	public:
-		int SQUARE() {
+		int Square() {
 			return _width * _height;
 		}
 		virtual void Setup() {};
@@ -44,7 +44,10 @@ namespace kiwii {
 		void ScreenP(int x, int y, wchar_t val);
 
 		void Comment(int length, const wchar_t* const format) {
-			swprintf_s(_screen, length, format);
+			wchar_t* comment = new wchar_t[length];
+			swprintf_s(comment, length, format);
+			for (int i = 0;i < length;i++)_screen[i] = comment[i];
+			delete[] comment;
 		}
 
 		double Aspect() {
@@ -54,11 +57,11 @@ namespace kiwii {
 		void Fill(wchar_t val);
 
 		void Out() {
-			WriteConsoleOutputCharacterW(_hconsole, _screen, SQUARE(), { 0, 0 }, &_dwbyteswritten);
-		}
-
-		~SScreenText() {
-			delete[] _screen;
+			wchar_t* scr = new wchar_t[_width * _height+1];
+			scr[_width * _height] = L'\0';
+			for (int i = 0;i < _width * _height;i++)_screen[i] = scr[i];
+			WriteConsoleOutputCharacterW(_hconsole, scr, Square(), { 0, 0 }, &_dwbyteswritten);
+			delete[] scr;
 		}
 	};
 }

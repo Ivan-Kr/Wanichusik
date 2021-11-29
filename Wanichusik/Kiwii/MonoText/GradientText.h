@@ -1,6 +1,7 @@
 #pragma once
 #include "ScreenText.h"
-#include "Explorer.h"
+#include <fstream>
+#include <string>
 
 namespace kiwii {
 	class GradientText :
@@ -11,7 +12,7 @@ namespace kiwii {
 		std::wstring GRADIENT;
 	public:
 		void Setup() override {
-			BRIGHTNESS = new unsigned __int8[SQUARE()];
+			BRIGHTNESS = new unsigned __int8[Square()];
 		}
 
 		unsigned __int8 Brightness(int index);
