@@ -7,10 +7,11 @@ void kiwii::ShaderText::Connect(ScreenText screentext)
 	action.push_back("Connect to "+(long long)&ConnectedScreen);
 }
 
-void kiwii::ShaderText::Disconnect()
+kiwii::ScreenText kiwii::ShaderText::Disconnect()
 {
 	is_connected = 0;
 	action.push_back("Disconnect from " + (long long)&ConnectedScreen);
+	return ConnectedScreen;
 }
 
 void kiwii::ShaderText::Noise()

@@ -19,7 +19,7 @@ namespace kiwii {
 
 		std::string ShowList(int index);
 
-		void Disconnect();
+		ScreenText Disconnect();
 
 		~ShaderText() {}
 	};

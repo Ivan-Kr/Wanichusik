@@ -29,7 +29,7 @@ int main(){
 				x += sin(t * 0.001f);
 
 				wchar_t a = L' ';
-				if (x * x + y * y < 0.5f)
+				if (x*x < 0.5f && y*y < 0.5f )
 					a = L'#';
 				ai.ScreenP(i, j, a);
 			
