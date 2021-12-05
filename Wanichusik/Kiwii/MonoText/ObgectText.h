@@ -1,15 +1,22 @@
 #pragma once
+#include "ScreenText.h"
+#include "SScreenText.h"
 #include <vector>
+#include <fstream>
 
 namespace kiwii {
 	class ObgectText
 	{
-		int _x;
-		int _y;
-		std::vector<wchar_t> pic;
+		friend ScreenText;
+		friend SScreenText;
+		std::vector<std::vector<wchar_t>> _pic;
 
+		
 	public:
 		ObgectText();
+
+		void Import(std::wstring dir);
+
 		~ObgectText();
 
 	private:

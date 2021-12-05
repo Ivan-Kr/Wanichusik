@@ -1,5 +1,5 @@
 ﻿#include "Kiwii/MonoText/GradientText.h"
-#include "Kiwii/MonoText/SScreenText.h"
+#include "Kiwii/MonoText/NScreenText.h"
 #include "Kiwii/Universalius/Math.h"
 #include <iostream>
 #include <Windows.h>
