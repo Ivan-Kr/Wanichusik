@@ -3,6 +3,7 @@
 #include "SScreenText.h"
 #include <vector>
 #include <fstream>
+#include <string>
 
 namespace kiwii {
 	class ObgectText
