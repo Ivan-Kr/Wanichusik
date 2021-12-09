@@ -48,6 +48,9 @@
     <ClCompile Include="Kiwii\MonoText\ScreenText.cpp">
       <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">

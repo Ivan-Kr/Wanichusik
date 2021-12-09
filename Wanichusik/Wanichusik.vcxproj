@@ -144,6 +144,7 @@
     <ClCompile Include="Kiwii\MonoText\ObgectText.cpp" />
     <ClCompile Include="Kiwii\MonoText\ScreenText.cpp" />
     <ClCompile Include="Kiwii\MonoText\SScreenText.cpp" />
+    <ClCompile Include="Main.c" />
     <ClCompile Include="Wanichusik.cpp" />
   </ItemGroup>
   <ItemGroup>

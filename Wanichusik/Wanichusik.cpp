@@ -1,6 +1,4 @@
-﻿//#include "Kiwii/MonoText/ScreenText.h"
-//#include "Kiwii/Universalius/Math.h"
-#include "Kiwii/Universalius/UniversaliusKit.h"
+﻿#include "Kiwii/Universalius/UniversaliusKit.h"
 #include "Kiwii/MonoText/MonoTextKit.h"
 #include <iostream>
 //#include <Windows.h>
@@ -53,6 +51,8 @@ int main(){
 
 	//b.Name(L"Sub");
 	b.Info();
+
+	std::cout << &a;
 
 	return 0;
 }

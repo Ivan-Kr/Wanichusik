@@ -2,8 +2,7 @@
 #include "Memory.h"
 #include "Kiwii.h"
 #include "Foot.h"
-#include <iostream>
-#include <Windows.h>
+//#include <iostream>
 #include <stdio.h>
 
 namespace kiwii {

@@ -42,7 +42,7 @@ void kiwii::monotext::ScreenText::ScreenP(int x, int y, wchar_t val) {
 
 void kiwii::monotext::ScreenText::Fill(wchar_t val)
 {
-	for (int i = 0;i < kiwii::ScreenText::Square();i++) {
+	for (int i = 0;i < Square();i++) {
 		_screen[i] = val;
 	}
 }
