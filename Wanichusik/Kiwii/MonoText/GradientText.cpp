@@ -1,6 +1,6 @@
 #include "GradientText.h"
 
-unsigned __int8 kiwii::GradientText::Brightness(int index)
+unsigned __int8 kiwii::monotext::GradientText::Brightness(int index)
 {
 	if (!(index < 0 || index >= Square()))
 		return BRIGHTNESS[index];
@@ -8,24 +8,24 @@ unsigned __int8 kiwii::GradientText::Brightness(int index)
 		return 0;
 }
 
-void kiwii::GradientText::Brightness(int index, unsigned __int8 val)
+void kiwii::monotext::GradientText::Brightness(int index, unsigned __int8 val)
 {
 	if (!(index < 0 || index >= Square()))
 		BRIGHTNESS[index] = val;
 }
 
-void kiwii::GradientText::BrightnessDiff(int index, __int8 val)
+void kiwii::monotext::GradientText::BrightnessDiff(int index, __int8 val)
 {
 	if (!(index < 0 || index >= Square()))
 		BRIGHTNESS[index] += val;
 }
 
-void kiwii::GradientText::ImportS(std::wstring grad)
+void kiwii::monotext::GradientText::ImportS(std::wstring grad)
 {
 	GRADIENT = grad.c_str();
 }
 
-void kiwii::GradientText::ImportL(std::wstring dir)
+void kiwii::monotext::GradientText::ImportL(std::wstring dir)
 {
 	std::wifstream file;
 	file.open(dir,std::ios::in);
@@ -35,7 +35,7 @@ void kiwii::GradientText::ImportL(std::wstring dir)
 	file.close();
 }
 
-void kiwii::GradientText::ImportLS(std::wstring dir)
+void kiwii::monotext::GradientText::ImportLS(std::wstring dir)
 {
 	std::wifstream file;
 	file.open(dir, std::ios::in);
@@ -53,7 +53,7 @@ void kiwii::GradientText::ImportLS(std::wstring dir)
 	file.close();
 }
 
-void kiwii::GradientText::Paint()
+void kiwii::monotext::GradientText::Paint()
 {
 	for (int i = 0;i < Square();i++) {
 		_screen[i] = GRADIENT[min(BRIGHTNESS[i], GRADIENT.size() - 1)];

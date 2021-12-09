@@ -6,22 +6,20 @@
 #include <string>
 
 namespace kiwii {
-	class ObgectText
-	{
-		friend ScreenText;
-		friend SScreenText;
-		std::vector<std::vector<wchar_t>> _pic;
+	namespace monotext {
+		class ObgectText
+		{
+			friend ScreenText;
+			friend SScreenText;
+			std::vector<std::vector<wchar_t>> _pic;
+		public:
+			ObgectText();
 
-		
-	public:
-		ObgectText();
+			void Import(std::wstring dir);
+			~ObgectText();
 
-		void Import(std::wstring dir);
+		private:
 
-		~ObgectText();
-
-	private:
-
-	};
-
+		};
+	}
 }

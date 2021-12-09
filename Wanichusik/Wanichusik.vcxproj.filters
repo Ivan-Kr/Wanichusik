@@ -50,7 +50,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Kiwii\Universalius\Universalius.h">
+    <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">
       <Filter>Kiwii\Universalius</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\Universalius\Explorer.h">
@@ -90,6 +90,12 @@
       <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\MonoText\SScreenText.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\MonoText\Memory.h">
+      <Filter>Kiwii\MonoText\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\MonoText\MonoTextKit.h">
       <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -150,6 +150,8 @@
     <ClInclude Include="Kiwii\MonoText\Foot.h" />
     <ClInclude Include="Kiwii\MonoText\GradientText.h" />
     <ClInclude Include="Kiwii\MonoText\Kiwii.h" />
+    <ClInclude Include="Kiwii\MonoText\Memory.h" />
+    <ClInclude Include="Kiwii\MonoText\MonoTextKit.h" />
     <ClInclude Include="Kiwii\MonoText\ObgectText.h" />
     <ClInclude Include="Kiwii\MonoText\ScreenText.h" />
     <ClInclude Include="Kiwii\MonoText\SScreenText.h" />
@@ -160,7 +162,7 @@
     <ClInclude Include="Kiwii\Universalius\Music.h" />
     <ClInclude Include="Kiwii\Universalius\Screen.h" />
     <ClInclude Include="Kiwii\Universalius\Time Act.h" />
-    <ClInclude Include="Kiwii\Universalius\Universalius.h" />
+    <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
