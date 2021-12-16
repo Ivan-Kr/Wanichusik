@@ -1,0 +1,3 @@
+Info in first deep
+	_pointer = 012FFE38
+	_name = Kiwii

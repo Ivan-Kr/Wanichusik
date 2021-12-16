@@ -7,6 +7,7 @@ namespace kiwii {
 	namespace monotext {
 		class Memory
 		{
+		protected:
 			bool pointer;
 			std::wstring _name = L"[null]";
 		public:

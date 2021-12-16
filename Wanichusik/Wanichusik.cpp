@@ -1,5 +1,6 @@
-﻿#include "Kiwii/Universalius/UniversaliusKit.h"
-#include "Kiwii/MonoText/MonoTextKit.h"
+﻿//#include "Kiwii/Universalius/UniversaliusKit.h"
+//#include "Kiwii/MonoText/MonoTextKit.h"
+#include "Kiwii/DatoBased/Deep.h"
 #include <iostream>
 //#include <Windows.h>
 //#include <stdio.h>
@@ -10,16 +11,18 @@
 int main(){
 	/*
 	srand(time(NULL));
-	kiwii::ScreenText ai;
+	kiwii::monotext::ScreenText ai;
 
-	change_font(4,8);
+	ai.Name(L"UX");
 
-	float font_ = 4.0f / 8.0f;
-	ai.SetupS(320,120);
+	change_font(8,16);
+
+	float font_ = 8.0f / 16.0f;
+	ai.SetupS(90,30);
 	//ai.Fill(L' ');
-	//ai.ImportL(L"Kiwii/Hash/Gradient1 GradientText.txt");
+	//ai.ImportL(L"Kiwii/_Hash/Gradient1 GradientText.txt");
 
-	for (int t = 0;t < 500000;t++) {
+	for (int t = 0;t < 5000;t++) {
 		for (int j = 0;j < ai.Height();j++) {
 			for (int i = 0;i < ai.Width();i++) {
 				
@@ -40,19 +43,12 @@ int main(){
 		ai.Out();
 
 	}
+	ai.Info();
 	*/
 
-	kiwii::monotext::Memory a;
-
-	a.Name(L"Sub");
-	a.Info();
-
-	kiwii::monotext::Memory b;
-
-	//b.Name(L"Sub");
-	b.Info();
-
-	std::cout << &a;
+	Deep a;
+	a.name("Kiwii");
+	a.info("first deep");
 
 	return 0;
 }
