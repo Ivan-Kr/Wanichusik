@@ -1,16 +1,16 @@
 #include ".\Kiwii.h"
 
-Kiwii::Kiwii()
+KiwiI::KiwiI()
 {
-	this->size = sizeof(Kiwii);
+	this->size = sizeof(KiwiI);
 }
 
-unsigned __int64 Kiwii::__size()
+unsigned __int64 KiwiI::__size()
 {
 	return size;
 }
 
-unsigned __int8 Kiwii::_cunt_dig(__int64 num)
+unsigned __int8 KiwiI::_cunt_dig(__int64 num)
 {
 	unsigned __int8 iter = 0;
 	while (num != 0) {
@@ -21,7 +21,7 @@ unsigned __int8 Kiwii::_cunt_dig(__int64 num)
 	return iter;
 }
 
-__int64 Kiwii::_random(__int64 seed)
+__int64 KiwiI::_random(__int64 seed)
 {
 	//we have work with numbers, what isn't rise 1152921504606846975
 	const __int64 m = 281474976710656;
@@ -32,17 +32,17 @@ __int64 Kiwii::_random(__int64 seed)
 
 	return this->seed;
 }
-__int64 Kiwii::_random()
+__int64 KiwiI::_random()
 {
 	return _random(this->seed);
 }
 
-Kiwii::~Kiwii()
+KiwiI::~KiwiI()
 {
 
 }
 
-void Kiwii::_setsize(unsigned __int64 size)
+void KiwiI::_setsize(unsigned __int64 size)
 {
 	this->size = size;
 }

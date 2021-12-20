@@ -23,7 +23,7 @@
 #define hide_win ShowWindow(::GetConsoleWindow(), SW_HIDE)
 
 #define vec std::vector
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 		using QWORD = unsigned long long;
 		using DWORD = unsigned long;

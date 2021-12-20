@@ -7,7 +7,7 @@
 
 /*define*/
 #define temp template
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 		using QWORD = unsigned long long;
 		using DWORD = unsigned long;

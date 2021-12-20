@@ -5,7 +5,7 @@
 #include <list>
 #include <string>
 
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 		__int64 min3(__int64 a, __int64 b, __int64 c) {
 			if (a < b && a < c) return a;

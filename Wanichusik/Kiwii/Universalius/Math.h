@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 		typedef unsigned int wint;
 		typedef float procent;

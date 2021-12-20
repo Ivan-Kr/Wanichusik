@@ -7,9 +7,9 @@
 #include <vector>
 
 
-namespace kiwii {
+namespace Kiwii {
 	namespace monotext {
-		class SScreenText : public Kiwii {
+		class SScreenText : public KiwiI {
 		protected:
 			WORD _width;
 			WORD _height;

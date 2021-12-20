@@ -3,7 +3,7 @@
 #include <fstream>
 
 //class of control memory and process
-namespace kiwii {
+namespace Kiwii {
 	namespace monotext {
 		class Memory
 		{

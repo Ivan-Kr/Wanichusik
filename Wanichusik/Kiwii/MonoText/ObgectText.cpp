@@ -1,10 +1,10 @@
 #include "ObgectText.h"
 
-kiwii::monotext::ObgectText::ObgectText()
+Kiwii::monotext::ObgectText::ObgectText()
 {
 }
 
-void kiwii::monotext::ObgectText::Import(std::wstring dir)
+void Kiwii::monotext::ObgectText::Import(std::wstring dir)
 {
 	std::wifstream file;
 	file.open(dir);
@@ -28,6 +28,6 @@ void kiwii::monotext::ObgectText::Import(std::wstring dir)
 
 }
 
-kiwii::monotext::ObgectText::~ObgectText()
+Kiwii::monotext::ObgectText::~ObgectText()
 {
 }

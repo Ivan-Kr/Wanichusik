@@ -9,7 +9,7 @@
 #define Size_Screen_Y 1024
 #define Font_X 14
 #define Font_Y 7
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 		class Snake {
 			vec2<int16_t> size;

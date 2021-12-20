@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 #define NOW_T std::chrono::system_clock::now()
 		typedef std::chrono::system_clock::time_point TIME_POINT;

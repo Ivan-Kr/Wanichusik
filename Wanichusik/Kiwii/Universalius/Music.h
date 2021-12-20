@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include <string>
 
-namespace kiwii {
+namespace Kiwii {
 	namespace universalius {
 		class Music {
 		private:

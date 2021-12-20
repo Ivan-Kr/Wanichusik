@@ -5,9 +5,9 @@
 //#include <iostream>
 #include <stdio.h>
 
-namespace kiwii {
+namespace Kiwii {
 	namespace monotext {
-		class ScreenText : public Kiwii, public Memory
+		class ScreenText : public KiwiI, public Memory
 		{
 		protected:
 			WORD _width;

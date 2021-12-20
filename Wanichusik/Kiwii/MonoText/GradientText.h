@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 
-namespace kiwii {
+namespace Kiwii {
 	namespace monotext {
 		class GradientText :
 			public ScreenText
