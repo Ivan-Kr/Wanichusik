@@ -63,6 +63,9 @@
     <ClCompile Include="Kiwii\DatoBased\Deep.cpp">
       <Filter>Kiwii\DatoBased\Body</Filter>
     </ClCompile>
+    <ClCompile Include="Kiwii\DatoBased\Table.cpp">
+      <Filter>Kiwii\DatoBased\Body</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">
@@ -114,6 +117,9 @@
       <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\DatoBased\Deep.h">
+      <Filter>Kiwii\DatoBased\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Table.h">
       <Filter>Kiwii\DatoBased\Header</Filter>
     </ClInclude>
   </ItemGroup>

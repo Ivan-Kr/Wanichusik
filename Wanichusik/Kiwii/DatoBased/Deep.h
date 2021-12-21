@@ -7,12 +7,12 @@ namespace Kiwii {
 		std::string _name;
 		bool _pointer;
 	public:
-		virtual void info(std::string name);
+		virtual void _info_r(std::string _name_r);
 
-		std::string name() {
+		std::string _name_r() {
 			return _name;
 		}
-		void name(std::string namee) {
+		void _name_r(std::string namee) {
 			_name = namee;
 		}
 	};

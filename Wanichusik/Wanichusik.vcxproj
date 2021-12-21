@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Kiwii\DatoBased\Deep.cpp" />
+    <ClCompile Include="Kiwii\DatoBased\Table.cpp" />
     <ClCompile Include="Kiwii\MonoText\GradientText.cpp" />
     <ClCompile Include="Kiwii\MonoText\Kiwii.cpp" />
     <ClCompile Include="Kiwii\MonoText\ObgectText.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\DatoBased\Deep.h" />
+    <ClInclude Include="Kiwii\DatoBased\Table.h" />
     <ClInclude Include="Kiwii\MonoText\Foot.h" />
     <ClInclude Include="Kiwii\MonoText\GradientText.h" />
     <ClInclude Include="Kiwii\MonoText\Kiwii.h" />
