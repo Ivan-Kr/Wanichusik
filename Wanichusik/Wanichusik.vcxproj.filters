@@ -57,9 +57,6 @@
     <ClCompile Include="Kiwii\MonoText\ScreenText.cpp">
       <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Kiwii\DatoBased\Deep.cpp">
       <Filter>Kiwii\DatoBased\Body</Filter>
     </ClCompile>
