@@ -33,10 +33,12 @@ int main(){
 
 	for (int i = 0;i < 5;i++) {
 		for (int j = 0;j < 5;j++) {
-			std::cout<<table.table(i, j)<<' ';
+			std::cout<<table.table(i, j)<<'\t';
 		}
 		std::cout << '\n';
 	}
+
+	table._info_r("Table");
 
 	return 0;
 }
