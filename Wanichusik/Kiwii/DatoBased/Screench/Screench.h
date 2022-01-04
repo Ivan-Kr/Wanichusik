@@ -2,6 +2,9 @@
 #include "../Deep/Deep.h"
 #include <Windows.h>
 #include <stdio.h>
+#include <utility>
+#include <algorithm>
+#include <chrono>
 
 namespace Kiwii {
     static void SO_set_window(int Width, int Height) {
@@ -45,7 +48,7 @@ namespace Kiwii {
         uint16_t _width;
         uint16_t _height;
         HANDLE _hconsole;
-        LPDWORD _dwbyteswritten = 0;
+        DWORD _dwbyteswritten = 0;
 
         double _aspect = NULL;
 
@@ -88,7 +91,7 @@ namespace Kiwii {
         /////special func//////
         
         void print() {
-            if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0, 0 }, _dwbyteswritten);
+            if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0,0 }, &_dwbyteswritten);
         }
 
         void reset_screen() {

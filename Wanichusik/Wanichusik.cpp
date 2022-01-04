@@ -21,13 +21,14 @@
 
 int main() {
 	Kiwii::Screench a;
-	a.set_screen(60, 30,false);
+	a.setup(182, 61);
 	
 
 	for(int t=0;t<400000;t++){
-		for (int i = 0;i < a.get_square();i++) a.set_screenn(i, t % 2 == 0 ? ' ' : '#');
+		for (int i = 0;i < a.get_square();i++) a.screen(i,  i % 6 == (t / 16) % 6 ? '#' : ' ');
 
 		a.print();
+		Sleep(1);
 	}
 
 	return 0;
