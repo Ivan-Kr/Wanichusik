@@ -36,16 +36,18 @@ namespace Kiwii {
         //then on each pointer need one boolean
         //(ask, if decleared, with class, when it hasn't got not empty constructor) 
 
+        typedef char SYM;
+
         ///////pointers////////
-        char* _screen;
+        SYM* _screen;
 
         ////others variables///
-        WORD _width;
-        WORD _height;
+        uint16_t _width;
+        uint16_t _height;
         HANDLE _hconsole;
-        DWORD _dwbyteswritten = 0;
+        LPDWORD _dwbyteswritten = 0;
 
-        double _aspect;
+        double _aspect = NULL;
 
         ///////pointers////////
         bool is_decleared = false;
@@ -55,17 +57,46 @@ namespace Kiwii {
         Screench(){}
 
         //////get and set//////
-        void set_screen(WORD width, WORD height, bool need_adapt = false);
-        
+        void setup(uint16_t width, uint16_t height, bool need_adapt = true);
+        double get_aspect() { return _aspect; }
+        uint32_t get_square() { return _width*_height; }
+        HANDLE get_handle() { return _hconsole; }
+        uint16_t get_width() { return _width; }
+        uint16_t get_height() { return _height; }
+        SYM screen(uint16_t x, uint16_t y) {
+            if (is_decleared)
+                return _screen[(x < _width ? x : _width - 1) + (y < _height ? y : _height - 1) * _width];
+        }
+        SYM screen(uint32_t ind) {
+            if (is_decleared)
+                return _screen[ind < get_square() ? ind : get_square() - 1];
+        }
+        void screen(uint16_t x, uint16_t y, SYM what) {
+            if (is_decleared)
+                _screen[(x < _width ? x : _width - 1) + (y < _height ? y : _height - 1) * _width] = what;
+        }
+        void screen(uint32_t ind, SYM what) {
+            if (is_decleared)
+                _screen[ind < get_square() ? ind : get_square() - 1] = what;
+        }
+
         ////////virtual////////
-        
+
         ///////override////////
-        
+        void _info_r(std::string _name_r) override;
+
         /////special func//////
         
+        void print() {
+            if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0, 0 }, _dwbyteswritten);
+        }
+
+        void reset_screen() {
+            delete[] _screen;
+        }
 
         ///////destructor//////
-        ~Screench(){}
+        ~Screench() { reset_screen(); }
 
     };
 }

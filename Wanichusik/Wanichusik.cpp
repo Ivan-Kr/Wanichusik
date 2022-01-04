@@ -19,8 +19,16 @@
 //⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯
 //⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿
 
-int main(){
+int main() {
 	Kiwii::Screench a;
-	a.set_screen(20, 20);
+	a.set_screen(60, 30,false);
+	
+
+	for(int t=0;t<400000;t++){
+		for (int i = 0;i < a.get_square();i++) a.set_screenn(i, t % 2 == 0 ? ' ' : '#');
+
+		a.print();
+	}
+
 	return 0;
 }

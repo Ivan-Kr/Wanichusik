@@ -23,7 +23,7 @@ namespace Kiwii {
     public:
         //////constructor//////
         Table(){}
-        void set_table(unsigned int x, unsigned int y) {
+        void setup(unsigned int x, unsigned int y) {
             _is_decleared = true;
 
             _sx = x;
