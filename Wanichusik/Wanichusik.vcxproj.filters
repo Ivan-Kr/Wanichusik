@@ -31,12 +31,6 @@
     <Filter Include="Kiwii\DatoBased">
       <UniqueIdentifier>{967a6d26-b4ba-4ea5-8729-83f32871fb28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kiwii\DatoBased\Header">
-      <UniqueIdentifier>{e4a327f4-ebc4-4a8f-ad5a-70a5d1046f66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Kiwii\DatoBased\Body">
-      <UniqueIdentifier>{f9b11fd3-12b9-4842-938f-5ffce2d445a4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Wanichusik.cpp">
@@ -57,11 +51,14 @@
     <ClCompile Include="Kiwii\MonoText\ScreenText.cpp">
       <Filter>Kiwii\MonoText\Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\DatoBased\Deep.cpp">
-      <Filter>Kiwii\DatoBased\Body</Filter>
+    <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp">
+      <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\DatoBased\Table.cpp">
-      <Filter>Kiwii\DatoBased\Body</Filter>
+    <ClCompile Include="Kiwii\DatoBased\Deep\Deep.cpp">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClCompile>
+    <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp">
+      <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,11 +110,14 @@
     <ClInclude Include="Kiwii\MonoText\MonoTextKit.h">
       <Filter>Kiwii\MonoText\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\DatoBased\Deep.h">
-      <Filter>Kiwii\DatoBased\Header</Filter>
+    <ClInclude Include="Kiwii\DatoBased\Table\Table.h">
+      <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\DatoBased\Table.h">
-      <Filter>Kiwii\DatoBased\Header</Filter>
+    <ClInclude Include="Kiwii\DatoBased\Deep\Deep.h">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Screench\Screench.h">
+      <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

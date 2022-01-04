@@ -1,5 +1,5 @@
 #pragma once
-#include "Deep.h"
+#include "../Deep/Deep.h"
 
 namespace Kiwii {
     template<typename _Ty>
@@ -63,24 +63,8 @@ namespace Kiwii {
             }
         }
 
-
-
         ////////virtual////////
         ///////override////////
-        void _info_r(std::string _name_r) override {
-            std::ofstream file("./Kiwii/DatoBased/Info/" + _name_r + ".txt", std::ios::out);
-            file << "{\n";
-            //////////////////////////
-            file << "Info in \"" << _name_r << ".txt\"\n";
-            file << "\t" <<"_pointer" << " : " << &_pointer << ',' << "\n";
-            file << "\t" << "_name" << " : " << _name << ',' << "\n";
-
-            
-            
-            //////////////////////////
-            file.close();
-        }
-
         /////special func//////
 
         void fill(_Ty what) {
