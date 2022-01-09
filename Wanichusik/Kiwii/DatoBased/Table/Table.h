@@ -91,7 +91,7 @@ namespace Kiwii {
         }
 
         ///////destructor//////
-        void reset_table() {
+        void unsetup() {
             if (_is_decleared) {
                 for (unsigned int i = 0;i < _sx;i++) {
                     delete[] _table[i];
@@ -108,7 +108,7 @@ namespace Kiwii {
             }
         }
         ~Table() { 
-            reset_table();
+            unsetup();
         }
 
     };

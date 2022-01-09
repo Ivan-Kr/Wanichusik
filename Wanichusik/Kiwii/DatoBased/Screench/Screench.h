@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <utility>
 #include <algorithm>
-#include <chrono>
 
 namespace Kiwii {
     static void SO_set_window(int Width, int Height) {
@@ -66,21 +65,23 @@ namespace Kiwii {
         HANDLE get_handle() { return _hconsole; }
         uint16_t get_width() { return _width; }
         uint16_t get_height() { return _height; }
-        SYM screen(uint16_t x, uint16_t y) {
+        SYM get_screen(uint16_t x, uint16_t y) {
             if (is_decleared)
-                return _screen[(x < _width ? x : _width - 1) + (y < _height ? y : _height - 1) * _width];
+                return _screen[fix_int<uint16_t>(x, 0, _width)  + fix_int<uint16_t>(y, 0, _height)* _width];
         }
-        SYM screen(uint32_t ind) {
+        SYM get_screen(uint32_t ind) {
             if (is_decleared)
-                return _screen[ind < get_square() ? ind : get_square() - 1];
+                return _screen[fix_int<uint32_t>(ind, 0, get_square() - 1)];
         }
-        void screen(uint16_t x, uint16_t y, SYM what) {
+        void set_screen(uint16_t x, uint16_t y, SYM what) {
+            uint16_t X = fix_int<uint16_t>(x, 0, _width);
+            uint16_t Y = fix_int<uint16_t>(y, 0, _height);
             if (is_decleared)
-                _screen[(x < _width ? x : _width - 1) + (y < _height ? y : _height - 1) * _width] = what;
+                _screen[X+Y*_width] = what;
         }
-        void screen(uint32_t ind, SYM what) {
+        void set_screen(uint32_t ind, SYM what) {
             if (is_decleared)
-                _screen[ind < get_square() ? ind : get_square() - 1] = what;
+                _screen[fix_int<uint32_t>(ind,0,get_square())] = what;
         }
 
         ////////virtual////////
@@ -94,12 +95,15 @@ namespace Kiwii {
             if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0,0 }, &_dwbyteswritten);
         }
 
-        void reset_screen() {
+        void unsetup() {
+            is_decleared = false;
             delete[] _screen;
         }
 
         ///////destructor//////
-        ~Screench() { reset_screen(); }
+        ~Screench() { 
+            unsetup();
+        }
 
     };
 }

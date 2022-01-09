@@ -60,6 +60,9 @@
     <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp">
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
+    <ClCompile Include="Kiwii\DatoBased\Spritech\Spritech.cpp">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">
@@ -117,6 +120,9 @@
       <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\DatoBased\Screench\Screench.h">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Spritech\Spritech.h">
       <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
   </ItemGroup>

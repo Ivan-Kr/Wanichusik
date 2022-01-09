@@ -1,7 +1,16 @@
 #pragma once
 #include <string>
 #include <fstream>
+
+#define max(a,b)(a<b?b:a)
+#define min(a,b)(a<b?a:b)
+
 namespace Kiwii {
+	template<typename _Ty>
+	static _Ty fix_int(_Ty num, _Ty mn, _Ty mx) {
+		return max(min(num,(mx - 1)),mn);
+	}
+
 	class Deep {
 	protected:
 		std::string _name;
@@ -31,6 +40,8 @@ namespace Kiwii {
 		void WriteAnyString(std::ofstream file, std::string name, const char** what, size_t size);
 		void WriteAnyWString(std::ofstream file, std::string name, const wchar_t** what, size_t size);
 	public:
+		void setup();
+
 		virtual void _info_r(std::string _name_r);
 
 		std::string _name_r() {
@@ -39,6 +50,8 @@ namespace Kiwii {
 		void _name_r(std::string namee) {
 			_name = namee;
 		}
+
+		void unsetup();
 	};
 
 }

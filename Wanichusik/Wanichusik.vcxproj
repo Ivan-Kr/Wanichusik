@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Kiwii\DatoBased\Deep\Deep.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp" />
+    <ClCompile Include="Kiwii\DatoBased\Spritech\Spritech.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp" />
     <ClCompile Include="Kiwii\MonoText\GradientText.cpp" />
     <ClCompile Include="Kiwii\MonoText\Kiwii.cpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Kiwii\DatoBased\Deep\Deep.h" />
     <ClInclude Include="Kiwii\DatoBased\Screench\Screench.h" />
+    <ClInclude Include="Kiwii\DatoBased\Spritech\Spritech.h" />
     <ClInclude Include="Kiwii\DatoBased\Table\Table.h" />
     <ClInclude Include="Kiwii\MonoText\Foot.h" />
     <ClInclude Include="Kiwii\MonoText\GradientText.h" />
