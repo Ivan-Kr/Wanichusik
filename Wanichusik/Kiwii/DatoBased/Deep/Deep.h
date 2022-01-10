@@ -1,9 +1,59 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <vector>
+#include <sstream>
 
 #define max(a,b)(a<b?b:a)
 #define min(a,b)(a<b?a:b)
+
+struct uint128_t {
+	static const uint8_t ma = 2;
+	uint64_t arr[ma];
+
+	std::string show_hex() {
+		std::stringstream num;
+		for (int i = 0;i < ma;i++)
+			num << std::hex << arr[i];
+
+		return num.str();
+	}
+
+	std::string show_oct() {
+		std::stringstream num;
+		for (int i = 0;i < ma;i++)
+			num << std::oct << arr[i];
+
+		return num.str();
+	}
+	std::string show_dec() {
+		std::stringstream num;
+		for (int i = 0;i < ma;i++)
+			num << arr[i];
+
+		return num.str();
+	}
+	std::string show_bin() {
+		std::stringstream num;
+		for (int i = 0;i < ma;i++)
+			num << arr[i];
+
+		return num.str();
+	}
+};
+
+struct uint256_t {
+	static const uint8_t ma = 4;
+	uint64_t arr[ma];
+
+	std::string show_hex() {
+		std::stringstream num;
+		for(int i=0;i< ma;i++)
+			num << std::hex << arr[i];
+
+		return num.str();
+	}
+};
 
 namespace Kiwii {
 	template<typename _Ty>
@@ -40,8 +90,6 @@ namespace Kiwii {
 		void WriteAnyString(std::ofstream file, std::string name, const char** what, size_t size);
 		void WriteAnyWString(std::ofstream file, std::string name, const wchar_t** what, size_t size);
 	public:
-		void setup();
-
 		virtual void _info_r(std::string _name_r);
 
 		std::string _name_r() {
@@ -50,8 +98,6 @@ namespace Kiwii {
 		void _name_r(std::string namee) {
 			_name = namee;
 		}
-
-		void unsetup();
 	};
 
 }

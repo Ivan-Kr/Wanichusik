@@ -12,11 +12,14 @@ namespace Kiwii {
         typedef char SYM;
 
         ///////pointers////////
-        SYM** _screen;
+        SYM** _visual;
 
         ////others variables///
         uint16_t _width;
         uint16_t _height;
+
+        uint16_t _pos_x;
+        uint16_t _pos_y;
 
         bool _have_void = false;
 
@@ -28,7 +31,9 @@ namespace Kiwii {
         Spritech(){}
 
         //////get and set//////
-        void setup(uint16_t width, uint16_t height, bool have_void = true);
+        void setup(uint16_t width, uint16_t height, bool have_void = true) {
+
+        }
 
         ////////virtual////////
 
@@ -40,6 +45,8 @@ namespace Kiwii {
 
 
         void unsetup() {
+            for (uint16_t i = 0;i < _width;i++) delete[] _visual[i];
+            delete[] _visual;
         }
 
         ///////destructor//////
