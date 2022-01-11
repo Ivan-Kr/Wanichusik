@@ -21,12 +21,7 @@
 
 int main() {
 
-	uint128_t a;
-
-	a.arr[0] = 3152652525235;
-	a.arr[1] = 12;
-
-	std::cout << a.show_dec();
+	std::cout << "Hello, Ivan-Krul!";
 
 	return 0;
 }
