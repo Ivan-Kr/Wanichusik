@@ -32,13 +32,26 @@ namespace Kiwii {
 
         //////get and set//////
         void setup(uint16_t width, uint16_t height, bool have_void = true) {
+            try {
+                if (_width == 0 || _height == 0) throw true;
 
+                _width = width;
+                _height = height;
+
+                _visual = new SYM * [_width];
+                for (uint16_t i = 0;i < _width;i++)
+                    throw false;
+            }
+            catch (bool res)
+            {
+                if (res)std::abort();
+            }
         }
 
         ////////virtual////////
 
         ///////override////////
-        void _info_r(std::string _name_r) override;
+        void _info_r(std::string _name_r) override{}
 
         /////special func//////
         

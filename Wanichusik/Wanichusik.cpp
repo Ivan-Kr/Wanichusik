@@ -1,4 +1,4 @@
-﻿#include "./Kiwii/DatoBased/Screench/Screench.h"
+﻿#include "./Kiwii/DatoBased/Spritech/Spritech.h"
 #include <iostream>
 
 //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎
@@ -21,7 +21,8 @@
 
 int main() {
 
-	std::cout << "Hello, Ivan-Krul!";
+	Kiwii::Spritech a;
+	a.setup(1, 0);
 
 	return 0;
 }
