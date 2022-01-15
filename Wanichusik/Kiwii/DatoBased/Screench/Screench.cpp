@@ -9,6 +9,7 @@ void Kiwii::Screench::setup(uint16_t width, uint16_t height, bool need_adapt)
 		_aspect = (double)_width / height;
 
 		if (_aspect > 3 || _aspect < (double)1 / 3) throw true;
+		if (_width == 0 || _height == 0) throw true;
 
 		_hconsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 		SetConsoleActiveScreenBuffer(_hconsole);

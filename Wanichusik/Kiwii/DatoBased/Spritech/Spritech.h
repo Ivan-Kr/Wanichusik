@@ -1,7 +1,5 @@
 #pragma once
 #include "../Deep/Deep.h"
-#include <Windows.h>
-#include <stdio.h>
 
 namespace Kiwii {
 	class Spritech : public Deep {
@@ -58,7 +56,6 @@ namespace Kiwii {
 
         uint16_t get_height() { return _height; }
         uint16_t get_width() { return _width; }
-        uint16_t get_height() { return _height; }
 
         SYM get_sprite(uint16_t x, uint16_t y) {
             return _sprite[fix<uint16_t>(x, 0, _width)][fix<uint16_t>(y, 0, _height)];
@@ -70,20 +67,10 @@ namespace Kiwii {
         ////////virtual////////
 
         ///////override////////
-        void _info_r(std::string _name_r) override {
-            std::ofstream file("./Kiwii/DatoBased/Info/" + _name_r + ".txt", std::ios::out);
-            file << "Info in \"" << _name_r << ".txt\"\n";
-            //////////////////////////
-
-            file << "\t" << "_pointer" << " : " << &_pointer << "\n";
-            file << "\t" << "_name" << " : " << _name << "\n";
-
-            //////////////////////////
-            file.close();
-        }
+        void _info_r(std::string _name_r) override;
 
         /////special func//////
-        
+        void load(std::string way);
 
         
         void unsetup() {
