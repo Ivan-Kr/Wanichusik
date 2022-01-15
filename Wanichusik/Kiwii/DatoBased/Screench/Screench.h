@@ -67,27 +67,37 @@ namespace Kiwii {
         uint16_t get_height() { return _height; }
         SYM get_screen(uint16_t x, uint16_t y) {
             if (is_decleared)
-                return _screen[fix_int<uint16_t>(x, 0, _width)  + fix_int<uint16_t>(y, 0, _height)* _width];
+                return _screen[fix<uint16_t>(x, 0, _width)  + fix<uint16_t>(y, 0, _height)* _width];
         }
         SYM get_screen(uint32_t ind) {
             if (is_decleared)
-                return _screen[fix_int<uint32_t>(ind, 0, get_square() - 1)];
+                return _screen[fix<uint32_t>(ind, 0, get_square() - 1)];
         }
         void set_screen(uint16_t x, uint16_t y, SYM what) {
-            uint16_t X = fix_int<uint16_t>(x, 0, _width);
-            uint16_t Y = fix_int<uint16_t>(y, 0, _height);
+            uint16_t X = fix<uint16_t>(x, 0, _width);
+            uint16_t Y = fix<uint16_t>(y, 0, _height);
             if (is_decleared)
                 _screen[X+Y*_width] = what;
         }
         void set_screen(uint32_t ind, SYM what) {
             if (is_decleared)
-                _screen[fix_int<uint32_t>(ind,0,get_square())] = what;
+                _screen[fix<uint32_t>(ind,0,get_square())] = what;
         }
 
         ////////virtual////////
 
         ///////override////////
-        void _info_r(std::string _name_r) override;
+        void _info_r(std::string _name_r) override {
+            std::ofstream file("./Kiwii/DatoBased/Info/" + _name_r + ".txt", std::ios::out);
+            file << "Info in \"" << _name_r << ".txt\"\n";
+            //////////////////////////
+
+            file << "\t" << "_pointer" << " : " << &_pointer << "\n";
+            file << "\t" << "_name" << " : " << _name << "\n";
+
+            //////////////////////////
+            file.close();
+        }
 
         /////special func//////
         

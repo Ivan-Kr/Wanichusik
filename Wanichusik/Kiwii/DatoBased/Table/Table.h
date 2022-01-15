@@ -37,7 +37,7 @@ namespace Kiwii {
         }
 
         //////get and set//////
-        void table(unsigned int x, unsigned int y, _Ty what) {
+        void set_table(unsigned int x, unsigned int y, _Ty what) {
             if (_is_decleared) {
 
                 if (x < _sx && y < _sy) {
@@ -47,7 +47,7 @@ namespace Kiwii {
             }
 
         }
-        _Ty table(unsigned int x, unsigned int y) {
+        _Ty get_table(unsigned int x, unsigned int y) {
             if (_is_decleared) {
 
                 if (x < _sx && y < _sy) {
@@ -64,7 +64,20 @@ namespace Kiwii {
         }
 
         ////////virtual////////
+        
         ///////override////////
+        void _info_r(std::string _name_r)override {
+            std::ofstream file("./Kiwii/DatoBased/Info/" + _name_r + ".txt", std::ios::out);
+            file << "Info in \"" << _name_r << ".txt\"\n";
+            //////////////////////////
+
+            file << "\t" << "_pointer" << " : " << &_pointer << "\n";
+            file << "\t" << "_name" << " : " << _name << "\n";
+
+            //////////////////////////
+            file.close();
+        }
+
         /////special func//////
 
         void fill(_Ty what) {

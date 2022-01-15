@@ -54,9 +54,6 @@
     <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp">
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
-    <ClCompile Include="Kiwii\DatoBased\Deep\Deep.cpp">
-      <Filter>Kiwii\DatoBased</Filter>
-    </ClCompile>
     <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp">
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>

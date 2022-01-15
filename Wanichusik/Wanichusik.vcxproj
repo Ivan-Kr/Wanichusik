@@ -143,7 +143,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Kiwii\DatoBased\Deep\Deep.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Spritech\Spritech.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp" />
