@@ -23,6 +23,4 @@ void Kiwii::Spritech::load(std::string way) {
             _sprite[i][setted_strokes]=str[i];
         }
     }
-
-
 }
