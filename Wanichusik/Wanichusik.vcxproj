@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Kiwii\DatoBased\Mathem\Mathem.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Spritech\Spritech.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\DatoBased\Deep\Deep.h" />
+    <ClInclude Include="Kiwii\DatoBased\Mathem\Mathem.h" />
     <ClInclude Include="Kiwii\DatoBased\Screench\Screench.h" />
     <ClInclude Include="Kiwii\DatoBased\Spritech\Spritech.h" />
     <ClInclude Include="Kiwii\DatoBased\Table\Table.h" />
