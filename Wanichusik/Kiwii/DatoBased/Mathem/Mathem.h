@@ -49,8 +49,8 @@ namespace Kiwii {
 		Angle(double_t angle) {
 			this->angle = angle;
 		}
-		Angle(double_t radian) {
-			rad(radian);
+		Angle(double_t radian,int8_t n_PI) {
+			angle = radian * 180 * M_PI*n_PI;
 		}
 
 		double_t rad() {
