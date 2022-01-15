@@ -1,4 +1,5 @@
 ﻿#include "./Kiwii/DatoBased/Spritech/Spritech.h"
+#include "./Kiwii/DatoBased/Mathem/Mathem.h"
 #include <iostream>
 
 //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎
@@ -20,9 +21,11 @@
 //⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿
 
 int main() {
+	Kiwii::Dot d(1);
 
 	Kiwii::Spritech a;
-	a.setup(1, 1);
+	a.setup(d.X,d.Y);
+
 
 
 	return 0;
