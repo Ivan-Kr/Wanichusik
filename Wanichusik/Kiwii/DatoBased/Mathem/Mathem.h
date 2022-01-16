@@ -3,6 +3,8 @@
 #include <math.h>
 #include <corecrt_math_defines.h>
 
+
+
 namespace Kiwii {
 	struct Dot {
 		double_t X = 0;
@@ -30,7 +32,6 @@ namespace Kiwii {
 		Segment(const Dot& one, Dot& two) {
 			A = one;
 			B = two;
-
 		}
 		Segment(const Dot& two) {
 			A = Dot(0.0);
@@ -50,14 +51,44 @@ namespace Kiwii {
 			this->angle = angle;
 		}
 		Angle(double_t radian,int8_t n_PI) {
-			angle = radian * 180 * M_PI*n_PI;
+			angle = radian * 180.0 * M_PI*n_PI;
 		}
 
 		double_t rad() {
-			return angle / 180 * M_PI;
+			return angle / (180.0 * M_PI);
 		}
 		void rad(double_t rd) {
-			angle = rd * 180 * M_PI;
+			angle = rd / M_PI * 180.0;
+		}
+
+	};
+
+	struct Vector {
+		Segment line;
+
+		Vector() {}
+		Vector(const Dot from, Dot to) {
+			line = Segment(from, to);
+			
+		}
+		Vector(const Dot two) {
+			line = Segment(two);
+		}
+
+		Dot direction() {
+			return line.B-line.A;
+		}
+
+		Angle angle() {
+			Dot dot(direction().X / line.length(), direction().Y/line.length());
+
+			Angle angle;
+			angle.rad(acos(dot.X));
+
+			if ((asin(dot.Y) / M_PI * 180.0) < 0)
+				angle.angle *= -1;
+
+			return angle;
 		}
 
 	};
