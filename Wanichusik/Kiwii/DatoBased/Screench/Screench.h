@@ -65,23 +65,15 @@ namespace Kiwii {
         HANDLE get_handle() { return _hconsole; }
         uint16_t get_width() { return _width; }
         uint16_t get_height() { return _height; }
-        SYM get_screen(uint16_t x, uint16_t y) {
-            if (is_decleared)
-                return _screen[fix<uint16_t>(x, 0, _width)  + fix<uint16_t>(y, 0, _height)* _width];
-        }
-        SYM get_screen(uint32_t ind) {
-            if (is_decleared)
-                return _screen[fix<uint32_t>(ind, 0, get_square() - 1)];
-        }
+        SYM get_screen(uint16_t x, uint16_t y) { if (is_decleared) return _screen[fix<uint16_t>(x, 0, _width)  + fix<uint16_t>(y, 0, _height)* _width]; }
+        SYM get_screen(uint32_t ind) { if (is_decleared) return _screen[fix<uint32_t>(ind, 0, get_square() - 1)]; }
         void set_screen(uint16_t x, uint16_t y, SYM what) {
             uint16_t X = fix<uint16_t>(x, 0, _width);
             uint16_t Y = fix<uint16_t>(y, 0, _height);
-            if (is_decleared)
-                _screen[X+Y*_width] = what;
+            if (is_decleared) _screen[X+Y*_width] = what;
         }
         void set_screen(uint32_t ind, SYM what) {
-            if (is_decleared)
-                _screen[fix<uint32_t>(ind,0,get_square())] = what;
+            if (is_decleared) _screen[fix<uint32_t>(ind,0,get_square())] = what;
         }
 
         ////////virtual////////
@@ -91,9 +83,7 @@ namespace Kiwii {
 
         /////special func//////
         
-        void print() {
-            if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0,0 }, &_dwbyteswritten);
-        }
+        void print() { if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0,0 }, &_dwbyteswritten); }
 
         void unsetup() {
             is_decleared = false;
@@ -101,9 +91,7 @@ namespace Kiwii {
         }
 
         ///////destructor//////
-        ~Screench() { 
-            unsetup();
-        }
+        ~Screench() { unsetup(); }
 
     };
 }

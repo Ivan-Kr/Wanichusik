@@ -9,11 +9,12 @@
 #define max(a,b)(a<b?b:a)
 #define min(a,b)(a<b?a:b)
 
+#define ios_reading std::ios::in
+#define ios_writing std::ios::out
+
 namespace Kiwii {
 	template<typename _Ty>
-	static _Ty fix(_Ty num, _Ty mn, _Ty mx) {
-		return max(min(num,(mx - 1)),mn);
-	}
+	static _Ty fix(_Ty num, _Ty mn, _Ty mx) { return max(min(num,(mx - 1)),mn); }
 
 	class Deep {
 	protected:
@@ -23,12 +24,8 @@ namespace Kiwii {
 		
 		virtual void _info_r(std::string _name_r) = 0;
 
-		std::string _name_r() {
-			return _name;
-		}
-		void _name_r(std::string namee) {
-			_name = namee;
-		}
+		std::string _name_r() { return _name; }
+		void _name_r(std::string namee) { _name = namee; }
 	};
 
 }

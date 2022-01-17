@@ -10,7 +10,7 @@ namespace Kiwii {
         typedef char SYM;
 
         ///////pointers////////
-        SYM** _sprite;
+        SYM** _sprite = nullptr;
 
         ////others variables///
         uint16_t _width=0;
@@ -40,6 +40,8 @@ namespace Kiwii {
 
                 _sprite = new SYM*[_width];
                 for (uint16_t i = 0;i < _width;i++)_sprite[i] = new SYM[_height];
+
+                is_decleared = true;
 
                 throw false;
             }
@@ -74,10 +76,13 @@ namespace Kiwii {
 
         
         void unsetup() {
-            for (uint16_t i = 0;i < _width;i++) delete[] _sprite[i];
-            delete[] _sprite;
+            if (is_decleared) {
+                for (uint16_t i = 0;i < _width;i++)
+                    delete[] _sprite[i];
+                delete[] _sprite;
 
-            is_decleared = false;
+                is_decleared = false;
+            }
         }
 
         ///////destructor//////

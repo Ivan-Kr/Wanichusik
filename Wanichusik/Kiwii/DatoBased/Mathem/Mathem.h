@@ -38,28 +38,18 @@ namespace Kiwii {
 			B = two;
 		}
 
-		double_t length() {
-			return sqrt(pow(B.X - A.X, 2) + pow(B.Y - A.Y, 2));
-		}
+		double_t length() { return sqrt(pow(B.X - A.X, 2) + pow(B.Y - A.Y, 2)); }
 	};
 
 	struct Angle {
 		double_t angle = 0;
 
 		Angle() {}
-		Angle(double_t angle) {
-			this->angle = angle;
-		}
-		Angle(double_t radian,int8_t n_PI) {
-			angle = radian * 180.0 * M_PI*n_PI;
-		}
+		Angle(double_t angle) { this->angle = angle; }
+		Angle(double_t radian,int8_t n_PI) { angle = radian * 180.0 * M_PI*n_PI; }
 
-		double_t rad() {
-			return angle / (180.0 * M_PI);
-		}
-		void rad(double_t rd) {
-			angle = rd / M_PI * 180.0;
-		}
+		double_t rad() { return angle / (180.0 * M_PI); }
+		void rad(double_t rd) { angle = rd / M_PI * 180.0; }
 
 	};
 
@@ -67,17 +57,10 @@ namespace Kiwii {
 		Segment line;
 
 		Vector() {}
-		Vector(const Dot from, Dot to) {
-			line = Segment(from, to);
-			
-		}
-		Vector(const Dot two) {
-			line = Segment(two);
-		}
+		Vector(const Dot from, Dot to) { line = Segment(from, to); }
+		Vector(const Dot two) { line = Segment(two); }
 
-		Dot direction() {
-			return line.B-line.A;
-		}
+		Dot direction() { return line.B-line.A; }
 
 		Angle angle() {
 			Dot dot(direction().X / line.length(), direction().Y/line.length());
