@@ -15,14 +15,19 @@ void Kiwii::Spritech::_info_r(std::string _name_r) {
 void Kiwii::Spritech::load(std::string way) {
     std::ifstream file(way, ios_reading);
 
-    uint16_t setted_strokes = 0;
-    while (file||setted_strokes==_height-1) {
+    for (uint16_t s = 0;file || s < _height - 1;s++) {
         std::string str;
         std::getline(file, str);
         for (uint16_t i = 0;i < _width||i<str.size();i++) {
-            _sprite[i][setted_strokes]=str[i];
+            if((0<i||i<_width)&&(0 < s || s < _height))
+                _sprite[
+                    i
+                ][
+                    s
+                ] = str[
+                    i<str.size()?i:str.size()
+                ];
         }
-        setted_strokes++;
     }
     file.close();
 }

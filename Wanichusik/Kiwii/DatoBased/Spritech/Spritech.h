@@ -1,5 +1,6 @@
 #pragma once
 #include "../Deep/Deep.h"
+#include <vector>
 
 namespace Kiwii {
 	class Spritech : public Deep {
@@ -10,7 +11,7 @@ namespace Kiwii {
         typedef char SYM;
 
         ///////pointers////////
-        SYM** _sprite = nullptr;
+        std::vector<std::vector<SYM>> _sprite;
 
         ////others variables///
         uint16_t _width=0;
@@ -38,8 +39,8 @@ namespace Kiwii {
 
                 if (_width == 0 || _height == 0) throw true;
 
-                _sprite = new SYM*[_width];
-                for (uint16_t i = 0;i < _width;i++)_sprite[i] = new SYM[_height];
+                _sprite.resize(_width);
+                for (uint16_t i = 0;i < _width;i++)_sprite[i].resize(_height);
 
                 is_decleared = true;
 
@@ -78,8 +79,8 @@ namespace Kiwii {
         void unsetup() {
             if (is_decleared) {
                 for (uint16_t i = 0;i < _width;i++)
-                    delete[] _sprite[i];
-                delete[] _sprite;
+                    _sprite[i].clear();
+                _sprite.clear();
 
                 is_decleared = false;
             }
