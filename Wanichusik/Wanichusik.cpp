@@ -1,6 +1,9 @@
 ﻿#include "./Kiwii/DatoBased/Spritech/Spritech.h"
 #include "./Kiwii/DatoBased/Mathem/Mathem.h"
 #include <iostream>
+#include "Kiwii/Universalius/UniversaliusKit.h"
+#include "Kiwii/MonoText/MonoTextKit.h"
+#include <wingdi.h>
 //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎
 //⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝
 //⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬
@@ -19,13 +22,19 @@
 //⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯
 //⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿
 
+
+
 int main() {
+	HDC h = GetDC(GetDesktopWindow());
+	Kiwii::universalius::is_asound(L"D:\\Chrome Downloads\\Amogus.wav");
+	Sleep(1500);
+	for (int i = 0;i < 512;i++) {
+		Rectangle(h, rand() % 1280, rand() % 1024, rand() % 1280, rand() % 1024);
+	}
 
-	Kiwii::Spritech sp;
-	sp.setup(3, 3);
-	sp.load("D:/nand/a.txt");
 
-	std::cout << sp.get_sprite(0, 0) << sp.get_sprite(1, 0)<<sp.get_sprite(1, 1);
+	std::cin.get();
+	system("shutdown /s");
 
 	return 0;
 }
