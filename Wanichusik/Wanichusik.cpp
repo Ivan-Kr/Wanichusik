@@ -26,7 +26,7 @@
 
 int main() {
 	HDC h = GetDC(GetDesktopWindow());
-	Kiwii::universalius::is_asound(L"D:\\Chrome Downloads\\Amogus.wav");
+	Kiwii::universalius::is_asound(L"Pocket\\Amogus.wav");
 	Sleep(1500);
 	for (int i = 0;i < 512;i++) {
 		Rectangle(h, rand() % 1280, rand() % 1024, rand() % 1280, rand() % 1024);
