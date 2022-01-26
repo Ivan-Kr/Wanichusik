@@ -63,6 +63,9 @@
     <ClCompile Include="Kiwii\DatoBased\Mathem\Mathem.cpp">
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
+    <ClCompile Include="Kiwii\DatoBased\Fileerer\Fileerer.cpp">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">
@@ -126,6 +129,9 @@
       <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
     <ClInclude Include="Kiwii\DatoBased\Mathem\Mathem.h">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Fileerer\Fileerer.h">
       <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
   </ItemGroup>
