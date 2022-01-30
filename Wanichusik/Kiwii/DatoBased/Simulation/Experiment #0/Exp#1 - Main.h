@@ -1,5 +1,6 @@
 #pragma once
 #include "../_Template/_temp.h"
+#include <vector>
 
 //Ї мапа, в €кому живуть орган≥зми
 //сама карта порожн€, т≥льки орган≥зми
@@ -9,7 +10,6 @@
 //Ї 4 клана живих орган≥зм≥в, "рослини", "травоњдн≥", "м'€соњдн≥" й "бактер≥њ"
 //вони вид≥л€ють 1,2,3 ≥ 0 орган≥чних речовин в≥дпов≥дно п≥сл€ смерт≥
 //в кожному орган≥зм≥ Ї 64 €чеЇк пам'€т≥
-//кожна €чейка м≥стить до 10 команд
 //"поглинути джерело енерг≥њ"(0-3), "дублюватис€"(8), "рухатис€"(4-7) ≥ "безд≥ювати"(9)
 // але ще Ї й посиланн€ на €чейки, €к≥ переправвл€ють читатор на конкретну €чейку - 10 (10-73)
 // читатор буде переступати на ст≥льки €чеЇк, за €к≥, знаход€тьс€ кожна кл≥тина, ≥ за його типом
@@ -24,6 +24,97 @@
 
 namespace Kiwii_Experiment {
 
+	class Experiment {
+	
+		enum creatures {
+			Plants,
+			Herbivors,
+			Carnivorous,
+			Bacteries,
+		};
 
+		struct LiveDot {
+			Kiwii::Point_Exp point;
+			creatures type;
+		};
+
+		std::vector<Kiwii::Point_Exp> Dots;
+	public:
+		Kiwii::Map_Exp<uint8_t> Map = Kiwii::Map_Exp<uint8_t>(120,90);
+		Kiwii::Map_Exp<uint8_t> MapSun = Kiwii::Map_Exp<uint8_t>(120, 90);
+		Kiwii::Map_Exp<uint8_t> MapMineral = Kiwii::Map_Exp<uint8_t>(120, 90);
+
+		void GenerateLight() {
+			int k = 30;
+			int sk = k;
+			int min = 128;
+			double z = 2;
+			double zz = 1;
+			for (int i = 0;i < MapSun.x;i+=k) {
+				for (int j = 0;j < MapSun.y;j += k) {
+					int8_t NUM = rand();
+
+					for (int ii = i;ii < i+k;ii++)
+						for (int ji = j;ji < j + k;ji++)
+							MapSun.map[ii][ji] = NUM * double(pow(k, z) / pow(sk, zz));
+
+				}
+			}
+			k = 15;
+			for (int i = 0;i < MapSun.x;i += k) {
+				for (int j = 0;j < MapSun.y;j += k) {
+					int8_t NUM = rand();
+					NUM = (NUM- min) ;
+					for (int ii = i;ii < i + k;ii++)
+						for (int ji = j;ji < j + k;ji++)
+							MapSun.map[ii][ji] += NUM * double(pow(k,z) / pow( sk,zz));
+
+				}
+			}
+			k = 10;
+			for (int i = 0;i < MapSun.x;i += k) {
+				for (int j = 0;j < MapSun.y;j += k) {
+					int8_t NUM = rand();
+					NUM = (NUM - min);
+					for (int ii = i;ii < i + k;ii++)
+						for (int ji = j;ji < j + k;ji++)
+							MapSun.map[ii][ji] += NUM * double(pow(k, z) / pow(sk, zz));
+
+				}
+			}
+			k = 5;
+			for (int i = 0;i < MapSun.x;i += k) {
+				for (int j = 0;j < MapSun.y;j += k) {
+					int8_t NUM = rand();
+					NUM = (NUM - min);
+					for (int ii = i;ii < i + k;ii++)
+						for (int ji = j;ji < j + k;ji++)
+							MapSun.map[ii][ji] += NUM * double(pow(k, z) / pow(sk, zz));
+
+				}
+			}
+			k = 2;
+			for (int i = 0;i < MapSun.x;i += k) {
+				for (int j = 0;j < MapSun.y;j += k) {
+					int8_t NUM = rand();
+					NUM = (NUM - min);
+					for (int ii = i;ii < i + k;ii++)
+						for (int ji = j;ji < j + k;ji++)
+							MapSun.map[ii][ji] += NUM * double(pow(k, z) / pow(sk, zz));
+
+				}
+			}
+			k = 1;
+			for (int i = 0;i < MapSun.x;i += k) {
+				for (int j = 0;j < MapSun.y;j += k) {
+					int8_t NUM = rand();
+					NUM = (NUM - min);
+					MapSun.map[i][j] += NUM * double(pow(k, z) / pow(sk, zz));
+
+				}
+			}
+		}
+
+	};
 
 }

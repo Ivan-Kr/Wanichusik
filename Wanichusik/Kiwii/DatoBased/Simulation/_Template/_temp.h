@@ -2,9 +2,10 @@
 #include "../../Deep/Deep.h"
 
 namespace Kiwii {
+	template<typename _Ty>
 	class Map_Exp {
 	public:
-		char** map;
+		_Ty** map;
 		uint16_t x = 0;
 		uint16_t y = 0;
 
@@ -12,8 +13,8 @@ namespace Kiwii {
 			this->x = x;
 			this->y = y;
 
-			map = new char* [x];
-			for (int i = 0;i < x;i++) map[i] = new char[y];
+			map = new _Ty * [x];
+			for (int i = 0;i < x;i++) map[i] = new _Ty[y];
 		}
 
 		~Map_Exp() {
