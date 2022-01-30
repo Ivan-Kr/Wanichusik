@@ -31,6 +31,9 @@
     <Filter Include="Kiwii\DatoBased">
       <UniqueIdentifier>{967a6d26-b4ba-4ea5-8729-83f32871fb28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kiwii\DatoBased\Experiments">
+      <UniqueIdentifier>{530fdd2a-56be-4327-97f2-3daafe481e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Wanichusik.cpp">
@@ -61,9 +64,6 @@
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
     <ClCompile Include="Kiwii\DatoBased\Mathem\Mathem.cpp">
-      <Filter>Kiwii\DatoBased</Filter>
-    </ClCompile>
-    <ClCompile Include="Kiwii\DatoBased\Fileerer\Fileerer.cpp">
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,8 +131,11 @@
     <ClInclude Include="Kiwii\DatoBased\Mathem\Mathem.h">
       <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\DatoBased\Fileerer\Fileerer.h">
-      <Filter>Kiwii\DatoBased</Filter>
+    <ClInclude Include="Kiwii\DatoBased\Simulation\_Template\_temp.h">
+      <Filter>Kiwii\DatoBased\Experiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exp#1 - Main.h">
+      <Filter>Kiwii\DatoBased\Experiments</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
