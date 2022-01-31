@@ -13,7 +13,7 @@ namespace Kiwii {
 			this->x = x;
 			this->y = y;
 
-			map = new _Ty * [x];
+			map = new _Ty *[x];
 			for (int i = 0;i < x;i++) map[i] = new _Ty[y];
 		}
 
