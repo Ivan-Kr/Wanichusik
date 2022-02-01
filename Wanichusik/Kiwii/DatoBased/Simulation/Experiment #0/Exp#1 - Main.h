@@ -99,6 +99,7 @@ namespace Kiwii_Experiment {
 		}
 
 		void GenerateCreature(uint16_t n) {
+			Dots.clear();
 			for (int i = 0;i < n;i++) {
 				Dots.push_back(Kiwii_Experiment::Experiment1::LiveDot(rand()%45));
 			
