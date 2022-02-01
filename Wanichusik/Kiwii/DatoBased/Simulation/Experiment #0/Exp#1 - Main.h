@@ -26,25 +26,86 @@
 namespace Kiwii_Experiment {
 
 	class Experiment1 {
-	
+	public:
+		static const uint16_t nGenes= 64;
+
 		enum creatures {
-			Plants,
-			Herbivors,
-			Carnivorous,
-			Bacteries,
+			Plants = '1',
+			Herbivors = '2',
+			Carnivorous = '3',
+			Bacteries = '4',
+		};
+
+		enum command : uint8_t{
+			Nothing = 0,
+			EatN = 1,
+			EatE = 2,
+			EatS = 3,
+			EatW = 4,
+			MoveN = 5,
+			MoveE = 6,
+			MoveS = 7,
+			MoveW = 8,
+			Dublicate = 9
+
 		};
 
 		struct LiveDot {
 			Kiwii::Point_Exp point;
 			creatures type;
+			command gens[nGenes];
+			uint8_t active_gen = 0;
+
+			LiveDot() {
+				for (int j = 0;j < nGenes;j++) {
+					int a = rand() % 10;
+
+					if (a == 0) gens[j] = Nothing;
+					else if (a == 1) gens[j] = EatN;
+					else if (a == 2) gens[j] = EatE;
+					else if (a == 3) gens[j] = EatS;
+					else if (a == 4) gens[j] = EatW;
+					else if (a == 5) gens[j] = MoveN;
+					else if (a == 6) gens[j] = MoveE;
+					else if (a == 7) gens[j] = MoveS;
+					else if (a == 8) gens[j] = MoveW;
+					else  gens[j] = Dublicate;
+
+				}
+			}
 		};
+
 		uint8_t xm = 120;
 		uint8_t ym = 90;
-		std::vector<Kiwii::Point_Exp> Dots;
-	public:
-		Kiwii::Map_Exp<uint8_t> Map = Kiwii::Map_Exp<uint8_t>(xm, ym);
+		std::vector<LiveDot> Dots;
+		Kiwii::Map_Exp<char> Map = Kiwii::Map_Exp<char>(xm, ym);
 		Kiwii::Map_Exp<uint8_t> MapSun = Kiwii::Map_Exp<uint8_t>(xm, ym);
 		Kiwii::Map_Exp<uint8_t> MapMineral = Kiwii::Map_Exp<uint8_t>(xm, ym);
+
+
+
+		Experiment1() {
+			for(int j=0;j<ym;j++)
+				for (int i = 0;i < xm;i++)
+					Map.map[i][j] = '.';
+		}
+
+		void GenerateCreature(uint16_t n) {
+			for (int i = 0;i < n;i++) {
+				Dots.push_back(Kiwii_Experiment::Experiment1::LiveDot());
+			
+				int ran = rand()%4;
+				if (ran == 0) Dots[i].type = Plants;
+				else if (ran == 1) Dots[i].type = Herbivors;
+				else if (ran == 2) Dots[i].type = Carnivorous;
+				else Dots[i].type = Bacteries;
+
+				Dots[i].point.set_pos(rand() % xm, rand() % ym);
+
+				Dots[i].point.dx = (rand()%3) - 1;
+				Dots[i].point.dy = (rand() % 3) - 1;
+			}
+		}
 
 		void GenerateLight() {
 			
@@ -57,7 +118,7 @@ namespace Kiwii_Experiment {
 			
 			for (int s = 0;s < a;s++) {
 				
-				for (int i = 0;i < MapSunAlpha.x;i += mas_k[s]) {
+				for (int i = 0;i < MapSunAlpha.x;i += mas_k[s])
 					for (int j = 0;j < MapSunAlpha.y;j += mas_k[s]) {
 						int8_t NUM = rand();
 						NUM = (NUM - min);
@@ -68,9 +129,8 @@ namespace Kiwii_Experiment {
 								else MapSunAlpha.map[ii][ji] += NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz));
 
 					}
-				}
 
-				for (int i = 0;i < MapSun.x;i += 1) {
+				for (int i = 0;i < MapSun.x;i += 1)
 					for (int j = 0;j < MapSun.y;j += 1) {
 						MapSun.map[i][j] =
 							(
@@ -102,43 +162,64 @@ namespace Kiwii_Experiment {
 								)
 								/20;
 					}
+			}
+		}
 
-				}
-					for (int i = 0;i < MapSun.y;i++) {
-						for (int j = 0;j < MapSun.x;j++) {
+		void GenerateMineral() {
 
-							if (MapSun.map[j][i] < 51.2)
-								std::cout << ' ';
-							else if (MapSun.map[j][i] < 51.2 * 2)
-								std::cout << char(176);
-							else if (MapSun.map[j][i] < 51.2 * 3)
-								std::cout << char(177);
-							else if (MapSun.map[j][i] < 51.2 * 4)
-								std::cout << char(178);
-							else std::cout << char(219);
+			Kiwii::Map_Exp<uint8_t> MapMineralAlpha = Kiwii::Map_Exp<uint8_t>(xm, ym);
+			int min = 128;
+			double z = 1;
+			double zz = 1;
+			const uint8_t a = 7;
+			int mas_k[a] = { 30,15,10,5,3,2,1 };
 
+			for (int s = 0;s < a;s++) {
 
-							//if (s < 32)
-								//std::wcout << '0';
-							//if (s < 64)
-								//std::wcout << '1';
-							//else if (s < 96)
-								//std::wcout << '2';
-							//else if (s < 128)
-								//std::wcout << '3';
-							//else if (s < 160)
-								//std::wcout << '4';
-							//else if (s < 192)
-								//std::wcout << '5';
-							//else if (s < 224)
-								//std::wcout << '6';
-							//else std::wcout << '7';
-
-						}
-						std::cout << '\n';
+				for (int i = 0;i < MapMineralAlpha.x;i += mas_k[s])
+					for (int j = 0;j < MapMineralAlpha.y;j += mas_k[s]) {
+						int8_t NUM = rand();
+						NUM = (NUM - min);
+						for (int ii = i;ii < i + mas_k[s];ii++)
+							for (int ji = j;ji < j + mas_k[s];ji++)
+								if (s == 0)
+									MapMineralAlpha.map[ii][ji] = NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz));
+								else MapMineralAlpha.map[ii][ji] += NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz));
 
 					}
-					std::cout << '\n';
+
+				for (int i = 0;i < MapSun.x;i += 1)
+					for (int j = 0;j < MapSun.y;j += 1) {
+						MapMineral.map[i][j] =
+							(
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j, 0, MapMineralAlpha.y)]
+								+
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapMineralAlpha.y)]
+								+
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 2, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 2, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 2, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapMineralAlpha.y)]
+								+
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 2, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 2, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 2, 0, MapMineralAlpha.y)]
+								+
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 2, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 2, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 2, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapMineralAlpha.y)]
+								+
+								MapMineralAlpha.map[Kiwii::fix<int>(i + 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 2, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 2, 0, MapMineralAlpha.y)] +
+								MapMineralAlpha.map[Kiwii::fix<int>(i - 1, 0, MapMineralAlpha.x)][Kiwii::fix<int>(j - 2, 0, MapMineralAlpha.y)]
+								)
+							/ 20;
+					}
 			}
 		}
 
@@ -146,8 +227,43 @@ namespace Kiwii_Experiment {
 			for (int i = 0;i < MapSun.x;i += 1)
 				for (int j = 0;j < MapSun.y;j += 1)
 					MapSun.map[i][j] = pow(double(MapSun.map[i][j]) / 256.0,z)*256;
+			for (int i = 0;i < MapMineral.x;i += 1)
+				for (int j = 0;j < MapMineral.y;j += 1)
+					MapMineral.map[i][j] = pow(double(MapMineral.map[i][j]) / 256.0, 1.0/z) * 256;
 		}
 
+
+
+		void Logic() {
+			//gen_move
+			{
+				
+
+
+			}
+			//move
+			{
+
+
+				for (int i = 0;i < Dots.size();i++) {
+					if(Dots[i].point.x + Dots[i].point.dx>=0
+						&& Dots[i].point.y + Dots[i].point.dy >= 0
+						&& Dots[i].point.x + Dots[i].point.dx <xm 
+						&& Dots[i].point.y + Dots[i].point.dy< ym)
+						Dots[i].point.move();
+				}
+			}
+			
+		}
+
+		void WriteDots() {
+			for (int j = 0;j < ym;j++)
+				for (int i = 0;i < xm;i++)
+					Map.map[i][j] = '.';
+			for (int i = 0;i < Dots.size();i++) {
+				Map.map[Kiwii::fix<int>(Dots[i].point.x, 0, Map.x)][Kiwii::fix<int>(Dots[i].point.y, 0, Map.y)] = Dots[i].type;
+			}
+		}
 	};
 
 }

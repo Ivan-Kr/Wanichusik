@@ -1,6 +1,7 @@
 ﻿#include "./Kiwii/DatoBased/Spritech/Spritech.h"
 #include "./Kiwii/DatoBased/Mathem/Mathem.h"
 #include "Kiwii/DatoBased/Simulation/Experiment #0/Exp#1 - Main.h"
+#include "Kiwii/DatoBased/Screench/Screench.h"
 #include <iostream>
 
 //⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎
@@ -29,42 +30,35 @@ int main() {
 
 	srand(0);
 	a.GenerateLight();
-	//a.ToMakeMountain(2);
-	for (int i = 0;i < a.MapSun.y;i++) {
-		for (int j = 0;j < a.MapSun.x;j++) {
+	a.GenerateMineral();
+	a.GenerateCreature(120);
 
-			if (a.MapSun.map[j][i] < 51.2)
-				std::cout << ' ';
-			else if (a.MapSun.map[j][i] < 51.2 * 2)
-				std::cout << char(176);
-			else if (a.MapSun.map[j][i] < 51.2 * 3)
-				std::cout << char(177);
-			else if (a.MapSun.map[j][i] < 51.2 * 4)
-				std::cout << char(178);
-			else std::cout << char(219);
+	while (true) {
+		system("cls");
+		a.WriteDots();
+		a.Logic();
+		for (int i = 0;i < a.Map.y;i++) {
+			for (int j = 0;j < a.Map.x;j++) {
 
 
-			//if (s < 32)
-				//std::wcout << '0';
-			//if (s < 64)
-				//std::wcout << '1';
-			//else if (s < 96)
-				//std::wcout << '2';
-			//else if (s < 128)
-				//std::wcout << '3';
-			//else if (s < 160)
-				//std::wcout << '4';
-			//else if (s < 192)
-				//std::wcout << '5';
-			//else if (s < 224)
-				//std::wcout << '6';
-			//else std::wcout << '7';
+				if (a.Map.map[j][i] == '.') {
+					if (a.MapSun.map[j][i] < 51.2)
+						std::cout << ' ';
+					else if (a.MapSun.map[j][i] < 51.2 * 2)
+						std::cout << char(176);
+					else if (a.MapSun.map[j][i] < 51.2 * 3)
+						std::cout << char(177);
+					else if (a.MapSun.map[j][i] < 51.2 * 4)
+						std::cout << char(178);
+					else std::cout << char(219);
+				}
+				else std::cout << a.Map.map[j][i];
+
+			}
+			std::cout << '\n';
 
 		}
-		std::cout << '\n';
-
 	}
-	
 	std::cin.get();
 	return 0;
 }

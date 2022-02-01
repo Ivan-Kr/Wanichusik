@@ -34,8 +34,6 @@ namespace Kiwii {
 		double dx = 0;
 		double dy = 0;
 
-		char sym;
-
 		void set_pos(double x, double y) {
 			this->x = x;
 			this->y = y;
