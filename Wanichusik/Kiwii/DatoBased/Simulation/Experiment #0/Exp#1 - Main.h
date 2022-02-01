@@ -56,7 +56,9 @@ namespace Kiwii_Experiment {
 			command gens[nGenes];
 			uint8_t active_gen = 0;
 
-			LiveDot() {
+			int16_t energy=0;
+
+			LiveDot(int16_t energy) {
 				for (int j = 0;j < nGenes;j++) {
 					int a = rand() % 10;
 
@@ -72,6 +74,12 @@ namespace Kiwii_Experiment {
 					else  gens[j] = Dublicate;
 
 				}
+				this->energy = energy;
+			}
+
+			void move() {
+				energy--;
+				point.move();
 			}
 		};
 
@@ -92,7 +100,7 @@ namespace Kiwii_Experiment {
 
 		void GenerateCreature(uint16_t n) {
 			for (int i = 0;i < n;i++) {
-				Dots.push_back(Kiwii_Experiment::Experiment1::LiveDot());
+				Dots.push_back(Kiwii_Experiment::Experiment1::LiveDot(rand()%45));
 			
 				int ran = rand()%4;
 				if (ran == 0) Dots[i].type = Plants;
@@ -102,8 +110,7 @@ namespace Kiwii_Experiment {
 
 				Dots[i].point.set_pos(rand() % xm, rand() % ym);
 
-				Dots[i].point.dx = (rand()%3) - 1;
-				Dots[i].point.dy = (rand() % 3) - 1;
+				Dots[i].point.set_move((rand() % 3) - 1, (rand() % 3) - 1);
 			}
 		}
 
@@ -232,25 +239,32 @@ namespace Kiwii_Experiment {
 					MapMineral.map[i][j] = pow(double(MapMineral.map[i][j]) / 256.0, 1.0/z) * 256;
 		}
 
-
-
-		void Logic() {
+		void Logic(bool is_undead) {
 			//gen_move
 			{
-				
-
 
 			}
 			//move
 			{
-
-
 				for (int i = 0;i < Dots.size();i++) {
-					if(Dots[i].point.x + Dots[i].point.dx>=0
+					if (Dots[i].point.x + Dots[i].point.dx >= 0
 						&& Dots[i].point.y + Dots[i].point.dy >= 0
-						&& Dots[i].point.x + Dots[i].point.dx <xm 
-						&& Dots[i].point.y + Dots[i].point.dy< ym)
-						Dots[i].point.move();
+						&& Dots[i].point.x + Dots[i].point.dx < xm
+						&& Dots[i].point.y + Dots[i].point.dy < ym)
+						Dots[i].move();
+				}
+			}
+			//check
+			if(!is_undead)
+			{
+				auto iter = Dots.begin();
+
+				while (iter != Dots.end()) {
+					if (iter->energy <= 0) {
+						Dots.erase(iter);
+						iter = Dots.begin();
+					}
+					iter++;
 				}
 			}
 			

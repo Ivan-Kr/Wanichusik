@@ -27,296 +27,85 @@
 
 int main() {
 	Kiwii_Experiment::Experiment1 a;
+	Kiwii::Screench uv;
+
+	uv.setup(120, 90);
 
 	srand(0);
 	a.GenerateLight();
 	a.GenerateMineral();
-	a.GenerateCreature(120);
+	a.GenerateCreature(360);
+
+	uint8_t Key_ESCAPE = 0;
+	uint8_t Key_F1 = 0;
+	uint8_t Key_F2 = 0;
+	uint8_t Key_P = 0;
 
 	while (true) {
-		system("cls");
-		a.WriteDots();
-		a.Logic();
-		for (int i = 0;i < a.Map.y;i++) {
-			for (int j = 0;j < a.Map.x;j++) {
-
-
-				if (a.Map.map[j][i] == '.') {
-					if (a.MapSun.map[j][i] < 51.2)
-						std::cout << ' ';
-					else if (a.MapSun.map[j][i] < 51.2 * 2)
-						std::cout << char(176);
-					else if (a.MapSun.map[j][i] < 51.2 * 3)
-						std::cout << char(177);
-					else if (a.MapSun.map[j][i] < 51.2 * 4)
-						std::cout << char(178);
-					else std::cout << char(219);
-				}
-				else std::cout << a.Map.map[j][i];
-
+		//input
+		{
+			if (GetAsyncKeyState(VK_ESCAPE)) {
+				Key_ESCAPE = !Key_ESCAPE;
+				break;
 			}
-			std::cout << '\n';
 
+			if (GetAsyncKeyState(VK_F1)) Key_F1 = (Key_F1 + 1) % 3;
+			if (GetAsyncKeyState(VK_F2)) Key_F2 = !Key_F2;
+			if (GetAsyncKeyState('P')) Key_P = !Key_P;
 		}
+		if (!Key_P) {
+			a.Logic(Key_F2);
+			a.WriteDots();
+		}
+		//output
+		{
+			for (int i = 0;i < a.Map.y;i++) {
+				for (int j = 0;j < a.Map.x;j++) {
+					if (a.Map.map[j][i] == '.') {
+						if (Key_F1 == 1) {
+							if (a.MapSun.map[j][i] < 51.2)
+								uv.set_screen(j, i, ' ');
+							else if (a.MapSun.map[j][i] < 51.2 * 2)
+								uv.set_screen(j, i, char(176));
+							else if (a.MapSun.map[j][i] < 51.2 * 3)
+								uv.set_screen(j, i, char(177));
+							else if (a.MapSun.map[j][i] < 51.2 * 4)
+								uv.set_screen(j, i, char(178));
+							else uv.set_screen(j, i, char(219));
+						}
+						else if (Key_F1 == 2) {
+							if (a.MapMineral.map[j][i] < 51.2)
+								uv.set_screen(j, i, ' ');
+							else if (a.MapMineral.map[j][i] < 51.2 * 2)
+								uv.set_screen(j, i, char(176));
+							else if (a.MapMineral.map[j][i] < 51.2 * 3)
+								uv.set_screen(j, i, char(177));
+							else if (a.MapMineral.map[j][i] < 51.2 * 4)
+								uv.set_screen(j, i, char(178));
+							else uv.set_screen(j, i, char(219));
+						}
+						else uv.set_screen(j, i, a.Map.map[j][i]);
+					}
+					else uv.set_screen(j, i, a.Map.map[j][i]);
+
+				}
+			}
+			if (Key_ESCAPE) uv.set_screen((uv.get_square() - 1), 'e');
+			else uv.set_screen((uv.get_square() - 1), ' ');
+
+			if (Key_F1 == 0) uv.set_screen((uv.get_square() - 1) - 1, 'V');
+			else if (Key_F1 == 1) uv.set_screen((uv.get_square() - 1) - 1, 'S');
+			else uv.set_screen((uv.get_square() - 1) - 1, 'M');
+
+			if (Key_F2) uv.set_screen((uv.get_square() - 1) - 2, 'u');
+			else uv.set_screen((uv.get_square() - 1) - 2, 'd');
+
+			if (Key_P) uv.set_screen((uv.get_square() - 1) - 3, 'P');
+			else uv.set_screen((uv.get_square() - 1) - 3, '-');
+
+			uv.print();
+		}
+		Sleep(100);
 	}
-	std::cin.get();
 	return 0;
 }
-
-/*
-☺
-☻
-♥
-♦
-♣
-♠
-
-
-
-
-
-♂
-♀
-
-♫
-☼
-►
-◄
-↕
-‼
-¶
-§
-▬
-↨
-↑
-↓
-→
-
-∟
-↔
-▲
-▼
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-	:
-;
-<
-	=
->
-?
-@
-A
-B
-C
-D
-E
-F
-G
-H
-I
-J
-K
-L
-M
-N
-O
-P
-Q
-R
-S
-T
-U
-V
-W
-X
-Y
-Z
-[
-	\
-]
-^
-_
-`
-a
-b
-c
-d
-e
-f
-g
-h
-i
-j
-k
-l
-m
-n
-o
-p
-q
-r
-s
-t
-u
-v
-w
-x
-y
-z
-{
-|
-}
-~
-⌂
-А
-Б
-В
-Г
-Д
-Е
-Ж
-З
-И
-Й
-К
-Л
-М
-Н
-О
-П
-Р
-С
-Т
-У
-Ф
-Х
-Ц
-Ч
-Ш
-Щ
-Ъ
-Ы
-Ь
-Э
-Ю
-Я
-а
-б
-в
-г
-д
-е
-ж
-з
-и
-й
-к
-л
-м
-н
-о
-п
-░
-▒
-▓
-│
-┤
-╡
-╢
-╖
-╕
-╣
-║
-╗
-╝
-╜
-╛
-┐
-└
-┴
-┬
-├
-─
-┼
-╞
-╟
-╚
-╔
-╩
-╦
-╠
-═
-╬
-╧
-╨
-╤
-╥
-╙
-╘
-╒
-╓
-╫
-╪
-┘
-┌
-█
-▄
-▌
-▐
-▀
-р
-с
-т
-у
-ф
-х
-ц
-ч
-ш
-щ
-ъ
-ы
-ь
-э
-ю
-я
-Ё
-ё
-Є
-є
-Ї
-ї
-Ў
-ў
-°
-∙
-·
-√
-№
-¤
-■
-*/
