@@ -76,10 +76,10 @@ namespace Kiwii {
 
 	};
 
-	int64_t efclide(int64_t a, int64_t b) {
-		while (a != b) {
-			max(a, b) -= min(a, b);
-		}
-		return a;
-	}
+	//int64_t efclide(int64_t a, int64_t b) {
+	//	while (a != b) {
+	//		max(a, b) -= min(a, b);
+	//	}
+	//	return a;
+	//}
 }

@@ -83,6 +83,18 @@ namespace Kiwii {
 
         /////special func//////
         
+        template <typename _Ty>
+        void insert_hex(uint32_t ind, _Ty num) {
+            for (int i = 0;i < sizeof(_Ty);i++) {
+                _Ty a = num;
+                for (int j = 0;j < i;j++) {
+                    a /= 256;
+                }
+                set_screen(ind-(i*2), get_hex(a, 0));
+                set_screen(ind - (i*2+1), get_hex(a, 1));
+            }
+        }
+
         void print() { if(is_decleared) WriteConsoleOutputCharacterA(_hconsole, _screen, get_square(), { 0,0 }, &_dwbyteswritten); }
 
         void unsetup() {
