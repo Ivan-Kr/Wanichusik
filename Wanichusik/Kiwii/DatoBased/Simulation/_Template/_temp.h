@@ -13,7 +13,7 @@ namespace Kiwii {
 			this->x = x;
 			this->y = y;
 
-			map = new _Ty *[x];
+			map = new _Ty * [x];
 			for (int i = 0;i < x;i++) map[i] = new _Ty[y];
 		}
 
@@ -27,6 +27,31 @@ namespace Kiwii {
 	};
 
 	class Point_Exp {
+	public:
+		int16_t x = 0;
+		int16_t y = 0;
+
+		int16_t dx = 0;
+		int16_t dy = 0;
+
+		void set_pos(int16_t x, int16_t y) {
+			this->x = x;
+			this->y = y;
+		}
+
+		void move() {
+			x += dx;
+			y += dy;
+		}
+
+		void stop() {
+			dx = 0;
+			dy = 0;
+		}
+
+	};
+
+	class Dot_Exp {
 	public:
 		double x = 0;
 		double y = 0;
