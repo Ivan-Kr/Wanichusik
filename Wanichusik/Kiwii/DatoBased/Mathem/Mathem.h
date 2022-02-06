@@ -6,72 +6,112 @@
 
 
 namespace Kiwii {
-	struct Dot {
-		double_t X = 0;
-		double_t Y = 0;
+	struct vec2 {
+		double X = 0;
+		double Y = 0;
 
-		Dot() {}
-		Dot(double_t val) { X = val; Y = val; }
-		Dot(double_t x, double_t y) { X = x;Y = y; }
+		vec2() {}
+		vec2(double val) { X = val; Y = val; }
+		vec2(double x, double y) { X = x;Y = y; }
 
-		Dot operator+ (const Dot& one) { return Dot(X + one.X, Y + one.Y); }
-		Dot operator- (const Dot& one) { return Dot(X - one.X, Y - one.Y); }
-		Dot operator* (const Dot& one) { return Dot(X * one.X, Y * one.Y); }
-		Dot operator/ (const Dot& one) { return Dot(X / one.X, Y / one.Y); }
-		Dot operator+ (double_t one) { return Dot(X + one, Y + one); }
-		Dot operator- (double_t one) { return Dot(X - one, Y - one); }
-		Dot operator* (double_t one) { return Dot(X * one, Y * one); }
-		Dot operator/ (double_t one) { return Dot(X / one, Y / one); }
+		vec2 operator+ (const vec2& one) { return vec2(X + one.X, Y + one.Y); }
+		vec2 operator- (const vec2& one) { return vec2(X - one.X, Y - one.Y); }
+		vec2 operator* (const vec2& one) { return vec2(X * one.X, Y * one.Y); }
+		vec2 operator/ (const vec2& one) { return vec2(X / one.X, Y / one.Y); }
+		vec2 operator+ (double one) { return vec2(X + one, Y + one); }
+		vec2 operator- (double one) { return vec2(X - one, Y - one); }
+		vec2 operator* (double one) { return vec2(X * one, Y * one); }
+		vec2 operator/ (double one) { return vec2(X / one, Y / one); }
+		vec2 operator-() { return vec2(-X, -Y); }
 	};
 
-	struct Segment {
-		Dot A;
-		Dot B;
+	struct vec3 {
+		double X = 0;
+		double Y = 0;
+		double Z = 0;
 
-		Segment() {}
-		Segment(const Dot& one, Dot& two) {
+		vec3() {}
+		vec3(double val) { X = val; Y = val;Z = val;}
+		vec3(double x, double y, double z) { X = x;Y = y;Z = z; }
+		vec3 operator+(vec3 const& one) { return vec3(X + one.X, Y + one.Y, Z + one.Z); }
+		vec3 operator-(vec3 const& one) { return vec3(X - one.X, Y - one.Y, Z - one.Z); }
+		vec3 operator*(vec3 const& one) { return vec3(X * one.X, Y * one.Y, Z * one.Z); }
+		vec3 operator/(vec3 const& one) { return vec3(X / one.X, Y / one.Y, Z / one.Z); }
+		vec3 operator+ (double one) { return vec3(X + one, Y + one, Z + one); }
+		vec3 operator- (double one) { return vec3(X - one, Y - one, Z - one); }
+		vec3 operator* (double one) { return vec3(X * one, Y * one, Z * one); }
+		vec3 operator/ (double one) { return vec3(X / one, Y / one, Z / one); }
+		vec3 operator-() { return vec3(-X, -Y, -Z); }
+	};
+
+	struct vec4 {
+		double X = 0;
+		double Y = 0;
+		double Z = 0;
+		double W = 0;
+
+		vec4() {}
+		vec4(double val) { X = val; Y = val;Z = val;W = val; }
+		vec4(double x, double y, double z, double w) { X = x;Y = y;Z = z; W = w; }
+		vec4 operator+(vec4 const& one) { return vec4(X + one.X, Y + one.Y, Z + one.Z, W + one.W); }
+		vec4 operator-(vec4 const& one) { return vec4(X - one.X, Y - one.Y, Z - one.Z, W - one.W); }
+		vec4 operator*(vec4 const& one) { return vec4(X * one.X, Y * one.Y, Z * one.Z, W * one.W); }
+		vec4 operator/(vec4 const& one) { return vec4(X / one.X, Y / one.Y, Z / one.Z, W / one.W); }
+		vec4 operator+ (double one) { return vec4(X + one, Y + one, Z + one, W + one);}
+		vec4 operator- (double one) { return vec4(X - one, Y - one, Z - one, W - one); }
+		vec4 operator* (double one) { return vec4(X * one, Y * one, Z * one, W * one); }
+		vec4 operator/ (double one) { return vec4(X / one, Y / one, Z / one, W / one); }
+		vec4 operator-() { return vec4(-X, -Y, -Z,-W); }
+	};
+
+	struct segment {
+		vec2 A;
+		vec2 B;
+
+		segment() {}
+		segment(const vec2& one, vec2& two) {
 			A = one;
 			B = two;
 		}
-		Segment(const Dot& two) {
-			A = Dot(0.0);
+		segment(const vec2& two) {
+			A = vec2(0.0);
 			B = two;
 		}
 
 		double_t length() { return sqrt(pow(B.X - A.X, 2) + pow(B.Y - A.Y, 2)); }
 	};
 
-	struct Angle {
-		double_t angle = 0;
+	struct angle {
+		double angle_ = 0;
 
-		Angle() {}
-		Angle(double_t angle) { this->angle = angle; }
-		Angle(double_t radian,int8_t n_PI) { angle = radian * 180.0 * M_PI*n_PI; }
+		angle() {}
+		angle(double angle) { this->angle_ = angle_; }
+		angle(double radian,int8_t n_PI) { angle_ = radian * 180.0 * M_PI*n_PI; }
 
-		double_t rad() { return angle / (180.0 * M_PI); }
-		void rad(double_t rd) { angle = rd / M_PI * 180.0; }
+		double rad() { return angle_ / (180.0 * M_PI); }
+		void rad(double rd) { angle_ = rd / M_PI * 180.0; }
 
 	};
 
-	struct Vector {
-		Segment line;
+	struct vector {
+		segment line;
 
-		Vector() {}
-		Vector(const Dot from, Dot to) { line = Segment(from, to); }
-		Vector(const Dot two) { line = Segment(two); }
+		vector() {}
+		vector(const vec2 from, vec2 to) { line = segment(from, to); }
+		vector(const vec2 two) { line = segment(two); }
 
-		Dot direction() { return line.B-line.A; }
+		vec2 direction() { return line.B-line.A; }
 
-		Angle angle() {
-			Dot dot(direction().X / line.length(), direction().Y/line.length());
+		angle angle_() {
+			vec2 dot(direction().X / line.length(), direction().Y/line.length());
 
-			Angle angle;
-			angle.rad(acos(dot.X));
+			angle _angle;
+			_angle.rad(acos(dot.X));
 
 			if ((asin(dot.Y) / M_PI * 180.0) < 0)
-				angle.angle *= -1;
+				_angle.angle_ *= -1;
 
-			return angle;
+			return _angle;
 		}
 
 	};

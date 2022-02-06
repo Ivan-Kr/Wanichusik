@@ -1,8 +1,10 @@
 #pragma once
 #include "../_Template/_temp.h"
 #include <vector>
-
+#include <list>
 #include <iostream>
+#include <corecrt_math_defines.h>
+#include "../../Mathem/Mathem.h"
 //є мапа, в якому живуть організми
 //сама карта порожня, тільки організми
 //але світло буде нерозподілена рівномірно (із-за гірських тіней)(плавно)
@@ -25,9 +27,30 @@
 
 namespace Kiwii_Experiment {
 
+	class Experiment0 {
+		static const uint16_t nGenes = 16;
+		static const uint16_t stealMin = 5;
+		static const char emptySpace = '.';
+		static const uint16_t DaysPerYear = 365;
+		static const uint8_t HoursPerDay = 24;
+
+		struct creature {
+			uint8_t gen[nGenes];
+			uint8_t pain[nGenes];
+			uint8_t energy = 30;
+			uint16_t hour = 1;
+			Kiwii::Dot_Exp point;
+			Kiwii::vec4 eater;
+		};
+
+		uint64_t hour = 0;
+
+
+	};
+
 	class Experiment1 {
 	public:
-		static const uint16_t nGenes= 64;
+		static const uint16_t nGenes = 64;
 		static const uint16_t stealMin = 5;
 		static const char emptySpace = '.';
 		static const uint16_t DaysPerYear = 365;
@@ -44,7 +67,7 @@ namespace Kiwii_Experiment {
 			Bacteries = '4',
 		};
 
-		enum command : uint8_t{
+		enum command : uint8_t {
 			Nothing = 0,
 			EatN = 1,
 			EatE = 2,
@@ -64,7 +87,7 @@ namespace Kiwii_Experiment {
 			uint8_t gens[nGenes];
 			uint8_t active_gen = 0;
 
-			int16_t energy=0;
+			int16_t energy = 0;
 
 			LiveDot(int16_t energy) {
 				for (uint8_t j = 0;j < nGenes;j++) {
@@ -94,57 +117,87 @@ namespace Kiwii_Experiment {
 				point.move();
 			}
 		};
+		bool operator() (LiveDot i, LiveDot j) { return (i.energy < j.energy); }
+		bool is_alive(const LiveDot& dot) {
+			if (dot.energy < 0) {
 
-		uint8_t xm=120;
-		uint8_t ym=90;
-		std::vector<LiveDot> Dots;
-		Kiwii::Map_Exp<char> Map = Kiwii::Map_Exp<char>(xm,ym);
+				//uint8_t x = dot.point.x;
+				//uint8_t y = dot.point.y;
+
+				//if (x + 1 < xm && y + 1 < ym)Kiwii_Experiment::Experiment1::MapMineral.map[x + 1][y + 1] += stealMin * 4 * (1 / M_SQRT2);
+				//if (x + 1 < xm)Kiwii_Experiment::Experiment1::MapMineral.map[x + 1][y] += stealMin * 4;
+				//if (x + 1 < xm && y - 1 >= 0)Kiwii_Experiment::Experiment1::MapMineral.map[x + 1][y - 1] += stealMin * 4 * (1 / M_SQRT2);
+				//if (y + 1 < ym)Kiwii_Experiment::Experiment1::MapMineral.map[x][y + 1] += stealMin * 4;
+				//Kiwii_Experiment::Experiment1::MapMineral.map[x][y] += stealMin * 4 * 2;
+				//if (x + 1 < xm)Kiwii_Experiment::Experiment1::MapMineral.map[x][y - 1] += stealMin * 4;
+				//if (x - 1 >= 0 && y + 1 < ym)Kiwii_Experiment::Experiment1::MapMineral.map[x - 1][y + 1] += stealMin * 4 * (1 / M_SQRT2);
+				//if (x - 1 >= 0)Kiwii_Experiment::Experiment1::MapMineral.map[x - 1][y] += stealMin * 4;
+				//if (x - 1 >= 0 && y - 1 >= 0)Kiwii_Experiment::Experiment1::MapMineral.map[x - 1][y - 1] += stealMin * 4 * (1 / M_SQRT2);
+
+				return true;
+			}
+			else return false;
+		}
+
+		uint8_t xm = 120;
+		uint8_t ym = 90;
+		std::list<LiveDot> dots;
+		Kiwii::Map_Exp<char> Map = Kiwii::Map_Exp<char>(xm, ym);
 		Kiwii::Map_Exp<uint8_t> MapSun = Kiwii::Map_Exp<uint8_t>(xm, ym);
 		Kiwii::Map_Exp<uint8_t> MapMineral = Kiwii::Map_Exp<uint8_t>(xm, ym);
 
+		TIME_POINT gen1;
+		TIME_POINT do1;
+		TIME_POINT check1;
+		TIME_POINT gen2;
+		TIME_POINT do2;
+		TIME_POINT check2;
+
 		Experiment1() {
-			for(int j=0;j<ym;j++)
+			for (int j = 0;j < ym;j++)
 				for (int i = 0;i < xm;i++)
 					Map.map[i][j] = emptySpace;
 		}
 
-		double get_sun(uint8_t dot,uint64_t hours) {
-			return dot * ((sin(M_PI * hours * (2 / day)) * 0.5 + 0.5) * (sin(M_PI * hours * (2 / (DaysPerYear * HoursPerDay))) + 1));
+		double get_sun(uint8_t dot, uint64_t hours) {
+			double hou = double(hours) / 10;
+			return dot * ((sin(M_PI * hours * (2 / HoursPerDay)) * 0.5 + 0.5) * (sin(M_PI * hours * (2 / (DaysPerYear * HoursPerDay))) + 1));
 		}
 
 		void generate_creature(uint16_t n) {
-			Dots.clear();
+			dots.clear();
 			for (int i = 0;i < n;i++) {
-				Dots.push_back(Kiwii_Experiment::Experiment1::LiveDot(rand()%45));
-			
-				int ran = rand()%4;
-				if (ran == 0) Dots[i].type = Plants;
-				else if (ran == 1) Dots[i].type = Herbivors;
-				else if (ran == 2) Dots[i].type = Carnivorous;
-				else Dots[i].type = Bacteries;
+				dots.push_back(Kiwii_Experiment::Experiment1::LiveDot(rand() % 45));
 
-				Dots[i].point.set_pos(rand() % xm, rand() % ym);
+
+				int ran = rand() % 4;
+				if (ran == 0) dots.back().type = Plants;
+				else if (ran == 1) dots.back().type = Herbivors;
+				else if (ran == 2) dots.back().type = Carnivorous;
+				else dots.back().type = Bacteries;
+
+				dots.back().point.set_pos(rand() % xm, rand() % ym);
 			}
 		}
 
 		void generate_light() {
-			
+
 			Kiwii::Map_Exp<uint8_t> MapSunAlpha = Kiwii::Map_Exp<uint8_t>(xm, ym);
 			int min = 128;
 			double z = 1;
 			double zz = 1;
 			const uint8_t a = 7;
-			int mas_k[a] = {30,15,10,5,3,2,1 };
-			
+			int mas_k[a] = { 30,15,10,5,3,2,1 };
+
 			for (int s = 0;s < a;s++) {
-				
+
 				for (int i = 0;i < MapSunAlpha.x;i += mas_k[s])
 					for (int j = 0;j < MapSunAlpha.y;j += mas_k[s]) {
 						int8_t NUM = rand();
 						NUM = (NUM - min);
 						for (int ii = i;ii < i + mas_k[s];ii++)
 							for (int ji = j;ji < j + mas_k[s];ji++)
-								if(s==0)
+								if (s == 0)
 									MapSunAlpha.map[ii][ji] = NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz));
 								else MapSunAlpha.map[ii][ji] += NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz));
 
@@ -157,12 +210,12 @@ namespace Kiwii_Experiment {
 								MapSunAlpha.map[Kiwii::fix<int>(i - 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j, 0, MapSunAlpha.y)] +
 								MapSunAlpha.map[Kiwii::fix<int>(i, 0, MapSunAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapSunAlpha.y)] +
 								MapSunAlpha.map[Kiwii::fix<int>(i, 0, MapSunAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapSunAlpha.y)] +
-								MapSunAlpha.map[Kiwii::fix<int>(i + 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j, 0, MapSunAlpha.y)] 
+								MapSunAlpha.map[Kiwii::fix<int>(i + 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j, 0, MapSunAlpha.y)]
 								+
 								MapSunAlpha.map[Kiwii::fix<int>(i - 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapSunAlpha.y)] +
 								MapSunAlpha.map[Kiwii::fix<int>(i + 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapSunAlpha.y)] +
 								MapSunAlpha.map[Kiwii::fix<int>(i - 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapSunAlpha.y)] +
-								MapSunAlpha.map[Kiwii::fix<int>(i + 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapSunAlpha.y)] 
+								MapSunAlpha.map[Kiwii::fix<int>(i + 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j + 1, 0, MapSunAlpha.y)]
 								+
 								MapSunAlpha.map[Kiwii::fix<int>(i + 2, 0, MapSunAlpha.x)][Kiwii::fix<int>(j - 1, 0, MapSunAlpha.y)] +
 								MapSunAlpha.map[Kiwii::fix<int>(i + 2, 0, MapSunAlpha.x)][Kiwii::fix<int>(j, 0, MapSunAlpha.y)] +
@@ -180,7 +233,7 @@ namespace Kiwii_Experiment {
 								MapSunAlpha.map[Kiwii::fix<int>(i, 0, MapSunAlpha.x)][Kiwii::fix<int>(j - 2, 0, MapSunAlpha.y)] +
 								MapSunAlpha.map[Kiwii::fix<int>(i - 1, 0, MapSunAlpha.x)][Kiwii::fix<int>(j - 2, 0, MapSunAlpha.y)]
 								)
-								/20;
+							/ 20;
 					}
 			}
 		}
@@ -246,47 +299,47 @@ namespace Kiwii_Experiment {
 		void make_mountain(double z) {
 			for (int i = 0;i < MapSun.x;i += 1)
 				for (int j = 0;j < MapSun.y;j += 1)
-					MapSun.map[i][j] = pow(double(MapSun.map[i][j]) / 256.0,z)*256;
+					MapSun.map[i][j] = pow(double(MapSun.map[i][j]) / 256.0, z) * 256;
 			for (int i = 0;i < MapMineral.x;i += 1)
 				for (int j = 0;j < MapMineral.y;j += 1)
-					MapMineral.map[i][j] = pow(double(MapMineral.map[i][j]) / 256.0, 1.0/z) * 256;
+					MapMineral.map[i][j] = pow(double(MapMineral.map[i][j]) / 256.0, 1.0 / z) * 256;
 		}
 
 		void logic() {
-			if (Dots.size() == 0)
-				return;
-
 			//gen_move
+			gen1 = NOW;
 			{
-				for (int i = 0;i < Dots.size();i++) {
-					int16_t x = Dots[i].point.x;
-					int16_t y = Dots[i].point.y;
+				for (auto i = dots.begin();i != dots.end();i++) {
+					int16_t x = i->point.x;
+					int16_t y = i->point.y;
 
-					if (int16_t(Dots[i].point.x + 1) < xm) {
-						if (Map.map[x + 1][y] == Plants) Dots[i].active_gen += 1;
-						else if (Map.map[x + 1][y] == Herbivors)Dots[i].active_gen += 2;
-						else if (Map.map[x + 1][y] == Carnivorous)Dots[i].active_gen += 3;
-						else if (Map.map[x + 1][y] == Bacteries)Dots[i].active_gen += 4;
+					if (x + 1 < xm) {
+						if (Map.map[x + 1][y] == Plants) i->active_gen += 1;
+						else if (Map.map[x + 1][y] == Herbivors) i->active_gen += 2;
+						else if (Map.map[x + 1][y] == Carnivorous) i->active_gen += 3;
+						else if (Map.map[x + 1][y] == Bacteries) i->active_gen += 4;
 					}
-					if (int16_t(Dots[i].point.x - 1) >=0) {
-						if (Map.map[x - 1][y] == Plants)Dots[i].active_gen += 1;
-						else if (Map.map[x - 1][y] == Herbivors)Dots[i].active_gen += 2;
-						else if (Map.map[x - 1][y] == Carnivorous)Dots[i].active_gen += 3;
-						else if (Map.map[x - 1][y] == Bacteries)Dots[i].active_gen += 4;
+					if (x - 1 >= 0) {
+						if (Map.map[x - 1][y] == Plants) i->active_gen += 1;
+						else if (Map.map[x - 1][y] == Herbivors) i->active_gen += 2;
+						else if (Map.map[x - 1][y] == Carnivorous) i->active_gen += 3;
+						else if (Map.map[x - 1][y] == Bacteries) i->active_gen += 4;
 					}
-					if (int16_t(Dots[i].point.y + 1) < ym) {
-						if (Map.map[x][y + 1] == Plants)Dots[i].active_gen += 1;
-						else if (Map.map[x][y + 1] == Herbivors)Dots[i].active_gen += 2;
-						else if (Map.map[x][y + 1] == Carnivorous)Dots[i].active_gen += 3;
-						else if (Map.map[x][y + 1] == Bacteries)Dots[i].active_gen += 4;
+					if (y + 1 < ym) {
+						if (Map.map[x][y + 1] == Plants) i->active_gen += 1;
+						else if (Map.map[x][y + 1] == Herbivors) i->active_gen += 2;
+						else if (Map.map[x][y + 1] == Carnivorous) i->active_gen += 3;
+						else if (Map.map[x][y + 1] == Bacteries) i->active_gen += 4;
 					}
-					if (int16_t(Dots[i].point.y - 1) >= 0) {
-						if (Map.map[x][y - 1] == Plants)Dots[i].active_gen += 1;
-						else if (Map.map[x][y - 1] == Herbivors)Dots[i].active_gen += 2;
-						else if (Map.map[x][y - 1] == Carnivorous)Dots[i].active_gen += 3;
-						else if (Map.map[x][y - 1] == Bacteries)Dots[i].active_gen += 4;
+					if (y - 1 >= 0) {
+						if (Map.map[x][y - 1] == Plants) i->active_gen += 1;
+						else if (Map.map[x][y - 1] == Herbivors) i->active_gen += 2;
+						else if (Map.map[x][y - 1] == Carnivorous) i->active_gen += 3;
+						else if (Map.map[x][y - 1] == Bacteries) i->active_gen += 4;
 					}
-					Dots[i].active_gen++;
+					i->active_gen;
+
+					i->active_gen = (i->active_gen + 1) % nGenes;
 
 					//uint8_t buf = 0;
 					//while (Dots[i].gens[Dots[i].active_gen] > 9&&buf<20) {
@@ -295,33 +348,35 @@ namespace Kiwii_Experiment {
 					//}
 				}
 			}
+			gen2 = NOW;
 			//
+			do1 = NOW;
 			{
-				for (int i = 0;i < Dots.size();i++) {
+				for (auto i = dots.begin();i != dots.end();i++) {
 
-					int16_t x = Dots[i].point.x;
-					int16_t y = Dots[i].point.y;
+					int16_t x = i->point.x;
+					int16_t y = i->point.y;
 
-					if (Dots[i].gens[Dots[i].active_gen] == EatN && y - 1 >= 0) {
+					if (i->gens[i->active_gen] == EatN && y - 1 >= 0) {
 
 						y--;
 
-						switch (Dots[i].type) {
+						switch (i->type) {
 							//plant must eat sun in current dir
 						case Plants:
-							Dots[i].energy += MapSun.map[x][y];
+							i->energy += get_sun(MapSun.map[x][y], hours + day * HoursPerDay + year * DaysPerYear * HoursPerDay);
 							break;
 						case Herbivors:
 							//animal must eat plant in current dir
 							if (Map.map[x][y] == Plants) {
 
 								//if there is a plant, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
 
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 
 							}
 							break;
@@ -330,12 +385,12 @@ namespace Kiwii_Experiment {
 							if (Map.map[x][y] == Herbivors) {
 
 								//if there is an animal, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && iter->point.x != x && iter->point.y != y && iter->type != Herbivors)
+								auto iter = dots.begin();
+								while (iter != dots.end() && iter->point.x != x && iter->point.y != y && iter->type != Herbivors)
 									iter++;
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 
 							}
 							break;
@@ -343,31 +398,31 @@ namespace Kiwii_Experiment {
 							//bacteria must eat minerals in current dir
 							if (MapMineral.map[x][y] > stealMin) {
 								MapMineral.map[x][y] -= stealMin;
-								Dots[i].energy += MapMineral.map[x][y] + stealMin;
+								i->energy += MapMineral.map[x][y] + stealMin;
 							}
 							break;
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == EatE && x + 1 < xm) {
+					else if (i->gens[i->active_gen] == EatE && x + 1 < xm) {
 
 						x++;
 
-						switch (Dots[i].type) {
+						switch (i->type) {
 							//plant must eat sun in current dir
 						case Plants:
-							Dots[i].energy += MapSun.map[x][y];
+							i->energy += get_sun(MapSun.map[x][y], hours + day * HoursPerDay + year * DaysPerYear * HoursPerDay);;
 							break;
 						case Herbivors:
 							//animal must eat plant in current dir
 							if (Map.map[x][y] == Plants) {
 
 								//if there is a plant, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
 
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 
 							}
 							break;
@@ -376,12 +431,12 @@ namespace Kiwii_Experiment {
 							if (Map.map[x][y] == Herbivors) {
 
 								//if there is an animal, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && iter->point.x != x && iter->point.y != y && iter->type != Herbivors)
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Herbivors))
 									iter++;
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 
 							}
 							break;
@@ -389,31 +444,31 @@ namespace Kiwii_Experiment {
 							//bacteria must eat minerals in current dir
 							if (MapMineral.map[x][y] > stealMin) {
 								MapMineral.map[x][y] -= stealMin;
-								Dots[i].energy += MapMineral.map[x][y] + stealMin;
+								i->energy += MapMineral.map[x][y] + stealMin;
 							}
 							break;
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == EatS && y + 1 < ym) {
+					else if (i->gens[i->active_gen] == EatS && y + 1 < ym) {
 
 						y++;
 
-						switch (Dots[i].type) {
+						switch (i->type) {
 							//plant must eat sun in current dir
 						case Plants:
-							Dots[i].energy += MapSun.map[x][y];
+							i->energy += get_sun(MapSun.map[x][y], hours + day * HoursPerDay + year * DaysPerYear * HoursPerDay);;
 							break;
 						case Herbivors:
 							//animal must eat plant in current dir
 							if (Map.map[x][y] == Plants) {
 
 								//if there is a plant, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
 
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 
 							}
 							break;
@@ -422,12 +477,12 @@ namespace Kiwii_Experiment {
 							if (Map.map[x][y] == Herbivors) {
 
 								//if there is an animal, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && iter->point.x != x && iter->point.y != y && iter->type != Herbivors)
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Herbivors))
 									iter++;
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 
 							}
 							break;
@@ -435,121 +490,230 @@ namespace Kiwii_Experiment {
 							//bacteria must eat minerals in current dir
 							if (MapMineral.map[x][y] > stealMin) {
 								MapMineral.map[x][y] -= stealMin;
-								Dots[i].energy += MapMineral.map[x][y] + stealMin;
+								i->energy += MapMineral.map[x][y] + stealMin;
 							}
 							break;
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == EatW && x - 1 >= 0) {
+					else if (i->gens[i->active_gen] == EatW && x - 1 >= 0) {
 						x--;
-						switch (Dots[i].type) {
+						switch (i->type) {
 							//plant must eat sun in current dir
 						case Plants:
-							Dots[i].energy += MapSun.map[x][y];
+							i->energy += get_sun(MapSun.map[x][y], hours + day * HoursPerDay + year * DaysPerYear * HoursPerDay);;
 							break;
 						case Herbivors:
 							//animal must eat plant in current dir
 							if (Map.map[x][y] == Plants) {
 								//if there is a plant, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Plants)) iter++;
 
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 							}
 							break;
 						case Carnivorous:
 							//animal must eat animal in current dir
 							if (Map.map[x][y] == Herbivors) {
 								//if there is an animal, then we search this
-								auto iter = Dots.begin();
-								while (iter != Dots.end() && iter->point.x != x && iter->point.y != y && iter->type != Herbivors)
+								auto iter = dots.begin();
+								while (iter != dots.end() && !(iter->point.x != x && iter->point.y != y && iter->type != Herbivors))
 									iter++;
 								//we are stealing energy and then we are deleting 
-								Dots[i].energy += iter->energy;
-								Dots.erase(iter);
+								i->energy += iter->energy;
+								dots.erase(iter);
 							}
 							break;
 						case Bacteries:
 							//bacteria must eat minerals in current dir
 							if (MapMineral.map[x][y] > stealMin) {
 								MapMineral.map[x][y] -= stealMin;
-								Dots[i].energy += MapMineral.map[x][y] + stealMin;
+								i->energy += MapMineral.map[x][y] + stealMin;
 							}
 							break;
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == MoveN && y - 1 >= 0) {
+					else if (i->gens[i->active_gen] == MoveN && y - 1 >= 0) {
 						y--;
-						if (Map.map[x][y] == emptySpace) { 
-							Dots[i].point.y--;
-							Dots[i].live();
+						if (Map.map[x][y] == emptySpace) {
+							i->point.y--;
+							i->live();
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == MoveE && x + 1 < xm) {
+					else if (i->gens[i->active_gen] == MoveE && x + 1 < xm) {
 						x++;
 						if (Map.map[x][y] == emptySpace) {
-							Dots[i].point.x++;
-							Dots[i].live();
+							i->point.x++;
+							i->live();
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == MoveS && y + 1 < ym){
+					else if (i->gens[i->active_gen] == MoveS && y + 1 < ym) {
 						y++;
 						if (Map.map[x][y] == emptySpace) {
-							Dots[i].point.y++;
-							Dots[i].live();
+							i->point.y++;
+							i->live();
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == MoveW && x - 1 >= 0) {
+					else if (i->gens[i->active_gen] == MoveW && x - 1 >= 0) {
 						x--;
 						if (Map.map[x][y] == emptySpace) {
-							Dots[i].point.x--;
-							Dots[i].live();
+							i->point.x--;
+							i->live();
 						}
 					}
-					else if (Dots[i].gens[Dots[i].active_gen] == Dublicate) {
-						Dots[i].energy /= 2;
-						Dots.push_back(Dots[i]);
-						Dots[Dots.size()-1].active_gen = 0;
-						if (rand() % 5 == 4) Dots[Dots.size() - 1].gens[rand() % 64] = rand() % 74;
+					else if (i->gens[i->active_gen] == Dublicate) {
+						if (x + 1 < xm) {
+							if (Map.map[x + 1][y] == emptySpace) {
+								i->energy /= 2;
+								dots.push_back(*i);
+								dots.back().active_gen = 0;
+								if (rand() % 5 == 4) dots.back().gens[rand() % 64] = rand() % 10;
+								if (rand() % 25 == 24) {
+									switch (1 + (rand() % 4)) {
+									case 1:
+										dots.back().type = Plants;
+										break;
+									case 2:
+										dots.back().type = Herbivors;
+										break;
+									case 3:
+										dots.back().type = Carnivorous;
+										break;
+									case 4:
+										dots.back().type = Bacteries;
+										break;
+									}
+
+								}
+								i->point.x++;
+							}
+						}
+						else if (y - 1 >= 0) {
+							if (Map.map[x][y - 1] == emptySpace) {
+								i->energy /= 2;
+								dots.push_back(*i);
+								i->active_gen = 0;
+								if (rand() % 5 == 4) dots.back().gens[rand() % 64] = rand() % 10;
+
+								if (rand() % 25 == 24) {
+									switch (1 + (rand() % 4)) {
+									case 1:
+										dots.back().type = Plants;
+										break;
+									case 2:
+										dots.back().type = Herbivors;
+										break;
+									case 3:
+										dots.back().type = Carnivorous;
+										break;
+									case 4:
+										dots.back().type = Bacteries;
+										break;
+									}
+
+								}
+								i->point.y--;
+							}
+						}
+						else if (y + 1 < ym) {
+							if (Map.map[x][y + 1] == emptySpace) {
+								i->energy /= 2;
+								dots.push_back(*i);
+								dots.back().active_gen = 0;
+								if (rand() % 5 == 4) dots.back().gens[rand() % 64] = rand() % 10;
+
+								if (rand() % 25 == 24) {
+									switch (1 + (rand() % 4)) {
+									case 1:
+										dots.back().type = Plants;
+										break;
+									case 2:
+										dots.back().type = Herbivors;
+										break;
+									case 3:
+										dots.back().type = Carnivorous;
+										break;
+									case 4:
+										dots.back().type = Bacteries;
+										break;
+									}
+
+								}
+								i->point.y++;
+							}
+						}
+						else if (x - 1 >= 0) {
+							if (Map.map[x - 1][y] == emptySpace) {
+								i->energy /= 2;
+								dots.push_back(*i);
+								dots.back().active_gen = 0;
+								if (rand() % 5 == 4) dots.back().gens[rand() % 64] = rand() % 10;
+								if (rand() % 25 == 24) {
+									switch (1 + (rand() % 4)) {
+									case 1:
+										dots.back().type = Plants;
+										break;
+									case 2:
+										dots.back().type = Herbivors;
+										break;
+									case 3:
+										dots.back().type = Carnivorous;
+										break;
+									case 4:
+										dots.back().type = Bacteries;
+										break;
+									}
+
+								}
+								i->point.x--;
+							}
+						}
 					}
 
-					Dots[i].live();
+					i->live();
 				}
 			}
-
+			do2 = NOW;
 			//check
-			auto iter = Dots.begin();
+			check1 = NOW;
+			{
+				auto iter = dots.begin();
+				uint32_t n = 0;
 
-			while (iter != Dots.end()) {
-				if (iter->energy <= 0) {
+				while (iter != dots.end()) {
+					if (iter->energy <= 0) {
 
-					uint8_t x = iter->point.x;
-					uint8_t y = iter->point.y;
-					Dots.erase(iter);
-					if (x + 1 < xm && y + 1 < ym)MapMineral.map[x + 1][y + 1] += stealMin * 4 * (1 / sqrt(2));
-					if (x + 1 < xm)MapMineral.map[x + 1][y] += stealMin * 4 * (1 / sqrt(1));
-					if (x + 1 < xm && y - 1 >= 0)MapMineral.map[x + 1][y - 1] += stealMin * 4 * (1 / sqrt(2));
-					if (y + 1 < ym)MapMineral.map[x][y + 1] += stealMin * 4 * (1 / sqrt(1));
-					MapMineral.map[x][y] += stealMin * 4 * 2;
-					if (x + 1 < xm)MapMineral.map[x][y - 1] += stealMin * 4 * (1 / sqrt(1));
-					if (x - 1 >= 0 && y + 1 < ym)MapMineral.map[x - 1][y + 1] += stealMin * 4 * (1 / sqrt(2));
-					if (x - 1 >= 0)MapMineral.map[x - 1][y] += stealMin * 4 * (1 / sqrt(1));
-					if (x - 1 >= 0 && y - 1 >= 0)MapMineral.map[x - 1][y - 1] += stealMin * 4 * (1 / sqrt(2));
-					iter = Dots.begin();
+						uint8_t x = iter->point.x;
+						uint8_t y = iter->point.y;
+						dots.erase(iter);
+						if (x + 1 < xm && y + 1 < ym)MapMineral.map[x + 1][y + 1] += stealMin * 4 * (1 / sqrt(2));
+						if (x + 1 < xm)MapMineral.map[x + 1][y] += stealMin * 4 * (1 / sqrt(1));
+						if (x + 1 < xm && y - 1 >= 0)MapMineral.map[x + 1][y - 1] += stealMin * 4 * (1 / sqrt(2));
+						if (y + 1 < ym)MapMineral.map[x][y + 1] += stealMin * 4 * (1 / sqrt(1));
+						MapMineral.map[x][y] += stealMin * 4 * 2;
+						if (x + 1 < xm)MapMineral.map[x][y - 1] += stealMin * 4 * (1 / sqrt(1));
+						if (x - 1 >= 0 && y + 1 < ym)MapMineral.map[x - 1][y + 1] += stealMin * 4 * (1 / sqrt(2));
+						if (x - 1 >= 0)MapMineral.map[x - 1][y] += stealMin * 4 * (1 / sqrt(1));
+						if (x - 1 >= 0 && y - 1 >= 0)MapMineral.map[x - 1][y - 1] += stealMin * 4 * (1 / sqrt(2));
+						iter = dots.begin();
+						for (int i = 0;i < n;i++) iter++;
+					}
+						iter++;
+						n++;
 				}
-				iter++;
 			}
+			check2 = NOW;
 		}
 
 		void write_dots() {
-			if (Dots.size() != 0) {
+			if (dots.size() != 0) {
 				for (int16_t j = 0;j < ym;j++)
 					for (int16_t i = 0;i < xm;i++)
 						Map.map[i][j] = emptySpace;
-				for (int i = 0;i < Dots.size();i++) {
-					Map.map[Kiwii::fix<int16_t>(Dots[i].point.x, 0, Map.x)][Kiwii::fix<int16_t>(Dots[i].point.y, 0, Map.y)] = Dots[i].type;
+				for (auto i = dots.begin();i != dots.end();i++) {
+					Map.map[Kiwii::fix<int16_t>(i->point.x, 0, Map.x)][Kiwii::fix<int16_t>(i->point.y, 0, Map.y)] = i->type;
 				}
 				hours++;
 				if (hours > HoursPerDay) {

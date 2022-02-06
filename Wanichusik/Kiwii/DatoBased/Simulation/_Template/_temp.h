@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Deep/Deep.h"
+#include <chrono>
+
+
 
 namespace Kiwii {
 	template<typename _Ty>
@@ -80,6 +83,7 @@ namespace Kiwii {
 
 	};
 
-	 
+#define TIME_POINT std::chrono::system_clock::time_point
+#define NOW std::chrono::system_clock::now()
 
 }

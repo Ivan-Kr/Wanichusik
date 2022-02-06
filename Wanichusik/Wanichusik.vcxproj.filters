@@ -134,8 +134,16 @@
     <ClInclude Include="Kiwii\DatoBased\Simulation\_Template\_temp.h">
       <Filter>Kiwii\DatoBased\Experiments</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exp#1 - Main.h">
+    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exp0 - Main.h">
       <Filter>Kiwii\DatoBased\Experiments</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test1.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="test2.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>

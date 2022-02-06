@@ -158,7 +158,7 @@
     <ClInclude Include="Kiwii\DatoBased\Deep\Deep.h" />
     <ClInclude Include="Kiwii\DatoBased\Mathem\Mathem.h" />
     <ClInclude Include="Kiwii\DatoBased\Screench\Screench.h" />
-    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exp#1 - Main.h" />
+    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exp0 - Main.h" />
     <ClInclude Include="Kiwii\DatoBased\Simulation\_Template\_temp.h" />
     <ClInclude Include="Kiwii\DatoBased\Spritech\Spritech.h" />
     <ClInclude Include="Kiwii\DatoBased\Table\Table.h" />
@@ -178,6 +178,10 @@
     <ClInclude Include="Kiwii\Universalius\Screen.h" />
     <ClInclude Include="Kiwii\Universalius\Time Act.h" />
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test1.txt" />
+    <Text Include="test2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
