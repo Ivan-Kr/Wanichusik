@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Deep/Deep.h"
 #include <chrono>
-
+#include <memory>
 
 
 namespace Kiwii {
@@ -16,13 +16,66 @@ namespace Kiwii {
 			this->x = x;
 			this->y = y;
 
-			map = new _Ty * [x];
+			map = new _Ty*[x];
 			for (int i = 0;i < x;i++) map[i] = new _Ty[y];
 		}
 
 		~Map_Exp() {
 			for (int i = 0;i < x;i++) delete[] map[i];
 			delete[] map;
+
+			x = 0;
+			y = 0;
+		}
+	};
+
+	template<typename T>
+	class Massive_Exp {
+	private:
+		uint16_t x;
+		uint16_t y;
+		T** mas;
+	public:
+		Massive_Exp(uint16_t x, uint16_t y) {
+			this->x = x;
+			this->y = y;
+
+			mas = new T * [x];
+			for (uint16_t i = 0;i < x;i++)
+				mas[i] = new T[y];
+		}
+
+		void set_mas(uint16_t x, uint16_t y,T what) {
+			if (x < this->x && y < this->y) mas[x][y] = what;
+		}
+		T get_mas(uint16_t x, uint16_t y) {
+			if (x < this->x && y < this->y) return mas[x][y];
+			else return T();
+		}
+
+		uint16_t get_x() { return x;}
+		uint16_t get_y() { return y; }
+
+		void fill_mas(T what) {
+			for (uint16_t j = 0;j < y;j++)
+				for (uint16_t i = 0;i < x;i++)
+					mas[i][j] = what;
+		}
+
+		T* to_line() {
+			T* one = new T[x * y];
+
+			for (uint16_t j = 0;j < y;j++)
+				for (uint16_t i = 0;i < x;i++)
+					one[i + j * x] = mas[i][j];
+
+			return one;
+			delete[] one;
+		}
+
+		~Massive_Exp(){
+			for (uint16_t i = 0;i < x;i++) delete[] mas[i];
+			delete[] mas;
 
 			x = 0;
 			y = 0;

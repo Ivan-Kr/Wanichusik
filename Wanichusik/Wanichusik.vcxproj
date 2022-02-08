@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Kiwii\DatoBased\Mathem\Mathem.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp" />
+    <ClCompile Include="Kiwii\DatoBased\Simulation\_Template\_temp.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Spritech\Spritech.cpp" />
     <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp" />
     <ClCompile Include="Kiwii\MonoText\GradientText.cpp" />
@@ -180,8 +181,7 @@
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test1.txt" />
-    <Text Include="test2.txt" />
+    <Text Include="coment.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

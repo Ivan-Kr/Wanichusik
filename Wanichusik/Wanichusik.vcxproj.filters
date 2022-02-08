@@ -66,6 +66,9 @@
     <ClCompile Include="Kiwii\DatoBased\Mathem\Mathem.cpp">
       <Filter>Kiwii\DatoBased</Filter>
     </ClCompile>
+    <ClCompile Include="Kiwii\DatoBased\Simulation\_Template\_temp.cpp">
+      <Filter>Kiwii\DatoBased\Experiments</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">
@@ -139,10 +142,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test1.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="test2.txt">
+    <Text Include="coment.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

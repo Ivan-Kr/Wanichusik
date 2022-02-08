@@ -26,6 +26,44 @@
 //організми можуть поглинати що небудь й получати за це енергію, і вони будуть тратити їх за всякі команди, за виключенням бездіяльності
 
 namespace Kiwii_Experiment {
+	
+	static Kiwii::Massive_Exp<uint8_t>& Perlin(Kiwii::Massive_Exp<uint8_t> mapp,uint8_t a,int list_a[],uint8_t inter) {
+		Kiwii::Massive_Exp<uint8_t> map = mapp;
+		Kiwii::Massive_Exp<uint8_t> mapAlpha(map.get_x(), map.get_y());
+		for (int i = 0;i < map.get_y(); i++)
+			for (int j = 0;j < map.get_x(); j++)
+				mapAlpha.set_mas(j,i,0);
+
+		int min = 128;
+		double z = 1;
+		double zz = 1;
+		int* mas_k;
+		mas_k=list_a;
+
+		for (int s = 0;s < a;s++) {
+
+			for (int i = 0;i < mapAlpha.get_x();i += mas_k[s]) {
+				for (int j = 0;j < mapAlpha.get_y();j += mas_k[s]) {
+					int8_t NUM = rand();
+					NUM = (NUM - min);
+					for (int ii = i;ii < i + mas_k[s];ii++) {
+						for (int ji = j;ji < j + mas_k[s];ji++) {
+							if (s == 0)
+								mapAlpha.set_mas(ii, ji, mapAlpha.get_mas(ii,ji)+NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz)));
+						}
+					}
+
+				}
+			}
+			//for (int i = 0;i < map.x;i += 1) {
+			//	for (int j = 0;j < map.y;j += 1) {
+			//		map.map[i][j] = mapAlpha.map[Kiwii::fix<int>(i, 0, mapAlpha.x)][Kiwii::fix<int>(j, 0, mapAlpha.y)];
+			//	}
+			//}
+		}
+
+		return map;
+	}
 
 	class Experiment0 {
 		static const uint16_t nGenes = 16;
@@ -33,17 +71,63 @@ namespace Kiwii_Experiment {
 		static const char emptySpace = '.';
 		static const uint16_t DaysPerYear = 365;
 		static const uint8_t HoursPerDay = 24;
+		static Kiwii::vec2 M;
+		uint64_t hour = 0;
+		Kiwii::Map_Exp<char> Map = Kiwii::Map_Exp<char>(1,1);
+		Kiwii::Map_Exp<uint8_t> MapSun = Kiwii::Map_Exp<uint8_t>(1, 1);
+		Kiwii::Map_Exp<uint8_t> MapMineral = Kiwii::Map_Exp<uint8_t>(1, 1);
 
 		struct creature {
 			uint8_t gen[nGenes];
 			uint8_t pain[nGenes];
-			uint8_t energy = 30;
+			int16_t energy = 30;
 			uint16_t hour = 1;
-			Kiwii::Dot_Exp point;
-			Kiwii::vec4 eater;
+			uint16_t max_hour = 1;
+			uint8_t active_gen=0;
+			uint8_t active_pain = 0;
+			Kiwii::vec2 point;
+			Kiwii::vec3 eater;
+
+			creature() {
+				for (uint16_t i = 0;i < nGenes;i++) {
+					gen[i] = rand() % 32;
+					pain[i] = rand() % 32;
+				}
+
+				point.X = rand() % int(M.X);
+				point.Y = rand() % int(M.Y);
+
+				eater.X = double(rand() % 1000) / 1000.0;
+				eater.Y = double(rand() % 1000) / 1000.0;
+				eater.Z = double(rand() % 1000) / 1000.0;
+			}
+			void live() {
+				if (max_hour > hour && energy>0) {
+					hour++;
+					energy--;
+				}
+			}
+			void move(double dx,double dy) {
+				if (energy > 0) {
+					energy--;
+					point.X += dx;
+					point.Y += dy;
+				}
+			}
+			uint8_t get_pain(uint8_t d_active_pain) {
+				active_pain += d_active_pain;
+				return pain[active_pain];
+			}
+			uint8_t get_gen(uint8_t d_active_gen) {
+				active_gen += d_active_gen;
+				return gen [active_gen];
+			}
 		};
 
-		uint64_t hour = 0;
+		std::vector<creature> creatures;
+
+	public:
+
 
 
 	};
