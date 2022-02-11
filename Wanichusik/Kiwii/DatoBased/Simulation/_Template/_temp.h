@@ -2,7 +2,7 @@
 #include "../../Deep/Deep.h"
 #include <chrono>
 #include <memory>
-
+#include <vector>
 
 namespace Kiwii {
 	template<typename _Ty>
@@ -31,55 +31,52 @@ namespace Kiwii {
 
 	template<typename T>
 	class Massive_Exp {
-	private:
-		uint16_t x;
-		uint16_t y;
-		T** mas;
-	public:
-		Massive_Exp(uint16_t x, uint16_t y) {
-			this->x = x;
-			this->y = y;
+		public:
+		uint16_t X=0;
+		uint16_t Y=0;
+		std::vector<std::vector<T>> mas;
 
-			mas = new T * [x];
-			for (uint16_t i = 0;i < x;i++)
-				mas[i] = new T[y];
+		Massive_Exp(uint16_t x, uint16_t y) {
+				X = x;
+				Y = y;
+
+				mas.resize(X);
+				for (int i = 0;i < X;i++) mas[i].resize(Y);
 		}
 
 		void set_mas(uint16_t x, uint16_t y,T what) {
-			if (x < this->x && y < this->y) mas[x][y] = what;
+			if (x < X && y < Y) mas[x][y] = what;
 		}
 		T get_mas(uint16_t x, uint16_t y) {
-			if (x < this->x && y < this->y) return mas[x][y];
-			else return T();
+				if(x < X && y < Y) 
+					return mas[x][y];
 		}
 
-		uint16_t get_x() { return x;}
-		uint16_t get_y() { return y; }
+		uint16_t get_x() { return X;}
+		uint16_t get_y() { return Y; }
 
 		void fill_mas(T what) {
-			for (uint16_t j = 0;j < y;j++)
-				for (uint16_t i = 0;i < x;i++)
-					mas[i][j] = what;
+				for (uint16_t j = 0;j < Y;j++)
+					for (uint16_t i = 0;i < X;i++)
+						mas[i][j] = what;
 		}
 
-		T* to_line() {
-			T* one = new T[x * y];
+		std::vector<T> to_line() {
+			std::vector<T> a;
+			a.resize(X * Y);
 
-			for (uint16_t j = 0;j < y;j++)
-				for (uint16_t i = 0;i < x;i++)
-					one[i + j * x] = mas[i][j];
-
-			return one;
-			delete[] one;
+			for (int i = 0;i < Y;i++) for (int j = 0;j < X;j++) a[i * X + j] = mas[j][i];
 		}
 
-		~Massive_Exp(){
-			for (uint16_t i = 0;i < x;i++) delete[] mas[i];
-			delete[] mas;
+		~Massive_Exp() {
+				for (uint16_t i = 0;i < X;i++) mas[i].clear();
+				mas.clear();
 
-			x = 0;
-			y = 0;
+				X = 0;
+				Y = 0;
 		}
+
+
 	};
 
 	class Point_Exp {

@@ -116,10 +116,29 @@ namespace Kiwii {
 
 	};
 
-	//int64_t efclide(int64_t a, int64_t b) {
-	//	while (a != b) {
-	//		max(a, b) -= min(a, b);
-	//	}
-	//	return a;
-	//}
+	inline int64_t efclide(int64_t a, int64_t b) {
+		while (a != b) {
+			if (a < b) b -= a;
+			else a -= b;
+		}
+		return a;
+	}
+
+	inline uint64_t prime(int64_t num) {
+		uint64_t n = 0;
+		for (int i = 2; i < 100&&num>=0; i++)
+		{
+			bool prime = true;
+			for (int j = 2; j * j <= i; j++)
+			{
+				if (i % j == 0)
+				{
+					prime = false;
+					break;
+				}
+			}
+			if (prime) { n = i;num--; }
+		}
+		return n;
+	}
 }

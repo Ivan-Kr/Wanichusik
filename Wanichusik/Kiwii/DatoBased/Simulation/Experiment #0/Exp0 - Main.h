@@ -27,42 +27,30 @@
 
 namespace Kiwii_Experiment {
 	
-	static Kiwii::Massive_Exp<uint8_t>& Perlin(Kiwii::Massive_Exp<uint8_t> mapp,uint8_t a,int list_a[],uint8_t inter) {
-		Kiwii::Massive_Exp<uint8_t> map = mapp;
-		Kiwii::Massive_Exp<uint8_t> mapAlpha(map.get_x(), map.get_y());
-		for (int i = 0;i < map.get_y(); i++)
-			for (int j = 0;j < map.get_x(); j++)
-				mapAlpha.set_mas(j,i,0);
+	static void Perlin(uint16_t x, uint16_t y) {
+		//спершу створюємо двовимірний буфер
 
-		int min = 128;
-		double z = 1;
-		double zz = 1;
-		int* mas_k;
-		mas_k=list_a;
+		//потім ми маємо знайти мінімальне число, яке ділиться на два числа
 
-		for (int s = 0;s < a;s++) {
+		//потім згенерувати шум, розміром з числом, яким ділиться й інтерполюємо
+		
+		//пізніше, ділити число на прості числа доки не вийде найбільше ціле число, яке змо
 
-			for (int i = 0;i < mapAlpha.get_x();i += mas_k[s]) {
-				for (int j = 0;j < mapAlpha.get_y();j += mas_k[s]) {
-					int8_t NUM = rand();
-					NUM = (NUM - min);
-					for (int ii = i;ii < i + mas_k[s];ii++) {
-						for (int ji = j;ji < j + mas_k[s];ji++) {
-							if (s == 0)
-								mapAlpha.set_mas(ii, ji, mapAlpha.get_mas(ii,ji)+NUM * double(pow(mas_k[s], z) / pow(mas_k[0], zz)));
-						}
-					}
+		//згенерувати шум, і накласти його до попереднього шуму й інтерполюємо
 
-				}
-			}
-			//for (int i = 0;i < map.x;i += 1) {
-			//	for (int j = 0;j < map.y;j += 1) {
-			//		map.map[i][j] = mapAlpha.map[Kiwii::fix<int>(i, 0, mapAlpha.x)][Kiwii::fix<int>(j, 0, mapAlpha.y)];
-			//	}
-			//}
-		}
+		float** Map = new float* [x];
+		for(int i=0;i<x;i++) Map[i] = new float[y];
 
-		return map;
+		for (int i = 0;i < x;i++) for (int j = 0;j < y;j++) Map[i][j] = 0.0f;
+
+		uint16_t num=Kiwii::efclide(x, y);
+
+		do {
+			
+		} while (num == 1);
+
+		for (int i = 0;i < x;i++) delete[] Map[i];
+		delete[] Map;
 	}
 
 	class Experiment0 {
