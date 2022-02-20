@@ -26,7 +26,9 @@ namespace Kiwii_Experiments {
 				for (int j = 0;j < X;j += resolution) {
 					ran = rand();
 
-					for (int ii = i;ii < i + resolution;ii++) for (int ij = j;ij < j + resolution;ij++) map_buf[ii * X + ij] = ran;
+					float rnd = ran;
+
+					for (int ii = i;ii < i + resolution;ii++) for (int ij = j;ij < j + resolution;ij++) map_buf[ii * X + ij] = rnd;
 				}
 			}
 			for (int i = 0;i < Y;i++) {
@@ -73,7 +75,18 @@ namespace Kiwii_Experiments {
 				}
 					
 			}
+			float mx = float(int(0x80000000));
+			float mn = float(int(0x7fffffff));
+			for (int i = 0;i < Y;i++) {
+				for (int j = 0;j < X;j++) {
+					mx = max(mx, map[i * X + j]);
+					mn = max(mn, map[i * X + j]);
+				}
+			}
 
+			for (int i = 0;i < Y;i++) 
+				for (int j = 0;j < X;j++)
+					map[i * X + j] = (map[i * X + j]-mn)/mx;
 
 			delete[] map_buf;
 		}
