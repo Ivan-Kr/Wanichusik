@@ -4,15 +4,23 @@
 #include <iostream>
 
 int main() {
-	Kiwii_Experiments::mapf as = Kiwii_Experiments::Perlin(15, 15);
+	srand(time(NULL));
+	int x=120, y=90;
 
-	for (int i = 0;i < 15;i++) {
-		for (int j = 0;j < 15;j++)
-			std::cout  << as[i * 15 + j]  <<  '\t' ;
+	Kiwii_Experiments::mapf as = Kiwii_Experiments::Perlin(x, y);
+
+	for (int i = 0;i < y;i++) {
+		for (int j = 0;j < x;j++)
+			//std::cout << as[i * x + j]<<'\t';
+			if (as[i * x + j] < 0.2) std::cout << ' ';
+			else if (as[i * x + j] < 0.4) std::cout << char(176);
+			else if (as[i * x + j] < 0.6) std::cout << char(177);
+			else if (as[i * x + j] < 0.8) std::cout << char(178);
+			else std::cout << char(219);
 		std::cout << '\n';
 	}
 
 	delete[] as;
-
+	std::cin.get();
 	return 0;
 }
