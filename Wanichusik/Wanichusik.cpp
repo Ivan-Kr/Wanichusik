@@ -4,8 +4,8 @@
 #include <iostream>
 
 int main() {
-	srand(time(NULL));
-	int x=120, y=90;
+	//srand(time(NULL));
+	int x=150, y=120;
 
 	Kiwii_Experiments::mapf as = Kiwii_Experiments::Perlin(x, y);
 

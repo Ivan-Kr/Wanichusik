@@ -14,7 +14,9 @@ namespace Kiwii_Experiments {
 	static mapf Perlin(uint16_t X = 120, uint16_t Y = 90) {
 		mapf map = new float[X * Y];
 
-		int32_t bias = 0;
+		int8_t k_null = 1;
+		int8_t k = 1;
+		float bias = -1351;
 
 		uint16_t resolution = Kiwii::efclide(X, Y);
 		uint16_t null_resolution = resolution;
@@ -31,50 +33,44 @@ namespace Kiwii_Experiments {
 
 					float rnd = float(ran);
 
+
+					rnd += bias;
+
 					for (int ii = i;ii < i + resolution;ii++) 
 						for (int ij = j;ij < j + resolution;ij++)
-							if(i==0) map[ii * X + ij] += rnd * (float(resolution) / float(null_resolution));
-							else map[ii * X + ij] = rnd*(float(resolution) / float(null_resolution));
+							if(i==0) map[ii * X + ij] += rnd * (float)resolution / (float)null_resolution;
+							else map[ii * X + ij] =rnd* (float)resolution/ (float)null_resolution;
 				}
 			}
 
-			{
-				for (int i = 0;i < Y;i++) {
-					for (int j = 0;j < X;j++)
-						//std::cout << as[i * x + j]<<'\t';
-						if (map[i * X + j] < 0.2) std::cout << ' ';
-						else if (map[i * X + j] < 0.4) std::cout << char(176);
-						else if (map[i * X + j] < 0.6) std::cout << char(177);
-						else if (map[i * X + j] < 0.8) std::cout << char(178);
-						else std::cout << char(219);
-					std::cout << '\n';
-				}
-				std::cout << '\n';
-			}
-
+			map[0] = 1000/2;
+			
+			int sq = X * Y;
+			map[sq-1] = 1000/2;
 			for (int i = 0;i < Y;i++) {
 				for (int j = 0;j < X;j++) {
-					map[i * X + j]+=(float(
-						map[Kiwii::fix<int>(i * X + j + 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 1) * X + j, 0, X * Y)] +
-						map[Kiwii::fix<int>(i * X + j - 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 1) * X + j, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 1) * X + j + 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 1) * X + j - 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 1) * X + j + 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 1) * X + j - 1, 0, X * Y)] +
-						map[Kiwii::fix<int>(i * X + j + 2, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 1) * X + j + 2, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 1) * X + j + 2, 0, X * Y)] +
-						map[Kiwii::fix<int>(i * X + j - 2, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 1) * X + j - 2, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 1) * X + j - 2, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 2) * X + j, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 2) * X + j - 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i + 2) * X + j + 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 2) * X + j, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 2) * X + j - 1, 0, X * Y)] +
-						map[Kiwii::fix<int>((i - 2) * X + j + 1, 0, X * Y)]) / 10.0f);
+					map[i * X + j] = (float(map[i * X + j]+
+						map[Kiwii::fix<int>(i * X + j + 1, 0, sq)] +
+						map[Kiwii::fix<int>((i + 1) * X + j, 0, sq)] +
+						map[Kiwii::fix<int>(i * X + j - 1, 0, sq)] +
+						map[Kiwii::fix<int>((i - 1) * X + j, 0, sq)] +
+						map[Kiwii::fix<int>((i + 1) * X + j + 1, 0, sq)] +
+						map[Kiwii::fix<int>((i + 1) * X + j - 1, 0, sq)] +
+						map[Kiwii::fix<int>((i - 1) * X + j + 1, 0, sq)] +
+						map[Kiwii::fix<int>((i - 1) * X + j - 1, 0, sq)] +
+						map[Kiwii::fix<int>(i * X + j + 2, 0, sq)] +
+						map[Kiwii::fix<int>((i + 1) * X + j + 2, 0, sq)] +
+						map[Kiwii::fix<int>((i - 1) * X + j + 2, 0, sq)] +
+						map[Kiwii::fix<int>(i * X + j - 2, 0, sq)] +
+						map[Kiwii::fix<int>((i + 1) * X + j - 2, 0, sq)] +
+						map[Kiwii::fix<int>((i - 1) * X + j - 2, 0, sq)] +
+						map[Kiwii::fix<int>((i + 2) * X + j, 0, sq)] +
+						map[Kiwii::fix<int>((i + 2) * X + j - 1, 0, sq)] +
+						map[Kiwii::fix<int>((i + 2) * X + j + 1, 0, sq)] +
+						map[Kiwii::fix<int>((i - 2) * X + j, 0, sq)] +
+						map[Kiwii::fix<int>((i - 2) * X + j - 1, 0, sq)] +
+						map[Kiwii::fix<int>((i - 2) * X + j + 1, 0, sq)]
+						) / 20.0f);
 				}
 			}
 
@@ -92,8 +88,8 @@ namespace Kiwii_Experiments {
 				}
 			}
 
-			float mx = float(short(0x8000));
-			float mn = float(short(0x7fff));
+			float mx = float(-INFINITY);
+			float mn = float(INFINITY);
 			for (int i = 0;i < Y;i++) {
 				for (int j = 0;j < X;j++) {
 					mx = max(mx, map[i * X + j]);
@@ -103,20 +99,6 @@ namespace Kiwii_Experiments {
 			for (int i = 0;i < Y;i++)
 				for (int j = 0;j < X;j++)
 					map[i * X + j] = float(map[i * X + j] - mn) / float(mx - mn);
-
-			{
-				for (int i = 0;i < Y;i++) {
-					for (int j = 0;j < X;j++)
-						//std::cout << as[i * x + j]<<'\t';
-						if (map[i * X + j] < 0.2) std::cout << ' ';
-						else if (map[i * X + j] < 0.4) std::cout << char(176);
-						else if (map[i * X + j] < 0.6) std::cout << char(177);
-						else if (map[i * X + j] < 0.8) std::cout << char(178);
-						else std::cout << char(219);
-					std::cout << '\n';
-				}
-				std::cout << '\n';
-			}
 		}
 
 		return map;
