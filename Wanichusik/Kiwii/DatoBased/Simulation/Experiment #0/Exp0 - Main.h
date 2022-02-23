@@ -33,7 +33,6 @@ namespace Kiwii_Experiments {
 
 					float rnd = float(ran);
 
-
 					rnd += bias;
 
 					for (int ii = i;ii < i + resolution;ii++) 
