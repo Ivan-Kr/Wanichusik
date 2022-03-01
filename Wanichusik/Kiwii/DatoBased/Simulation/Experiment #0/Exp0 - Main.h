@@ -10,6 +10,7 @@ namespace Kiwii_Experiments {
 	typedef double* mapd;
 	typedef unsigned int* mapui;
 	typedef unsigned char* mapuc;
+	typedef char* mapc;
 
 	static mapf Perlin(uint16_t X = 120, uint16_t Y = 90) {
 		mapf map = new float[X * Y];
@@ -102,4 +103,46 @@ namespace Kiwii_Experiments {
 
 		return map;
 	}
+
+	class Exper_0 {
+		static const uint8_t ngen = 64;
+
+		mapc mappp;
+		mapf sunnn;
+		mapf miner;
+
+		static enum command {
+			nothing,
+			duplicate,
+			move_n,
+			move_e,
+			move_s,
+			move_w,
+			eat_s_n,
+			eat_s_e,
+			eat_s_s,
+			eat_s_w,
+			eat_m_n,
+			eat_m_e,
+			eat_m_s,
+			eat_m_w,
+			eat_h_n,
+			eat_h_e,
+			eat_h_s,
+			eat_h_w
+		};
+
+		struct creature {
+			char skin;
+			Kiwii::vec2 pos;
+			Kiwii::vec3 dir;
+			uint8_t gens[ngen];
+
+			creature() {
+
+			}
+
+		};
+
+	};
 }
