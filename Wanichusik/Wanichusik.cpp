@@ -4,22 +4,40 @@
 #include <iostream>
 
 int main() {
-	srand(time(NULL));
-	int x=120, y=90;
+	Kiwii_Experiments::Exper_0 A(30);
 
-	Kiwii_Experiments::mapf as = Kiwii_Experiments::Perlin(x, y);
 
-	for (int i = 0;i < y;i++) {
-		for (int j = 0;j < x;j++)
-			if (as[i * x + j] < 0.2) std::cout << ' ';
-			else if (as[i * x + j] < 0.4) std::cout << char(176);
-			else if (as[i * x + j] < 0.6) std::cout << char(177);
-			else if (as[i * x + j] < 0.8) std::cout << char(178);
-			else std::cout << char(219);
-		std::cout << '\n';
+	Kiwii::Screench uv;
+	uv.setup(120, 90);
+
+	for (int t = 0;t < 0xfff;t++) {
+
+		if (GetAsyncKeyState(VK_ESCAPE)) break;
+
+		A.logic_actmove();
+		A.logic_action();
+		A.logic_death();
+		A.write();
+
+		for (int i = 0;i < 90;i++) {
+			for (int j = 0;j < 120;j++) {
+				if (A.mappp[i * 120 + j] == '.') {
+					if (A.sunnn[i * 120 + j] < 0.2)
+						uv.set_screen(j, i, ' ');
+					else if (A.sunnn[i * 120 + j] < 0.4)
+						uv.set_screen(j, i, char(176));
+					else if (A.sunnn[i * 120 + j] < 0.6)
+						uv.set_screen(j, i, char(177));
+					else if (A.sunnn[i * 120 + j] < 0.8)
+						uv.set_screen(j, i, char(178));
+					else uv.set_screen(j, i, char(219));
+				}
+				else uv.set_screen(j, i, A.mappp[i * 120 + j]);
+			}
+			uv.insert_hex<int>(120*90-1, t);
+
+			uv.print();
+		}
 	}
-
-	delete[] as;
-	std::cin.get();
 	return 0;
 }

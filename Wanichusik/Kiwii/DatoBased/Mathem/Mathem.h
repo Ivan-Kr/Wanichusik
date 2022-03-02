@@ -141,4 +141,30 @@ namespace Kiwii {
 		}
 		return n;
 	}
+
+	inline double sinus(double x,double multiple,double bias,double amplitude,double riser) {
+		return sin(x*M_PI*multiple+bias)*amplitude+riser;
+	}
+	inline double cosinus(double x, double multiple, double bias, double amplitude, double riser) {
+		return cos(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+	inline double tangents(double x, double multiple, double bias, double amplitude, double riser) {
+		return tan(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+	inline double catangents(double x, double multiple, double bias, double amplitude, double riser) {
+		return tanh(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+
+	inline double sinus_1(double x, double multiple, double bias, double amplitude, double riser) {
+		return 1.0 / sin(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+	inline double cosinus_1(double x, double multiple, double bias, double amplitude, double riser) {
+		return 1.0 / cos(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+	inline double tangents_1(double x, double multiple, double bias, double amplitude, double riser) {
+		return 1.0 / tan(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+	inline double catangents_1(double x, double multiple, double bias, double amplitude, double riser) {
+		return 1.0 / tanh(x * M_PI * multiple + bias) * amplitude + riser;
+	}
 }
