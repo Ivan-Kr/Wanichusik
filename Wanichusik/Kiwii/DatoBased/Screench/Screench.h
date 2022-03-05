@@ -83,6 +83,10 @@ namespace Kiwii {
 
         /////special func//////
         
+        void copy(SYM* str) {
+            for (int i = 0;i < _width * _height;i++) _screen[i] = str[i];
+        }
+
         template <typename _Ty>
         void insert_hex(uint32_t ind, _Ty num) {
             for (int i = 0;i < sizeof(_Ty);i++) {

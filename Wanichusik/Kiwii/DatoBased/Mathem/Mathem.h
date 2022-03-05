@@ -22,7 +22,7 @@ namespace Kiwii {
 		vec2 operator- (double one) { return vec2(X - one, Y - one); }
 		vec2 operator* (double one) { return vec2(X * one, Y * one); }
 		vec2 operator/ (double one) { return vec2(X / one, Y / one); }
-		vec2 operator-() { return vec2(-X, -Y); }
+		vec2 operator- () { return vec2(-X, -Y); }
 	};
 
 	struct vec3 {
@@ -126,7 +126,7 @@ namespace Kiwii {
 
 	inline uint64_t prime(int64_t num) {
 		uint64_t n = 0;
-		for (int i = 2; i < 100&&num>=0; i++)
+		for (int i = 2; i < 0xfffff&&num>=0; i++)
 		{
 			bool prime = true;
 			for (int j = 2; j * j <= i; j++)
@@ -166,5 +166,9 @@ namespace Kiwii {
 	}
 	inline double catangents_1(double x, double multiple, double bias, double amplitude, double riser) {
 		return 1.0 / tanh(x * M_PI * multiple + bias) * amplitude + riser;
+	}
+
+	inline double normalize(double num, double min, double max) {
+		return (num-min) / (max-min);
 	}
 }

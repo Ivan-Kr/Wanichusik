@@ -10,35 +10,51 @@ namespace Kiwii_Experiments {
 	typedef unsigned int* mapui;
 	typedef unsigned char* mapuc;
 	typedef char* mapc;
+	typedef short* maps;
+	typedef unsigned short* mapus;
+	typedef long long* mapll;
+	typedef unsigned long long* mapull;
 
-	static mapf Perlin(uint16_t X = 120, uint16_t Y = 90) {
+	static mapf Perlin(uint16_t X = 120,uint16_t Y = 90,int scale = 0) {
 		mapf map = new float[X * Y];
-
 		int8_t k_null = 1;
 		int8_t k = 1;
 		float bias = -1351;
 
 		uint16_t resolution = Kiwii::efclide(X, Y);
-		uint16_t null_resolution = resolution;
 
-		while (true) {
-			if (resolution == 0)
-				break;
+		std::vector<int> all_resol;
+		all_resol.push_back(resolution);
+		for (int s = 0;s < all_resol.size();s++) {
+			for (int i = 0;Kiwii::prime(i) <= all_resol[s];i++) {
+
+				if (all_resol[s] % Kiwii::prime(i) == 0) {
+					bool is_unique = true;
+					int res = all_resol[s] / Kiwii::prime(i);
+					for (int ss = 0;ss < all_resol.size();ss++) if (all_resol[ss] == res) is_unique = false;
+					if (is_unique && scale<=res) all_resol.push_back(res);
+					break;
+				}
+
+			}
+		}
+
+		for (int s = 0;s < all_resol.size();s++) {
 
 			int ran;
 
-			for (int i = 0;i < Y;i += resolution) {
-				for (int j = 0;j < X;j += resolution) {
+			for (int i = 0;i < Y;i += all_resol[s]) {
+				for (int j = 0;j < X;j += all_resol[s]) {
 					ran = rand();
 
 					float rnd = float(ran);
 
 					rnd += bias;
 
-					for (int ii = i;ii < i + resolution;ii++) 
-						for (int ij = j;ij < j + resolution;ij++)
-							if(i==0) map[ii * X + ij] += rnd * (float)resolution / (float)null_resolution;
-							else map[ii * X + ij] =rnd* (float)resolution/ (float)null_resolution;
+					for (int ii = i;ii < i + all_resol[s];ii++)
+						for (int ij = j;ij < j + all_resol[s];ij++)
+							if(i==0) map[ii * X + ij] += rnd * (float)all_resol[s] / (float)resolution;
+							else map[ii * X + ij] =rnd* (float)all_resol[s] / (float)resolution;
 				}
 			}
 
@@ -73,20 +89,6 @@ namespace Kiwii_Experiments {
 				}
 			}
 
-			if (resolution == 1) {
-				resolution = 0;
-			}
-			else {
-				for (int i = 0;Kiwii::prime(i) <= resolution;i++) {
-
-					if (resolution % Kiwii::prime(i) == 0) {
-						resolution /= Kiwii::prime(i);
-						break;
-					}
-
-				}
-			}
-
 			float mx = float(-INFINITY);
 			float mn = float(INFINITY);
 			for (int i = 0;i < Y;i++) {
@@ -103,6 +105,265 @@ namespace Kiwii_Experiments {
 		return map;
 	}
 
+	class Exper_2 {
+	public:
+		Kiwii::vec2 size;
+		mapc scr;
+		Exper_2(Kiwii::vec2 size) {
+			scr = new char[int(size.X * size.Y)];
+
+			for (int i = 0;i<int(size.X * size.Y);i++)scr[i] = '.';
+
+			this->size = size;
+		}
+		void Segment(Kiwii::segment s) {
+
+		}
+	};
+
+	class Exper_1 {
+	public:
+		static const uint8_t X = 240;
+		static const uint8_t Y = 130;
+		static const int force = 5000;
+
+		mapf map;
+		Exper_1() {
+			map = Perlin(X,Y,3);
+		}
+
+		void rain() {
+			Kiwii::vec2 dot(rand() % X, rand() % Y);
+
+			std::vector<Kiwii::vec2> list;
+			for (int i = 0;i < 128;i++) {
+				int Xl = dot.X;
+				int Yl = dot.Y;
+
+				float mn = map[Xl + Yl * X];
+				Kiwii::vec2 min_d = dot;
+
+				if (Xl - 1 >= 0) {
+					Xl--;
+					if (Yl - 1 >= 0) {
+						Yl--;
+						if (map[Xl + Yl * X] + 1.0f/float(force) < mn) {
+							min_d.X = Xl;
+							min_d.Y = Yl;
+							mn = map[Xl + Yl * X];
+						}
+						Yl++;
+					}				
+					if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+						min_d.X = Xl;
+						min_d.Y = Yl;
+						mn = map[Xl + Yl * X];
+					}
+
+					if (Yl + 1 < Y) {
+						Yl++;
+						if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+							min_d.X = Xl;
+							min_d.Y = Yl;
+							mn = map[Xl + Yl * X];
+						}
+						Yl--;
+					}
+					Xl++;
+				}
+				//æææææææææææææææææææææææææææææææææææææææææææææææææææ
+				if (Yl - 1 >= 0) {
+					Yl--;
+					if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+						min_d.X = Xl;
+						min_d.Y = Yl;
+						mn = map[Xl + Yl * X];
+					}
+					Yl++;
+				}
+				if (Yl + 1 < Y) {
+					Yl++;
+					if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+						min_d.X = Xl;
+						min_d.Y = Yl;
+						mn = map[Xl + Yl * X];
+					}
+					Yl--;
+				}
+				//æææææææææææææææææææææææææææææææææææææææææææææææææææ
+				if (Xl + 1 < X) {
+					Xl++;
+					if (Yl - 1 >= 0) {
+						Yl--;
+						if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+							min_d.X = Xl;
+							min_d.Y = Yl;
+							mn = map[Xl + Yl * X];
+						}
+						Yl++;
+					}
+					if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+						min_d.X = Xl;
+						min_d.Y = Yl;
+						mn = map[Xl + Yl * X];
+					}
+					if (Yl + 1 < Y) {
+						Yl++;
+						if (map[Xl + Yl * X] + 1.0f / float(force) < mn) {
+							min_d.X = Xl;
+							min_d.Y = Yl;
+							mn = map[Xl + Yl * X];
+						}
+						Yl--;
+					}
+					Xl--;
+				}
+
+				bool is_unique = true;
+				for (int i = 0;i < list.size();i++) {
+					if (list[i].X == dot.X && list[i].Y == dot.Y) is_unique = false;
+				}
+				if (is_unique) list.push_back(dot);
+
+				if (min_d.X == dot.X && min_d.Y == dot.Y && !is_unique) {
+					break;
+				}
+				else {
+					if(map[Xl + Yl * X]>=0.0f + 1.0f / float(force))
+					map[Xl + Yl * X] -= 1.0f / float(force) * pow(map[Xl + Yl * X],0.5);
+					dot = min_d;
+				}
+			}
+			if (list.size() > 1) {
+				int Xl = list[list.size() - 1].X;
+				int Yl = list[list.size() - 1].Y;
+				int Xj = list[list.size() - 2].X;
+				int Yj = list[list.size() - 2].Y;
+
+				if (Xl - 1 >= 0) {
+					Xl--;
+					if (Yl - 1 >= 0) {
+						Yl--;
+						if (!(Xl == Xj && Yl == Yj))
+							map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+						Yl++;
+					}
+					if (!(Xl == Xj && Yl == Yj))
+						map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+					if (Yl + 1 < Y) {
+						Yl++;
+						if (!(Xl == Xj && Yl == Yj))
+							map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+						Yl--;
+					}
+					Xl++;
+				}
+				//æææææææææææææææææææææææææææææææææææææææææææææææææææ
+				if (Yl - 1 >= 0) {
+					Yl--;
+					if (!(Xl == Xj && Yl == Yj))
+						map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+					Yl++;
+				}
+				if (Yl + 1 < Y) {
+					Yl++;
+					if (!(Xl == Xj && Yl == Yj))
+						map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+					Yl--;
+				}
+				//æææææææææææææææææææææææææææææææææææææææææææææææææææ
+				if (Xl + 1 < X) {
+					Xl++;
+					if (Yl - 1 >= 0) {
+						Yl--;
+						if (!(Xl == Xj && Yl == Yj))
+							map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+						Yl++;
+					}
+					if (!(Xl == Xj && Yl == Yj))
+						map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+					if (Yl + 1 < Y) {
+						Yl++;
+						if (!(Xl == Xj && Yl == Yj))
+							map[Xl + Yl * X] -= 1.0f / float(force * 10) * pow(map[Xl + Yl * X], 0.5);
+						Yl--;
+					}
+					Xl--;
+				}
+			}
+
+			float mx = -INFINITY;
+			float mn = INFINITY;
+			for (int i = 0;i < Y;i++) {
+				for (int j = 0;j < X;j++) {
+					mx = max(mx, map[i * X + j]);
+					mn = min(mn, map[i * X + j]);
+				}
+			}
+			mn -= 1.0f / float(force);
+
+			for (int i = 0;i < Y;i++)
+				for (int j = 0;j < X;j++)
+					map[i * X + j] = Kiwii::normalize(map[i * X + j], mn, mx);
+
+			for (int Yl = 0;Yl < Y;Yl++) {
+				for (int Xl = 0;Xl < X;Xl++) {
+					int Xm = Xl;
+					int Ym = Yl;
+					double avr = 0.0;
+					int S = 0;
+
+					if (Xl - 1 >= 0) {
+						Xl--;
+						if (Yl - 1 >= 0) {
+							Yl--;
+							S++;
+							avr += map[Xl + Yl * X];
+							Yl++;
+						}S++;
+						avr += map[Xl + Yl * X];
+						if (Yl + 1 < Y) {
+							Yl++;S++;
+							avr += map[Xl + Yl * X];
+							Yl--;
+						}
+						Xl++;
+					}
+					//æææææææææææææææææææææææææææææææææææææææææææææææææææ
+					if (Yl - 1 >= 0) {
+						Yl--;S++;
+						avr += map[Xl + Yl * X];
+						Yl++;
+					}
+					if (Yl + 1 < Y) {
+						Yl++;S++;
+						avr += map[Xl + Yl * X];
+						Yl--;
+					}
+					//æææææææææææææææææææææææææææææææææææææææææææææææææææ
+					if (Xl + 1 < X) {
+						Xl++;
+						if (Yl - 1 >= 0) {
+							Yl--;S++;
+							avr += map[Xl + Yl * X];
+							Yl++;
+						}S++;
+						avr += map[Xl + Yl * X];
+						if (Yl + 1 < Y) {
+							Yl++;S++;
+							avr += map[Xl + Yl * X];
+							Yl--;
+						}
+						Xl--;
+					}
+					avr /= S;
+					map[Xl + Yl * X] += avr*0.00001;
+				}
+			}
+		}
+	};
+
+	static const float nminerals = 0.05f;
 	class Exper_0 {
 	public:
 		static const uint8_t X = 120;
@@ -111,7 +372,7 @@ namespace Kiwii_Experiments {
 		static const uint8_t day = 24;
 		static const uint16_t year = 365;
 		static const uint8_t chance_mutant = 200;
-		static const uint8_t nminerals = 5;
+
 
 		static enum command {
 			nothing = 0,
@@ -161,10 +422,10 @@ namespace Kiwii_Experiments {
 				else if (dir.Y > dir.X && dir.Y > dir.Z) skin = 'M';
 				else skin = 'H';
 
-				if (dir.X + dir.Y + dir.Z >= 2.5) skin = 'A';
+				if (dir.X + dir.Y + dir.Z >= 2.0) skin = 'A';
 
 				act = 0;
-				energy = (rand()%50)+100;
+				energy = (rand()%500)+100;
 			}
 
 			void reset(creature& parent) {
@@ -183,7 +444,7 @@ namespace Kiwii_Experiments {
 				else if (dir.Y > dir.X && dir.Y > dir.Z) skin = 'M';
 				else skin = 'H';
 
-				if (dir.X + dir.Y + dir.Z >= 2.5) skin = 'A';
+				if (dir.X + dir.Y + dir.Z >= 2.0) skin = 'A';
 
 				pos.X = parent.pos.X;
 				pos.Y = parent.pos.Y;
@@ -221,10 +482,14 @@ namespace Kiwii_Experiments {
 		double time;
 
 		Exper_0(uint16_t n) {
-			sunnn = Perlin(X, Y);
-			miner = Perlin(X, Y);
 
-			mappp = new char[X * Y];
+			sunnn = new float[X*Y];
+			miner = new float[X * Y];
+
+			for (int i = 0;i < X * Y;i++) sunnn[i] = 0.0f;
+			for (int i = 0;i < X * Y;i++) miner[i] = 0.0f;
+
+			mappp = new char[int(X) * int(Y)];
 
 			for (int i = 0;i < n;i++)
 				exist.push_back(creature());
@@ -273,7 +538,7 @@ namespace Kiwii_Experiments {
 					else if (mappp[Yl * X + Xl] == 'H')biaser += 3;
 					else if (mappp[Yl * X + Xl] == 'A')biaser += 4;
 					else biaser += 0;
-					Xl++; Yl++;
+					Yl++;
 				}
 				if (Yl + 1 < sq) {
 					Yl++;
@@ -321,10 +586,10 @@ namespace Kiwii_Experiments {
 		void logic_action() {
 			for (int i = 0;i < exist.size();i++) {
 				switch (rand()%4) {
-				case 0: if (exist[i].pos.Y - 1 >= 0) exist[i].pos.Y--; break;
-				case 1: if (exist[i].pos.X + 1 < X * Y) exist[i].pos.X++; break;
-				case 2: if (exist[i].pos.Y + 1 < X * Y) exist[i].pos.Y++; break;
-				case 3: if (exist[i].pos.X - 1 >= 0) exist[i].pos.X--; break;
+				case 0: if (exist[i].pos.Y - 1 >= 0) if(mappp[int((exist[i].pos.Y - 1)*X+ exist[i].pos.X)]=='.') exist[i].pos.Y--; break;
+				case 1: if (exist[i].pos.X + 1 < X * Y) if (mappp[int((exist[i].pos.Y) * X + exist[i].pos.X+1)] == '.') exist[i].pos.X++; break;
+				case 2: if (exist[i].pos.Y + 1 < X * Y) if (mappp[int((exist[i].pos.Y + 1) * X + exist[i].pos.X)] == '.') exist[i].pos.Y++; break;
+				case 3: if (exist[i].pos.X - 1 >= 0) if (mappp[int((exist[i].pos.Y) * X + exist[i].pos.X-1)] == '.')exist[i].pos.X--; break;
 				}
 
 				exist[i].energy--;
@@ -357,7 +622,7 @@ namespace Kiwii_Experiments {
 					if (Yl - 1 >= 0) {
 						Yl--;
 						miner[Yl * X + Xl] += nminerals;
-						Xl++; Yl++;
+						Yl++;
 					}
 					if (Yl + 1 < sq) {
 						Yl++;
@@ -389,13 +654,17 @@ namespace Kiwii_Experiments {
 		void write() {
 			for (int i = 0;i < X * Y;i++) mappp[i] = '.';
 
-			for (int i = 0;i < exist.size();i++) mappp[int(exist[i].pos.X + exist[i].pos.Y * X)] = exist[i].skin;
+			for (int i = 0;i < exist.size();i++) 
+				mappp[int(exist[i].pos.X) + int(exist[i].pos.Y)* X] = exist[i].skin;
 
 			time += 1.0 / float(day);
 		}
 
 		~Exper_0() {
-			delete[] mappp, sunnn, miner;
+			exist.~vector();
+			delete[] sunnn;
+			delete[] miner;
+			delete[] mappp;
 		}
 	};
 }
