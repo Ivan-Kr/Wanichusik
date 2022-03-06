@@ -85,7 +85,7 @@ namespace Kiwii_Experiments {
 						map[Kiwii::fix<int>((i - 2) * X + j, 0, sq)] +
 						map[Kiwii::fix<int>((i - 2) * X + j - 1, 0, sq)] +
 						map[Kiwii::fix<int>((i - 2) * X + j + 1, 0, sq)]
-						) / 20.0f);
+						) / 10.0f);
 				}
 			}
 
