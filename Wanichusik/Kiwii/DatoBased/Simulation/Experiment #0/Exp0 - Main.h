@@ -110,19 +110,11 @@ namespace Kiwii_Experiments {
 		Kiwii::vec2 size;
 		mapc scr;
 
-		struct top {
-			Kiwii::vec2 D;
-			std::vector<top&> Con;
-
-			void Connect(top& what) {
-				Con.push_back(what);
-			}
-		};
 
 		Exper_2(Kiwii::vec2 size) {
 			scr = new char[int(size.X * size.Y)];
 
-			for (int i = 0;i<int(size.X * size.Y);i++)scr[i] = '.';
+			for (int i = 0;i<int(size.X * size.Y);i++)scr[i] = ' ';
 
 			this->size = size;
 		}

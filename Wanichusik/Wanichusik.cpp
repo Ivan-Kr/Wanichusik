@@ -41,12 +41,8 @@ int main() {
 		if (GetAsyncKeyState(VK_RIGHT)) {
 			b.X++;
 		}
-		if (GetAsyncKeyState(VK_RIGHT)) {
-			
-		}
 		if (GetAsyncKeyState(' ')) { 
 			E.Segment(a.X,a.Y,b.X,b.Y,1); 
-			Sleep(100); 
 		}
 
 		uv.copy(E.scr);
