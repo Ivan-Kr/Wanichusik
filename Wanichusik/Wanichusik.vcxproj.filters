@@ -69,6 +69,9 @@
     <ClCompile Include="Kiwii\DatoBased\Simulation\_Template\_temp.cpp">
       <Filter>Kiwii\DatoBased\Experiments</Filter>
     </ClCompile>
+    <ClCompile Include="Kiwii\DatoBased\Screench\ScreenchE.cpp">
+      <Filter>Kiwii\DatoBased</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h">
@@ -137,8 +140,14 @@
     <ClInclude Include="Kiwii\DatoBased\Simulation\_Template\_temp.h">
       <Filter>Kiwii\DatoBased\Experiments</Filter>
     </ClInclude>
-    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exp0 - Main.h">
+    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exper_0.h">
       <Filter>Kiwii\DatoBased\Experiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #1\Exper_1.h">
+      <Filter>Kiwii\DatoBased\Experiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiwii\DatoBased\Screench\ScreenchE.h">
+      <Filter>Kiwii\DatoBased</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

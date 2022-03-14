@@ -3,8 +3,6 @@
 #include <math.h>
 #include <corecrt_math_defines.h>
 
-
-
 namespace Kiwii {
 	struct vec2 {
 		double X = 0;
@@ -126,7 +124,7 @@ namespace Kiwii {
 
 	inline uint64_t prime(int64_t num) {
 		uint64_t n = 0;
-		for (int i = 2; i < 0xfffff&&num>=0; i++)
+		for (uint64_t i = 2; i < 0xffffffffffffffff&&num>=0; i++)
 		{
 			bool prime = true;
 			for (int j = 2; j * j <= i; j++)

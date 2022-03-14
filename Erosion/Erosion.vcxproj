@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{cfc9540a-f8ce-47e0-9dd0-8a07602b06c6}</ProjectGuid>
-    <RootNamespace>Wanichusik</RootNamespace>
+    <ProjectGuid>{ffc7c278-2412-4f24-adf1-4dca4ad3a85c}</ProjectGuid>
+    <RootNamespace>Erosion</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,7 +88,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,7 +102,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +116,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +130,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,48 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Kiwii\DatoBased\Mathem\Mathem.cpp" />
-    <ClCompile Include="Kiwii\DatoBased\Screench\Screench.cpp" />
-    <ClCompile Include="Kiwii\DatoBased\Screench\ScreenchE.cpp" />
-    <ClCompile Include="Kiwii\DatoBased\Simulation\_Template\_temp.cpp" />
-    <ClCompile Include="Kiwii\DatoBased\Spritech\Spritech.cpp" />
-    <ClCompile Include="Kiwii\DatoBased\Table\Table.cpp" />
-    <ClCompile Include="Kiwii\MonoText\GradientText.cpp" />
-    <ClCompile Include="Kiwii\MonoText\Kiwii.cpp" />
-    <ClCompile Include="Kiwii\MonoText\ObgectText.cpp" />
-    <ClCompile Include="Kiwii\MonoText\ScreenText.cpp" />
-    <ClCompile Include="Kiwii\MonoText\SScreenText.cpp" />
-    <ClCompile Include="Wanichusik.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Kiwii\DatoBased\Deep\Deep.h" />
-    <ClInclude Include="Kiwii\DatoBased\Mathem\Mathem.h" />
-    <ClInclude Include="Kiwii\DatoBased\Screench\Screench.h" />
-    <ClInclude Include="Kiwii\DatoBased\Screench\ScreenchE.h" />
-    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #0\Exper_0.h" />
-    <ClInclude Include="Kiwii\DatoBased\Simulation\Experiment #1\Exper_1.h" />
-    <ClInclude Include="Kiwii\DatoBased\Simulation\_Template\_temp.h" />
-    <ClInclude Include="Kiwii\DatoBased\Spritech\Spritech.h" />
-    <ClInclude Include="Kiwii\DatoBased\Table\Table.h" />
-    <ClInclude Include="Kiwii\MonoText\Foot.h" />
-    <ClInclude Include="Kiwii\MonoText\GradientText.h" />
-    <ClInclude Include="Kiwii\MonoText\Kiwii.h" />
-    <ClInclude Include="Kiwii\MonoText\Memory.h" />
-    <ClInclude Include="Kiwii\MonoText\MonoTextKit.h" />
-    <ClInclude Include="Kiwii\MonoText\ObgectText.h" />
-    <ClInclude Include="Kiwii\MonoText\ScreenText.h" />
-    <ClInclude Include="Kiwii\MonoText\SScreenText.h" />
-    <ClInclude Include="Kiwii\Universalius\Explorer.h" />
-    <ClInclude Include="Kiwii\Universalius\Games.h" />
-    <ClInclude Include="Kiwii\Universalius\Interpre.h" />
-    <ClInclude Include="Kiwii\Universalius\Math.h" />
-    <ClInclude Include="Kiwii\Universalius\Music.h" />
-    <ClInclude Include="Kiwii\Universalius\Screen.h" />
-    <ClInclude Include="Kiwii\Universalius\Time Act.h" />
-    <ClInclude Include="Kiwii\Universalius\UniversaliusKit.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="coment.txt" />
+    <ClCompile Include="Erosion.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

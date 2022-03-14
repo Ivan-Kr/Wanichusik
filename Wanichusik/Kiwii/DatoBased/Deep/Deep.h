@@ -12,6 +12,9 @@
 #define ios_reading std::ios::in
 #define ios_writing std::ios::out
 
+typedef std::chrono::system_clock::time_point TIME_POINT;
+#define NOW std::chrono::system_clock::now()
+
 namespace Kiwii {
 	static char get_hex(unsigned char what,bool num) {
 		if (!num) {
