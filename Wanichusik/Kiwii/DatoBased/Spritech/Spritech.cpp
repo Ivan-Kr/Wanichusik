@@ -12,15 +12,3 @@ void Kiwii::Spritech::_info_r(std::string _name_r) {
     file.close();
 }
 
-void Kiwii::Spritech::load(std::string way) {
-    std::ifstream file(way, ios_reading);
-    std::string str;
-    for (uint16_t s = 0;file && s < _height;s++) {
-        std::getline(file, str);
-        for (uint16_t i = 0;i < _width||i<str.size();i++) {
-            if((0<i||i<_width)&&(0 < s || s < _height))
-                _sprite[i][s] = str[i<str.size()?i:str.size()];
-        }
-    }
-    file.close();
-}

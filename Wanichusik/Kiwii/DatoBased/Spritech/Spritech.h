@@ -11,7 +11,7 @@ namespace Kiwii {
         typedef char SYM;
 
         ///////pointers////////
-        std::vector<std::vector<SYM>> _sprite;
+        SYM* _sprite;
 
         ////others variables///
         uint16_t _width=0;
@@ -33,23 +33,12 @@ namespace Kiwii {
 
         //////get and set//////
         void setup(uint16_t width, uint16_t height, bool have_void = true) {
-            try {
-                _width = width;
-                _height = height;
+            _width = width;
+            _height = height;
+            
+            _sprite = new SYM[_width * _height];
 
-                if (_width == 0 || _height == 0) throw true;
-
-                _sprite.resize(_width);
-                for (uint16_t i = 0;i < _width;i++)_sprite[i].resize(_height);
-
-                is_decleared = true;
-
-                throw false;
-            }
-            catch (bool res)
-            {
-                if (res)std::abort();
-            }
+            is_decleared = true;
         }
 
         int16_t get_pos_x() { return _pos_x; }
@@ -61,10 +50,10 @@ namespace Kiwii {
         uint16_t get_width() { return _width; }
 
         SYM get_sprite(uint16_t x, uint16_t y) {
-            return _sprite[fix<uint16_t>(x, 0, _width)][fix<uint16_t>(y, 0, _height)];
+            return _sprite[fix<uint16_t>(x, 0, _width) + fix<uint16_t>(y, 0, _height) * _width];
         }
         void set_sprite(uint16_t x, uint16_t y,SYM sprite) {
-            _sprite[fix<uint16_t>(x, 0, _width)][fix<uint16_t>(y, 0, _height)]=sprite;
+            _sprite[fix<uint16_t>(x, 0, _width) + fix<uint16_t>(y, 0, _height) * _width] = sprite;
         }
 
         ////////virtual////////
@@ -73,14 +62,10 @@ namespace Kiwii {
         void _info_r(std::string _name_r) override;
 
         /////special func//////
-        void load(std::string way);
-
         
         void unsetup() {
             if (is_decleared) {
-                for (uint16_t i = 0;i < _width;i++)
-                    _sprite[i].clear();
-                _sprite.clear();
+                delete _sprite;
 
                 is_decleared = false;
             }

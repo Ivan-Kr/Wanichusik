@@ -3,8 +3,8 @@
 
 class Exper_1 {
 public:
-	static const uint8_t X = 90;
-	static const uint8_t Y = 30;
+	static const uint8_t X = 120;
+	static const uint8_t Y = 90;
 	static const int force = 10000;
 	static const int inter_force = 100000;
 

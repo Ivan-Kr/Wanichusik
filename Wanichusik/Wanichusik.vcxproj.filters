@@ -34,6 +34,9 @@
     <Filter Include="Kiwii\DatoBased\Experiments">
       <UniqueIdentifier>{530fdd2a-56be-4327-97f2-3daafe481e47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kiwii\LeFinela">
+      <UniqueIdentifier>{922d9caa-a695-4fca-94ed-71fc2e99d1c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Wanichusik.cpp">
