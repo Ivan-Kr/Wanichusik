@@ -1,7 +1,6 @@
 ﻿#include <windows.h>
 #include <gl/gl.h>
-#include <math.h>
-//#include <corecrt_math_defines.h>
+#include "Kiwii/DatoBased/Mathem/Mathem.h"
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "winmm.lib")
@@ -11,16 +10,24 @@ void EnableOpenGL(HWND hwnd, HDC*, HGLRC*);
 void DisableOpenGL(HWND, HDC, HGLRC);
 
 
-void glRectangle() {
-	glBegin(GL_TRIANGLES);
-	glColor3d(0, 0, 0); glVertex2d(0, 0);
-	glColor3d(1, 0, 0); glVertex2d(0.5, 0);
-	glColor3d(0, 1, 0); glVertex2d(0, 0.5);
-	glEnd();
-	glBegin(GL_TRIANGLES);
-	glColor3d(1, 0, 0); glVertex2d(0.5, 0);
-	glColor3d(0, 1, 0); glVertex2d(0, 0.5);
-	glColor3d(1, 1, 0); glVertex2d(0.5, 0.5);
+void glRectangled(int pol,double radius, GLdouble r, GLdouble g, GLdouble b) {
+	//glBegin(GL_TRIANGLES);
+	//glColor3d(1, 0, 0); glVertex2d(-0.25, -0.25);
+	//glColor3d(0, 1, 0); glVertex2d(0.25, -0.25);
+	//glColor3d(0, 0, 1); glVertex2d(-0.25, 0.25);
+	//glEnd();
+	//glBegin(GL_TRIANGLES);
+	//glColor3d(0, 0, 1); glVertex2d(0.25, -0.25);
+	//glColor3d(1, 0, 0); glVertex2d(-0.25, 0.25);
+	//glColor3d(0, 1, 0); glVertex2d(0.25, 0.25);
+	//glEnd();
+	
+	float turn = M_PI * 2.0 / pol;
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3d(r, g, b); glVertex2d(0, 0);
+	for (int i = 0;i <= pol;i++) {
+		glVertex2d(sin(turn * i)*radius, cos(turn * i)*radius);
+	}
 	glEnd();
 }
 
@@ -104,13 +111,18 @@ int WINAPI WinMain(HINSTANCE hInstance,
 			/* OpenGL animation code goes here */
 			if (!is_pause) {
 
-				glClearColor(0.7f, 1.0f, 0.7f, 0.0f);
+				glClearColor(0, 0, 0, 0.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
 
-				glLoadIdentity();
-
-				glRectangle();
-
+				//glTranslated(-0.001, -0.001, 0);
+				//glLoadIdentity();
+				//glRotated(10, 0, 0, 1);
+				glRotated(sin((t + 2) * 0.001) * 90, 0, 0, 1);
+				glRectangled(6, 0.5, 1, 0, 0);
+				glRotated(sin((t + 1) * 0.001) * 90, 0, 0, 1);
+				glRectangled(6, 0.5, 0, 1, 0);
+				glRotated(sin(t * 0.001) * 90, 0, 0, 1);
+				glRectangled(6, 0.5, 0, 0, 1);
 
 				SwapBuffers(hDC);
 
